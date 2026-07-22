@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZenDy App — Maccin Beldad Portfolio</title>
+  <meta name="description" content="ZenDy — A smartwatch-integrated Android app for predicting nocturnal enuresis using machine learning. Capstone thesis by Maccin Beldad, Cavite State University 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── ZENDY PAGE EXTRAS ── */
+    .zendy-hero {
+      min-height: 38vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-h) + 3rem) 24px 3rem;
+      background: radial-gradient(ellipse at 50% 0%, rgba(34,211,238,0.12) 0%, transparent 65%);
+      position: relative;
+      z-index: 1;
+    }
+    .zendy-badge {
+      display: inline-block;
+      padding: 5px 16px;
+      border-radius: 99px;
+      border: 1px solid var(--teal);
+      color: var(--teal);
+      font-size: 0.72rem;
+      font-family: var(--mono);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .zendy-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .zendy-hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-family: var(--font);
+      text-decoration: none;
+      transition: all 0.25s;
+      background: var(--bg-card);
+    }
+    .back-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    /* ── STATS ROW ── */
+    .zendy-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2.5rem 0;
+      position: relative;
+      z-index: 1;
+    }
+    .zstat {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.75rem;
+      text-align: center;
+      min-width: 150px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .zstat:hover { border-color: var(--teal); transform: translateY(-4px); }
+    .zstat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+    }
+    .zstat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* ── POSTER ── */
+    .poster-section {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto 3rem;
+      padding: 0 24px;
+    }
+    .poster-section h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .poster-section h2::before {
+      content: '';
+      display: inline-block;
+      width: 4px; height: 1.1rem;
+      background: var(--teal);
+      border-radius: 2px;
+    }
+    .poster-img {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      transition: box-shadow 0.3s;
+    }
+    .poster-img:hover { box-shadow: 0 24px 80px rgba(34,211,238,0.12); }
+
+    /* ── TECH + FEATURES ── */
+    .zendy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 860px;
+      margin: 0 auto 3rem;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 640px) { .zendy-grid { grid-template-columns: 1fr; } }
+
+    .zcard {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .zcard:hover { border-color: var(--teal); transform: translateY(-3px); }
+    .zcard h3 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .ztag {
+      padding: 4px 12px;
+      border-radius: 99px;
+      background: rgba(34,211,238,0.08);
+      border: 1px solid rgba(34,211,238,0.25);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-family: var(--mono);
+    }
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .feature-item::before {
+      content: '✦';
+      color: var(--teal);
+      font-size: 0.7rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ── DOWNLOAD BUTTONS ── */
+    .download-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.75rem;
+    }
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .dl-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.25s;
+      background: rgba(255,255,255,0.08);
+    }
+    .dl-btn:hover::before { opacity: 1; }
+    .dl-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+    .dl-apk {
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+    }
+    .dl-apk:hover { box-shadow: 0 8px 32px rgba(34,197,94,0.5); }
+    .dl-pdf {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(239,68,68,0.3);
+    }
+    .dl-pdf:hover { box-shadow: 0 8px 32px rgba(239,68,68,0.5); }
+    .dl-size {
+      font-size: 0.72rem;
+      opacity: 0.8;
+      font-weight: 400;
+      background: rgba(0,0,0,0.2);
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="particleCanvas"></canvas>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">MB<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="index.html#skills" class="nav-link">Skills</a></li>
+        <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <a href="index.html#contact" class="nav-cta">Hire Me</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="zendy-hero">
+    <div>
+      <span class="zendy-badge">🎓 Capstone Thesis · 2026</span>
+      <h1>ZenDy <span class="gradient-text">App</span></h1>
+      <p>A smartwatch-integrated Android application that uses machine learning to predict nocturnal enuresis (bedwetting) risk in children and young adults.</p>
+      <a href="index.html#projects" class="back-btn">← Back to Portfolio</a>
+
+      <!-- DOWNLOAD BUTTONS -->
+      <div class="download-row">
+        <a href="Zendy.apk" download="Zendy.apk" class="dl-btn dl-apk" id="downloadApk">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+          Download APK
+          <span class="dl-size">153 MB</span>
+        </a>
+        <a href="Zendy Guide.pdf" download="Zendy Guide.pdf" class="dl-btn dl-pdf" id="downloadGuide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          User Guide
+          <span class="dl-size">PDF</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="zendy-stats">
+    <div class="zstat">
+      <span class="zstat-num">95.5%</span>
+      <span class="zstat-label">User Acceptance</span>
+    </div>
+    <div class="zstat">
+      <span class="zstat-num">4.61<small style="font-size:1.1rem">/5</small></span>
+      <span class="zstat-label">ISO/IEC 25010 Score</span>
+    </div>
+    <div class="zstat">
+      <span class="zstat-num">31</span>
+      <span class="zstat-label">ML Features</span>
+    </div>
+    <div class="zstat">
+      <span class="zstat-num">11</span>
+      <span class="zstat-label">APIs Integrated</span>
+    </div>
+  </div>
+
+  <!-- TECH + FEATURES GRID -->
+  <div class="zendy-grid">
+    <div class="zcard">
+      <h3>Tech Stack</h3>
+      <div class="tag-list">
+        <span class="ztag">Kotlin</span>
+        <span class="ztag">Android</span>
+        <span class="ztag">Firebase Auth</span>
+        <span class="ztag">Firestore</span>
+        <span class="ztag">Cloud Functions</span>
+        <span class="ztag">FCM</span>
+        <span class="ztag">ONNX Runtime</span>
+        <span class="ztag">Health Connect</span>
+        <span class="ztag">Python</span>
+        <span class="ztag">XGBoost</span>
+        <span class="ztag">Room DB</span>
+        <span class="ztag">Open-Meteo API</span>
+      </div>
+    </div>
+    <div class="zcard">
+      <h3>Key Features</h3>
+      <div class="feature-list">
+        <div class="feature-item">On-device AI prediction via ONNX Runtime — no internet required for inference</div>
+        <div class="feature-item">Real-time smartwatch sync via Android Health Connect</div>
+        <div class="feature-item">Firebase cloud backup & Cloud Function risk prediction</div>
+        <div class="feature-item">Weather-aware predictions using Open-Meteo GPS data</div>
+        <div class="feature-item">Full voice-guided UI with Android TextToSpeech</div>
+        <div class="feature-item">Daily, weekly, and monthly health reports & charts</div>
+        <div class="feature-item">Push notifications via Firebase Cloud Messaging</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESEARCH POSTER -->
+  <div class="poster-section">
+    <h2>Research Poster</h2>
+    <img src="zendy-poster.jpg" alt="ZenDy Research Poster — Cavite State University 2026" class="poster-img" />
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-logo">MB<span class="dot">.</span></span>
+      <p class="footer-copy">© 2026 Maccin Beldad. Crafted with ❤️ &amp; ☕</p>
+      <a href="index.html#hero" class="back-to-top" aria-label="Back to top">↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

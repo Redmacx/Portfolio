@@ -1,0 +1,144 @@
+@font-face {
+  font-family: minecraft;
+  src:url(mine.ttf.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, table {
+   
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+body {
+    background-image: url(rbued4durtc81.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 40px;
+    
+}
+
+
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #f7f7f713;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.74);
+    padding: 80px;
+    font-family: minecraft;
+}
+
+
+h1, h2, h3 {
+    text-align: center;
+    font-size: 50px;
+    text-shadow: 5px 7px #000000;
+    color: rgb(255, 255, 255);
+    font-family: minecraft;
+    margin-bottom: 20px;
+}
+
+
+table {
+    text-align: center; 
+    width: 110%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    margin-left:-3rem;
+    font-family: minecraft;
+    background: #fafbfc;
+    border-radius: 8px;
+    overflow: hidde n;
+}
+
+th, td {
+    padding: 14px 18px;
+    text-align: center;
+}
+
+th {
+    background: #e3e8f0;
+    color: #2a3f54;
+    font-weight: 600;
+    border-bottom: 2px solid #d1d9e6;
+}
+
+tr:nth-child(even) {
+    background: #f4f6fb;
+}
+
+tr:hover {
+    background: #e9f1fb;
+    transition: background 0.2s;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+button.delete a {
+    color: black;
+}
+button.update a {
+  color: black;
+}
+
+
+button.add {
+    background-color: #3a3a3a;
+    color: black;
+    border-radius: 5px;
+    margin-left: 54rem;
+    margin-top: -7%;
+    padding: 10px 24px;
+    margin-bottom: 3%;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button {
+    font-size: 15px;
+    padding: 12px 60px; 
+    font-family: minecraft;
+}
+
+button.update {
+    background-color: #8f9599;
+    font-family: minecraft;
+    text-decoration: none;
+    border-radius: 5px;
+    color: black;
+}
+
+button:hover.update {
+    background-color: #34b30d;
+    font-family: minecraft;
+}
+
+
+button.delete {
+    background-color: #8f9599;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: minecraft;
+    color: black;
+}
+
+button:hover.delete {
+    background-color: #b91010;
+    font-family: minecraft;
+}
+
+
+button:hover.add {
+    background-color: #8f9599;
+    font-family: minecraft;
+    color: #000000;
+}

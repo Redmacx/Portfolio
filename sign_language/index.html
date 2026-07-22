@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Language Detector — Maccin Beldad Portfolio</title>
+  <meta name="description" content="Real-time Sign Language and Hand Gesture Recognition in Python & Computer Vision by Maccin Beldad." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .project-hero {
+      padding: calc(var(--nav-h) + 2.5rem) 24px 2rem;
+      text-align: center;
+      background: radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.15) 0%, transparent 70%);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 99px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-family: var(--mono);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .project-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; margin-bottom: 0.75rem; }
+    .project-hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem; line-height: 1.6; }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      background: var(--bg-card);
+    }
+    .back-btn:hover { border-color: var(--accent); color: #fff; }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 24px;
+    }
+    @media (max-width: 850px) { .demo-grid { grid-template-columns: 1fr; } }
+
+    .card-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+    }
+    .card-panel h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+
+    .code-box {
+      background: #090914;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: #a78bfa;
+      max-height: 380px;
+      overflow-y: auto;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--teal));
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 1rem;
+      transition: transform 0.2s;
+    }
+    .dl-btn:hover { transform: translateY(-2px); }
+
+    .camera-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--border);
+    }
+    .camera-wrapper video, .camera-wrapper canvas {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .status-badge {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      background: rgba(13, 13, 30, 0.92);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      font-family: var(--mono);
+      color: #fff;
+      backdrop-filter: blur(8px);
+      text-align: center;
+      font-weight: 700;
+      transition: all 0.15s;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="project-hero">
+    <span class="badge">Python · OpenCV · Computer Vision</span>
+    <h1>Sign Language <span class="gradient-text">Detector</span></h1>
+    <p>A real-time Computer Vision system in Python that tracks 21 hand joints to classify American Sign Language (ASL) gestures and hand signs.</p>
+    <a href="../index.html#projects" class="back-btn">← Back to Portfolio</a>
+  </div>
+
+  <!-- DEMO & CODE GRID -->
+  <div class="demo-grid">
+    <!-- Python Script Details & Code View -->
+    <div class="card-panel">
+      <h2>🐍 Python Script & Download</h2>
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1rem;">
+        Run this script locally on your PC with a webcam using OpenCV and MediaPipe.
+      </p>
+      
+      <div class="code-box">import cv2
+import mediapipe as mp
+
+# Initialize MediaPipe Hand Tracker (Lite model for zero lag)
+mp_hands = mp.solutions.hands
+hands = mp_hands.Hands(model_complexity=0, min_detection_confidence=0.5)
+mp_draw = mp.solutions.drawing_utils
+
+cap = cv2.VideoCapture(0)
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    results = hands.process(rgb_frame)
+
+    if results.multi_hand_landmarks:
+        for hand_landmarks in results.multi_hand_landmarks:
+            mp_draw.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+
+    cv2.imshow("Sign Language Detector", frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'): break
+
+cap.release()
+cv2.destroyAllWindows()</div>
+
+      <a href="sign_language_detector.py" download="sign_language_detector.py" class="dl-btn">
+        📥 Download Python Script (.py)
+      </a>
+    </div>
+
+    <!-- Live Interactive Browser Camera Demo -->
+    <div class="card-panel">
+      <h2>⚡ Zero-Lag Real-Time Camera Demo</h2>
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1rem;">
+        Non-blocking 60 FPS video pipeline with instant gesture classification.
+      </p>
+      
+      <div class="camera-wrapper">
+        <video id="webcam" autoplay playsinline style="display:none;"></video>
+        <canvas id="output_canvas"></canvas>
+        <div class="status-badge" id="gestureStatus">Click "Start Web Camera" below</div>
+      </div>
+
+      <div style="margin-top: 1rem; text-align: center;">
+        <button class="dl-btn" id="startCamBtn" onclick="startCamera()" style="cursor:pointer; border:none;">
+          ▶ Start Web Camera
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <script>
+    const videoElement = document.getElementById('webcam');
+    const canvasElement = document.getElementById('output_canvas');
+    const canvasCtx = canvasElement.getContext('2d');
+    const statusText = document.getElementById('gestureStatus');
+
+    let isProcessing = false;
+    let currentLandmarks = null;
+    let cameraActive = false;
+
+    function classifyGesture(landmarks) {
+      const lm = landmarks;
+      const thumbUp = lm[4].y < lm[3].y && lm[3].y < lm[2].y;
+      const indexUp = lm[8].y < lm[6].y;
+      const middleUp = lm[12].y < lm[10].y;
+      const ringUp = lm[16].y < lm[14].y;
+      const pinkyUp = lm[20].y < lm[18].y;
+
+      if (thumbUp && !indexUp && !middleUp && !ringUp && !pinkyUp) return "THUMBS UP 👍 (Good)";
+      if (indexUp && middleUp && !ringUp && !pinkyUp) return "PEACE / VICTORY ✌️ (ASL 'V')";
+      if (indexUp && !middleUp && !ringUp && !pinkyUp) return "POINTING / ONE ☝️ (ASL '1')";
+      if (indexUp && !middleUp && !ringUp && pinkyUp) return "LOVE / ROCK 🤟";
+      if (indexUp && middleUp && ringUp && pinkyUp) return "OPEN PALM 🖐️ (Hello)";
+      if (!indexUp && !middleUp && !ringUp && !pinkyUp) return "FIST ✊ (ASL 'S')";
+      return "HAND TRACKED 👋";
+    }
+
+    const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
+    hands.setOptions({
+      maxNumHands: 1,
+      modelComplexity: 0, // Lite model for zero-lag
+      minDetectionConfidence: 0.5,
+      minTrackingConfidence: 0.5
+    });
+
+    hands.onResults((results) => {
+      isProcessing = false; // Release processing lock immediately
+      if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        currentLandmarks = results.multiHandLandmarks[0];
+      } else {
+        currentLandmarks = null;
+      }
+    });
+
+    // Dedicated 60 FPS rendering loop (Never lags or blocks camera)
+    function renderLoop() {
+      if (!cameraActive) return;
+
+      canvasElement.width = videoElement.videoWidth || 640;
+      canvasElement.height = videoElement.videoHeight || 480;
+
+      // Draw Video Background continuously (smooth 60 FPS)
+      canvasCtx.save();
+      canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+      canvasCtx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+
+      // Draw Landmarks & Gestures
+      if (currentLandmarks) {
+        drawConnectors(canvasCtx, currentLandmarks, HAND_CONNECTIONS, {color: '#22d3ee', lineWidth: 2});
+        drawLandmarks(canvasCtx, currentLandmarks, {color: '#8b5cf6', lineWidth: 1, radius: 3});
+        
+        const gestureName = classifyGesture(currentLandmarks);
+        statusText.innerText = "Recognized: " + gestureName;
+        statusText.style.borderColor = "#22d3ee";
+      } else {
+        statusText.innerText = "Show your hand to the camera...";
+        statusText.style.borderColor = "#8b5cf6";
+      }
+      canvasCtx.restore();
+
+      // Trigger non-blocking MediaPipe inference when ready
+      if (!isProcessing && videoElement.readyState >= 2) {
+        isProcessing = true;
+        hands.send({image: videoElement}).catch(() => { isProcessing = false; });
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+
+    async function startCamera() {
+      if (cameraActive) return;
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: "user" }
+        });
+        videoElement.srcObject = stream;
+        await videoElement.play();
+        cameraActive = true;
+        document.getElementById('startCamBtn').innerText = "🟢 Camera Active (Zero Lag)";
+        requestAnimationFrame(renderLoop);
+      } catch (err) {
+        alert("Camera error: " + err.message);
+      }
+    }
+  </script>
+</body>
+</html>

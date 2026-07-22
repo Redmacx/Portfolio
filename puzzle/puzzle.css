@@ -1,0 +1,523 @@
+/* =====================================================
+   PUZZLE.CSS — Cozy Warm Peach & Sage Standalone Theme
+   ===================================================== */
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #FFF5EC 0%, #EADFD3 100%);
+  --panel-bg: #FCF9F5;
+  --text-main: #4A3E3D;
+  --text-muted: #8E827B;
+  --primary: #E76F51; /* Warm Terracotta */
+  --primary-hover: #D95D3F;
+  --secondary: #2A9D8F; /* Soft Sage Green */
+  --secondary-hover: #218377;
+  --accent: #E9C46A; /* Soft Sand Yellow */
+  --border: #F0E6DC;
+  --shadow: 0 12px 35px rgba(90, 72, 65, 0.08);
+  --board-shadow: 0 20px 45px rgba(90, 72, 65, 0.12);
+  --radius: 20px;
+  --radius-sm: 10px;
+  --font: 'Quicksand', sans-serif;
+  --title-font: 'Comfortaa', sans-serif;
+}
+
+/* ----- Reset & Base ----- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding: 2.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ----- Container & Title ----- */
+.container {
+  max-width: 1100px;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(231, 111, 81, 0.1);
+  color: var(--primary);
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.header h1 {
+  font-family: var(--title-font);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.divider {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+
+.nav-actions {
+  margin-bottom: 1.5rem;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.25s;
+  box-shadow: 0 4px 10px rgba(90, 72, 65, 0.04);
+}
+
+.back-btn:hover {
+  background: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(90, 72, 65, 0.08);
+}
+
+/* ----- Top Info Panel (How to Play) ----- */
+.info-panel-top {
+  margin-bottom: 2rem;
+}
+
+.info-panel-top h3 {
+  font-family: var(--title-font);
+  font-size: 1.15rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-main);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.info-list-horizontal {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .info-list-horizontal {
+    grid-template-columns: 1fr;
+  }
+}
+
+.info-item {
+  display: flex;
+  gap: 12px;
+}
+
+.info-item .num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(42, 157, 143, 0.1);
+  color: var(--secondary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info-item strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.info-item p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ----- Layout ----- */
+.game-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ----- Panel Cards ----- */
+.panel {
+  background: var(--panel-bg);
+  border-radius: var(--radius);
+  padding: 2.25rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.panel h2 {
+  font-family: var(--title-font);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.panel-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.75rem;
+}
+
+.form-group {
+  margin-bottom: 1.75rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+/* ----- Controls & Inputs ----- */
+.url-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+input[type="text"] {
+  flex: 1;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  font-size: 0.88rem;
+  outline: none;
+  transition: all 0.25s;
+  color: var(--text-main);
+  background: #FAF6F0;
+  font-family: var(--font);
+}
+
+input[type="text"]:focus {
+  border-color: var(--primary);
+  background: #FFF;
+  box-shadow: 0 0 8px rgba(231, 111, 81, 0.15);
+}
+
+.btn {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 11px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #FFF;
+  box-shadow: 0 4px 15px rgba(231, 111, 81, 0.2);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(231, 111, 81, 0.35);
+}
+
+.btn-danger {
+  background: rgba(231, 111, 81, 0.08);
+  color: var(--primary);
+  border: 1px solid rgba(231, 111, 81, 0.25);
+}
+
+.btn-danger:hover {
+  background: var(--primary);
+  color: #FFF;
+  transform: translateY(-2px);
+}
+
+.btn-full {
+  width: 100%;
+  padding: 12px;
+}
+
+/* ----- File Upload ----- */
+.file-upload-zone {
+  border: 2px dashed #D2C4B7;
+  border-radius: var(--radius-sm);
+  padding: 24px;
+  text-align: center;
+  background: #FAF6F0;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s;
+}
+
+.file-upload-zone:hover {
+  border-color: var(--secondary);
+  background: #F2FAF8;
+}
+
+.file-upload-zone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-icon {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 6px;
+  filter: sepia(0.3);
+}
+
+.upload-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ----- Difficulty Buttons ----- */
+.difficulty-options {
+  display: flex;
+  gap: 8px;
+}
+
+.diff-btn {
+  flex: 1;
+  background: #FAF6F0;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.25s;
+  font-family: var(--font);
+}
+
+.diff-btn:hover {
+  background: #F0E6DC;
+  color: var(--text-main);
+}
+
+.diff-btn.active {
+  background: var(--secondary);
+  border-color: var(--secondary);
+  color: #FFF;
+  box-shadow: 0 4px 15px rgba(42, 157, 143, 0.25);
+}
+
+/* ----- Play Area ----- */
+.play-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ----- Stat Cards ----- */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--panel-bg);
+  border-radius: var(--radius);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: var(--title-font);
+}
+
+/* ----- Board Wrapper ----- */
+.board-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--panel-bg);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  box-shadow: var(--board-shadow);
+  border: 1px solid var(--border);
+}
+
+#puzzle-board {
+  display: grid;
+  gap: 3px;
+  border: 8px solid #6E6259; /* Soft Wood clay color */
+  border-radius: 12px;
+  overflow: hidden;
+  background: #6E6259;
+  box-shadow: 0 15px 35px rgba(110, 98, 89, 0.25);
+}
+
+.piece {
+  cursor: grab;
+  transition: opacity 0.25s, box-shadow 0.25s;
+}
+
+.piece:active {
+  cursor: grabbing;
+}
+
+.piece.dragging {
+  opacity: 0.5;
+}
+
+.piece.drag-over {
+  box-shadow: inset 0 0 0 5px var(--accent);
+}
+
+/* ----- Success Modal ----- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(74, 62, 61, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3rem 2.25rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(74, 62, 61, 0.2);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.open .modal {
+  transform: scale(1);
+}
+
+.modal-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.modal h2 {
+  font-family: var(--title-font);
+  font-size: 1.8rem;
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+}
+
+.modal p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.modal-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
+}
+
+.mstat {
+  background: #FAF6F0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.mstat-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.mstat-val {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  font-family: var(--title-font);
+}

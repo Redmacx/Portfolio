@@ -1,0 +1,49 @@
+/* =====================================================
+   VARIABLES.CSS — Design Tokens
+   -------------------------------------------------------
+   Edit this file to change:
+   • Colors (accent, background, text)
+   • Fonts
+   • Spacing & border-radius
+   • Shadow styles
+   ===================================================== */
+
+:root {
+
+  /* --- Background Colors --- */
+  --bg:      #06060f;   /* Main page background */
+  --bg-2:    #0d0d1e;   /* Slightly lighter background (used in sections) */
+  --bg-card: rgba(255,255,255,0.04); /* Card / panel background */
+
+  /* --- Border Colors --- */
+  --border:       rgba(255,255,255,0.08);  /* Default subtle border */
+  --border-hover: rgba(139,92,246,0.4);    /* Border on hover */
+
+  /* --- Accent / Brand Colors --- */
+  --accent:   #8b5cf6;  /* Primary purple accent */
+  --accent-2: #6366f1;  /* Secondary indigo accent */
+  --accent-3: #a78bfa;  /* Lighter purple (used for text highlights) */
+  --teal:     #22d3ee;  /* Teal/cyan complement color */
+  --pink:     #ec4899;  /* Pink (available for use) */
+  --green:    #10b981;  /* Green (used for success messages) */
+
+  /* --- Text Colors --- */
+  --text:       #f1f5f9;  /* Main text (near white) */
+  --text-muted: #94a3b8;  /* Muted / secondary text */
+  --text-faint: #475569;  /* Very faint text (labels, hints) */
+
+  /* --- Shape & Spacing --- */
+  --radius:    16px;  /* Default border-radius for cards */
+  --radius-sm:  8px;  /* Small border-radius (inputs, badges) */
+
+  /* --- Shadows --- */
+  --shadow:    0 4px 40px rgba(139,92,246,0.12);  /* Soft glow shadow */
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);       /* Deep shadow */
+
+  /* --- Typography --- */
+  --font: 'Outfit', sans-serif;           /* Main body font */
+  --mono: 'JetBrains Mono', monospace;   /* Monospace (code / labels) */
+
+  /* --- Layout --- */
+  --nav-h: 72px;  /* Height of the fixed navigation bar */
+}

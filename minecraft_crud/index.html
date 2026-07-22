@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minecraft Book Management System (CRUD)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Background Music / Sound FX overlay -->
+  <div class="mc-container">
+    
+    <!-- Top Header & Navigation -->
+    <div class="mc-header">
+      <a href="../index.html#projects" class="mc-btn mc-btn-sm">← Back to Portfolio</a>
+      <h1 class="mc-title">MINECRAFT BOOK MANAGEMENT</h1>
+      <button class="mc-btn mc-btn-sm" onclick="togglePhpModal()">📜 View PHP Source Code</button>
+    </div>
+
+    <!-- Main Inventory GUI Container -->
+    <div class="mc-gui">
+      
+      <!-- Top Action Bar & Search -->
+      <div class="mc-toolbar">
+        <button class="mc-btn mc-btn-green" onclick="openAddModal()">➕ Add New Book</button>
+        <div class="mc-search-box">
+          <span class="mc-search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search book name or author..." oninput="filterBooks()" />
+        </div>
+        <button class="mc-btn mc-btn-gray" onclick="resetDefaultData()">↺ Reset Default Data</button>
+      </div>
+
+      <!-- Book List Inventory Table -->
+      <div class="mc-table-wrapper">
+        <table class="mc-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Book Title</th>
+              <th>Author</th>
+              <th>Category</th>
+              <th>Rarity</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bookTableBody">
+            <!-- Dynamic Rows rendered via JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Experience / Inventory Footer Bar -->
+      <div class="mc-xp-bar">
+        <div class="mc-xp-fill" id="xpFill"></div>
+        <span class="mc-xp-level" id="xpText">Level 50 · 0 Books Stored</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Add / Edit Book Modal -->
+  <div class="mc-modal-overlay" id="bookModal">
+    <div class="mc-modal-box">
+      <div class="mc-modal-header">
+        <h2 id="modalTitle">📖 ADD BOOK INFORMATION</h2>
+        <button class="mc-close-btn" onclick="closeBookModal()">×</button>
+      </div>
+      <form id="bookForm" onsubmit="handleFormSubmit(event)">
+        <input type="hidden" id="editBookId" value="" />
+        
+        <div class="mc-form-group">
+          <label>Book Name</label>
+          <input type="text" id="bookNameInput" class="mc-input" placeholder="Enter Book Name (e.g., Enchanting Guide)" required />
+        </div>
+
+        <div class="mc-form-group">
+          <label>Author</label>
+          <input type="text" id="authorInput" class="mc-input" placeholder="Enter Author Name (e.g., Steve)" required />
+        </div>
+
+        <div class="mc-form-row">
+          <div class="mc-form-group">
+            <label>Category</label>
+            <select id="categoryInput" class="mc-input">
+              <option value="Enchanting">Enchanting 🔮</option>
+              <option value="Crafting">Crafting 🔨</option>
+              <option value="Redstone">Redstone ⚡</option>
+              <option value="Survival">Survival 🏕️</option>
+              <option value="Lore & Story">Lore &amp; Story 📜</option>
+            </select>
+          </div>
+
+          <div class="mc-form-group">
+            <label>Rarity</label>
+            <select id="rarityInput" class="mc-input">
+              <option value="Common">Common ⚪</option>
+              <option value="Rare">Rare 🔵</option>
+              <option value="Epic">Epic 🟣</option>
+              <option value="Legendary">Legendary 🟡</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mc-modal-footer">
+          <button type="submit" class="mc-btn mc-btn-green" id="saveBtn">Submit</button>
+          <button type="button" class="mc-btn mc-btn-red" onclick="closeBookModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PHP Source Code Inspector Modal -->
+  <div class="mc-modal-overlay" id="phpModal">
+    <div class="mc-modal-box mc-modal-large">
+      <div class="mc-modal-header">
+        <h2>📜 PHP & MySQL BACKEND SOURCE CODE</h2>
+        <button class="mc-close-btn" onclick="togglePhpModal()">×</button>
+      </div>
+      <div class="mc-php-tabs">
+        <button class="mc-tab-btn active" onclick="showTab('display_php', this)">display.php</button>
+        <button class="mc-tab-btn" onclick="showTab('home_php', this)">home.php</button>
+        <button class="mc-tab-btn" onclick="showTab('update_php', this)">update.php</button>
+        <button class="mc-tab-btn" onclick="showTab('delete_php', this)">delete.php</button>
+        <button class="mc-tab-btn" onclick="showTab('sql_file', this)">bookdb.sql</button>
+      </div>
+
+      <div class="mc-tab-content active" id="tab_display_php">
+        <pre class="mc-code-block">&lt;?php 
+include 'connection.php';
+?&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;Display page&lt;/title&gt;
+    &lt;link rel="stylesheet" href="Diisplay.CSS"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;Book Management System&lt;/h1&gt;
+        &lt;button class="add"&gt;&lt;a href="home.php"&gt;Add Book&lt;/a&gt;&lt;/button&gt;
+        &lt;table class="table"&gt;
+            &lt;thead&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;Book ID&lt;/th&gt;
+                    &lt;th&gt;Book Name&lt;/th&gt;
+                    &lt;th&gt;Author&lt;/th&gt;
+                    &lt;th&gt;Action&lt;/th&gt;
+                &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+                &lt;?php
+                $sql = "SELECT * FROM booktb ORDER BY id ASC";
+                $result = mysqli_query($conn, $sql);
+                if ($result) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo '&lt;tr&gt;
+                        &lt;td&gt;' . $row['id'] . '&lt;/td&gt;
+                        &lt;td&gt;' . $row['bookname'] . '&lt;/td&gt;
+                        &lt;td&gt;' . $row['author'] . '&lt;/td&gt;
+                        &lt;td&gt;
+                        &lt;a href="update.php?updateid=' . $row['id'] . '"&gt;Update&lt;/a&gt;
+                        &lt;a href="delete.php?deleteid=' . $row['id'] . '"&gt;Delete&lt;/a&gt;
+                        &lt;/td&gt;
+                        &lt;/tr&gt;';
+                    }
+                }
+                ?&gt;
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+
+      <div class="mc-tab-content" id="tab_home_php">
+        <pre class="mc-code-block">&lt;?php
+include 'connection.php';
+
+if (isset($_POST['btn'])) {
+    $bname = mysqli_real_escape_string($conn, $_POST['bookname']);
+    $author = mysqli_real_escape_string($conn, $_POST['author']);
+
+    $sql = "INSERT INTO booktb(bookname, author) VALUES ('$bname', '$author')";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        header('location:display.php');
+    }
+}
+?&gt;</pre>
+      </div>
+
+      <div class="mc-tab-content" id="tab_update_php">
+        <pre class="mc-code-block">&lt;?php
+include 'connection.php';
+
+$bookid = $_GET['updateid'];
+$sql = "SELECT * FROM booktb WHERE id = $bookid";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+
+if (isset($_POST['btn'])) {
+    $bname = mysqli_real_escape_string($conn, $_POST['bookname']);
+    $author = mysqli_real_escape_string($conn, $_POST['author']);
+    $sql = "UPDATE booktb SET bookname='$bname', author='$author' WHERE id=$bookid";
+
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        header('Location: display.php');
+    }
+}
+?&gt;</pre>
+      </div>
+
+      <div class="mc-tab-content" id="tab_delete_php">
+        <pre class="mc-code-block">&lt;?php
+include 'connection.php';
+
+if (isset($_GET['deleteid'])) {
+    $id = $_GET['deleteid'];
+    $sql = "DELETE FROM booktb WHERE id = $id";
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        header('location:display.php');
+    }
+}
+?&gt;</pre>
+      </div>
+
+      <div class="mc-tab-content" id="tab_sql_file">
+        <pre class="mc-code-block">CREATE TABLE `booktb` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bookname` varchar(255) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `booktb` (`id`, `bookname`, `author`) VALUES
+(1, 'Minecraft Beginners Guide', 'Notch'),
+(2, 'Redstone Engineering Handbook', 'Jeb'),
+(3, 'The Art of Nether Survival', 'Alex');</pre>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
