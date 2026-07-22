@@ -99,7 +99,7 @@ navLinks.querySelectorAll('a').forEach(a => {
 /* ── 5. TYPED TEXT ───────────────────────────────── */
 const roles = [
   'Web Developer',
-  'WordPress Expert',
+  'Frontend Builder',
   'PHP Developer',
   'UI Designer',
   'Full-Stack Builder'
