@@ -334,18 +334,18 @@ ul { list-style: none; }
 /* ── ABOUT ────────────────────────────────────────── */
 .about-section { background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%); }
 .about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px; align-items: start;
+  display: flex;
+  justify-content: center;
+}
+.about-text {
+  max-width: 780px;
+  text-align: center;
 }
 .about-text p { color: var(--text-muted); margin-bottom: 16px; }
-.about-lead { font-size: 1.1rem; color: var(--text) !important; line-height: 1.6; }
+.about-lead { font-size: 1.15rem; color: var(--text) !important; line-height: 1.7; }
 .about-lead strong { color: var(--accent-3); }
 .about-text strong { color: var(--text); }
-.about-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
-.about-cards {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 16px;
+.about-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; justify-content: center; }
 }
 .info-card {
   background: var(--bg-card);
