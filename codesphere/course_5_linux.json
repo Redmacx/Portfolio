@@ -1,0 +1,223 @@
+[
+  {
+    "id": 0,
+    "title": "1.1 Introduction to Linux & the Terminal",
+    "vid": "s3G59nC8cXY",
+    "reading": "<h3>Welcome to Linux!</h3><p>Linux is a family of open-source Unix-like operating systems based on the Linux kernel. It is the backbone of the modern internet, powering servers, supercomputers, and smartphones.</p><h3>The Command Line Interface (CLI)</h3><p>While many Linux distributions offer a Graphical User Interface (GUI), the true power of Linux lies in the Command Line Interface (CLI) or <strong>Terminal</strong>.</p><ul><li><strong>Speed:</strong> CLI commands execute tasks faster than clicking through menus.</li><li><strong>Automation:</strong> You can script commands to run automatically.</li><li><strong>Remote Access:</strong> It is much easier and lighter to manage a remote server via SSH using the terminal.</li></ul><div class='note-box'>💡 Note: When you open a terminal, you are presented with a shell prompt (often ending in a $ or #). This is where you type your commands.</div>",
+    "quiz": [
+      {
+        "q": "What is the main advantage of using the Command Line Interface over a GUI?",
+        "opts": [
+          "It has better graphics and animations",
+          "It provides faster execution and powerful automation capabilities",
+          "It requires a mouse to navigate"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "title": "1.2 Navigating the File System",
+    "vid": "jD6B_44O13U",
+    "reading": "<h3>The Linux Directory Structure</h3><p>Unlike Windows, which uses drive letters like C:, Linux organizes all files in a single unified hierarchy starting from the root directory, denoted by a forward slash (/).</p><h3>Basic Navigation Commands</h3><ul><li><strong>pwd:</strong> Print Working Directory. Shows where you currently are.</li><li><strong>ls:</strong> List directory contents.</li><li><strong>cd:</strong> Change Directory. Move around the file system.</li></ul><div class='code-block'>$ pwd<br>/home/user<br>$ ls<br>Desktop  Documents  Downloads<br>$ cd Documents</div><div class='note-box'>💡 Note: Use 'cd ..' to move up one directory, and 'cd ~' to return to your home directory.</div>",
+    "quiz": [
+      {
+        "q": "pwd stands for what?",
+        "opts": [
+          "Print Working Directory",
+          "Password Working Data",
+          "Provide Window Directory"
+        ],
+        "ans": 0
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "2.1 Managing Files and Directories",
+    "vid": "v_1Gq_5L5gA",
+    "reading": "<h3>Creating Files and Directories</h3><p>You can easily create new files and folders straight from the terminal.</p><ul><li><strong>mkdir:</strong> Make Directory. e.g., <code>mkdir my_folder</code></li><li><strong>touch:</strong> Create an empty file. e.g., <code>touch myfile.txt</code></li></ul><h3>Copying, Moving, and Removing</h3><ul><li><strong>cp:</strong> Copy files or directories. (Use -r for directories)</li><li><strong>mv:</strong> Move or rename files. e.g., <code>mv old.txt new.txt</code></li><li><strong>rm:</strong> Remove files. e.g., <code>rm file.txt</code></li></ul><div class='code-block'>$ mkdir project<br>$ touch project/notes.txt<br>$ cp project/notes.txt project/backup.txt<br>$ rm project/notes.txt</div><div class='note-box'>💡 Note: Be extremely careful with the 'rm' command, especially 'rm -rf'. Once deleted, files usually cannot be recovered from the terminal!</div>",
+    "quiz": [
+      {
+        "q": "Which command creates an empty file?",
+        "opts": [
+          "mkdir",
+          "touch",
+          "rm"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "2.2 Viewing File Contents",
+    "vid": "2zJ8E-H7Bq4",
+    "reading": "<h3>Reading Files from the Terminal</h3><p>Linux provides several tools to read the contents of text files without opening a full-fledged text editor.</p><ul><li><strong>cat:</strong> Concatenate and print. Shows the entire file content at once. Great for short files.</li><li><strong>less:</strong> Allows pagination. You can scroll up and down using arrow keys. Press 'q' to quit.</li><li><strong>head:</strong> Outputs the first 10 lines of a file.</li><li><strong>tail:</strong> Outputs the last 10 lines of a file. (Use 'tail -f' to watch a file update in real-time, great for logs!)</li></ul><div class='code-block'>$ cat short_note.txt<br>Hello World!<br>$ tail -n 5 /var/log/syslog</div><div class='note-box'>💡 Note: If a file is very large, always use 'less' or 'tail' instead of 'cat' to prevent flooding your terminal screen.</div>",
+    "quiz": [
+      {
+        "q": "Which command allows you to view a file page by page and scroll up or down?",
+        "opts": [
+          "cat",
+          "less",
+          "tail"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "3.1 Understanding File Permissions",
+    "vid": "z12qHDEvF60",
+    "reading": "<h3>Linux File Permissions</h3><p>Linux is a multi-user OS. Permissions define who can read, write, or execute a file.</p><p>Permissions are broken down into three categories:</p><ul><li><strong>User (u):</strong> The owner of the file.</li><li><strong>Group (g):</strong> Users who belong to the file's group.</li><li><strong>Others (o):</strong> Everyone else.</li></ul><h3>Changing Permissions with chmod</h3><p>The <strong>chmod</strong> command changes file permissions. Permissions can be represented by letters (r=read, w=write, x=execute) or numbers (4=read, 2=write, 1=execute).</p><div class='code-block'>$ chmod +x script.sh  # Adds execute permission<br>$ chmod 755 script.sh # Owner gets rwx (4+2+1=7), Group/Others get rx (4+1=5)</div><div class='note-box'>💡 Note: Use 'ls -l' to view the current permissions of files in a directory.</div>",
+    "quiz": [
+      {
+        "q": "In the numeric permission '755', what does the '7' represent?",
+        "opts": [
+          "Read and Write for the Owner",
+          "Read, Write, and Execute for the Owner",
+          "Read and Execute for the Group"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "3.2 Searching for Files and Text",
+    "vid": "5j5cKMB4dFE",
+    "reading": "<h3>Finding Files</h3><p>The <strong>find</strong> command is a powerful tool to search for files in a directory hierarchy.</p><div class='code-block'>$ find /home/user -name \"*.txt\"</div><h3>Searching Text with grep</h3><p>The <strong>grep</strong> command searches for patterns within files. It is arguably one of the most useful commands in Linux.</p><ul><li><strong>grep \"error\" log.txt:</strong> Finds lines containing \"error\".</li><li><strong>grep -i \"error\" log.txt:</strong> Case-insensitive search.</li><li><strong>grep -r \"pattern\" /dir:</strong> Recursively search inside a directory.</li></ul><div class='note-box'>💡 Note: You can combine 'find' and 'grep' to search for specific text across multiple specific files!</div>",
+    "quiz": [
+      {
+        "q": "Which command is used to search for a specific text pattern inside a file?",
+        "opts": [
+          "find",
+          "grep",
+          "search"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "4.1 Input, Output, and Piping",
+    "vid": "v_1Gq_5L5gA",
+    "reading": "<h3>Standard Input and Output</h3><p>In Linux, programs typically read from Standard Input (stdin) and write to Standard Output (stdout).</p><h3>Redirection</h3><p>You can redirect output to a file using <strong>&gt;</strong> (overwrite) or <strong>&gt;&gt;</strong> (append).</p><div class='code-block'>$ echo \"Hello\" > greeting.txt<br>$ echo \"World\" >> greeting.txt</div><h3>Piping</h3><p>The pipe operator <strong>|</strong> takes the output of one command and passes it as input to another. This allows chaining commands together.</p><div class='code-block'>$ ls -l /var/log | grep \"syslog\"<br>$ cat names.txt | sort | uniq</div><div class='note-box'>💡 Note: Piping is a core philosophy of Unix/Linux: writing small programs that do one thing well and connecting them together.</div>",
+    "quiz": [
+      {
+        "q": "What does the pipe (|) operator do?",
+        "opts": [
+          "Overwrites a file with output",
+          "Passes the output of one command as input to another",
+          "Runs a command in the background"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "4.2 Process Management",
+    "vid": "zB1Wj_pE1kQ",
+    "reading": "<h3>Monitoring Processes</h3><p>Every running program in Linux is called a <strong>process</strong>. You can view running processes to monitor system health.</p><ul><li><strong>ps:</strong> Snapshot of current processes. (e.g., <code>ps aux</code>)</li><li><strong>top:</strong> Interactive, real-time process viewer. (Press 'q' to quit)</li><li><strong>htop:</strong> A more colorful and user-friendly version of top (often needs to be installed).</li></ul><h3>Managing Processes</h3><p>If a process freezes, you can terminate it using the <strong>kill</strong> command followed by its Process ID (PID).</p><div class='code-block'>$ kill 1234<br>$ kill -9 1234 # Force kill</div><div class='note-box'>💡 Note: You can run a process in the background by appending an ampersand (&amp;) to the end of your command. e.g., 'sleep 100 &amp;'</div>",
+    "quiz": [
+      {
+        "q": "Which command provides an interactive, real-time view of running processes?",
+        "opts": [
+          "ps",
+          "kill",
+          "top"
+        ],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "5.1 Archiving and Compressing",
+    "vid": "L88f1-N243M",
+    "reading": "<h3>Working with Tarballs</h3><p>In Linux, archiving (combining multiple files into one) and compressing (reducing file size) are often done together using the <strong>tar</strong> command.</p><ul><li><strong>Create an archive:</strong> <code>tar -cvf archive.tar /folder</code></li><li><strong>Extract an archive:</strong> <code>tar -xvf archive.tar</code></li></ul><h3>Compression</h3><p>To compress archives, we add flags for gzip (z) or bzip2 (j).</p><div class='code-block'>$ tar -czvf backup.tar.gz /home/user/Documents<br>$ tar -xzvf backup.tar.gz</div><div class='note-box'>💡 Note: The flags stand for: c (create), x (extract), z (gzip), v (verbose - see files processed), f (file).</div>",
+    "quiz": [
+      {
+        "q": "Which flag is used with the 'tar' command to compress the archive using gzip?",
+        "opts": [
+          "-c",
+          "-z",
+          "-v"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "5.2 Package Management",
+    "vid": "Q_p6D3bUoA8",
+    "reading": "<h3>Installing Software</h3><p>Unlike Windows where you download .exe files from websites, Linux relies on <strong>Package Managers</strong> to download, install, and update software from official repositories.</p><h3>Debian/Ubuntu (APT)</h3><p>The Advanced Package Tool (APT) is standard on Debian-based systems.</p><ul><li><strong>Update package list:</strong> <code>sudo apt update</code></li><li><strong>Install a package:</strong> <code>sudo apt install curl</code></li><li><strong>Remove a package:</strong> <code>sudo apt remove curl</code></li></ul><h3>Red Hat/CentOS (YUM/DNF)</h3><p>These systems use <code>yum</code> or <code>dnf</code>.</p><div class='code-block'>$ sudo dnf install git</div><div class='note-box'>💡 Note: You usually need 'sudo' (superuser do) to install or remove software, as these commands affect the entire system.</div>",
+    "quiz": [
+      {
+        "q": "Which command updates the list of available packages on an Ubuntu/Debian system?",
+        "opts": [
+          "sudo apt update",
+          "sudo yum install",
+          "sudo apt remove"
+        ],
+        "ans": 0
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "6.1 Networking Basics",
+    "vid": "2c7lZ1vIXXI",
+    "reading": "<h3>Network Diagnostics</h3><p>The terminal is perfect for troubleshooting network issues.</p><ul><li><strong>ping:</strong> Tests connectivity to another server. <code>ping google.com</code></li><li><strong>ifconfig / ip addr:</strong> Displays your network interfaces and IP addresses.</li></ul><h3>Downloading Files</h3><p>You can fetch data or download files directly from the web.</p><ul><li><strong>curl:</strong> Fetch web content to the terminal. <code>curl http://example.com</code></li><li><strong>wget:</strong> Download files. <code>wget http://example.com/file.zip</code></li></ul><div class='code-block'>$ ping -c 4 8.8.8.8<br>$ wget https://kernel.org/pub/linux/kernel/v5.x/linux-5.10.tar.xz</div><div class='note-box'>💡 Note: Press Ctrl+C to stop commands like 'ping' that run continuously by default.</div>",
+    "quiz": [
+      {
+        "q": "Which command is commonly used to download a file directly from the internet via the terminal?",
+        "opts": [
+          "ping",
+          "wget",
+          "ifconfig"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "6.2 Text Editors in the Terminal",
+    "vid": "w9Y6ZfB9A6I",
+    "reading": "<h3>Why Terminal Editors?</h3><p>When working on servers without a GUI, you must edit configuration files directly in the terminal.</p><h3>Nano</h3><p><strong>nano</strong> is a simple, user-friendly editor. It displays shortcuts at the bottom of the screen.</p><div class='code-block'>$ nano config.txt<br># Edit text, then press Ctrl+O to save, and Ctrl+X to exit.</div><h3>Vim</h3><p><strong>vim</strong> is incredibly powerful but has a steep learning curve. It uses 'modes' (Command mode and Insert mode).</p><ul><li>Open file: <code>vim file.txt</code></li><li>Enter Insert Mode: Press <strong>i</strong></li><li>Exit Insert Mode: Press <strong>Esc</strong></li><li>Save and Quit: Type <strong>:wq</strong> and hit Enter.</li></ul><div class='note-box'>💡 Note: If you ever get stuck in Vim, press 'Esc' multiple times, type ':q!', and press Enter to force quit without saving!</div>",
+    "quiz": [
+      {
+        "q": "In Vim, how do you save your changes and quit the editor?",
+        "opts": [
+          ":q!",
+          ":wq",
+          "Ctrl+X"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "7.1 Basic Bash Scripting",
+    "vid": "tK9Oc6AEnZE",
+    "reading": "<h3>What is a Bash Script?</h3><p>A Bash script is simply a plain text file containing a series of terminal commands. It allows you to automate repetitive tasks.</p><h3>Creating a Script</h3><p>Scripts typically start with a \"shebang\" (<code>#!/bin/bash</code>) to tell the system which interpreter to use.</p><div class='code-block'>#!/bin/bash<br>echo \"Starting backup...\"<br>tar -czvf backup.tar.gz /home/user/Documents<br>echo \"Backup complete!\"</div><h3>Running the Script</h3><p>Before running it, you must make it executable using <code>chmod</code>.</p><div class='code-block'>$ chmod +x backup.sh<br>$ ./backup.sh</div><div class='note-box'>💡 Note: The './' tells Linux to look for the script in the current directory, rather than in system paths.</div>",
+    "quiz": [
+      {
+        "q": "What is the purpose of the 'shebang' (#!/bin/bash) at the top of a script?",
+        "opts": [
+          "It makes the script run faster",
+          "It acts as a comment for documentation",
+          "It specifies the interpreter that should execute the script"
+        ],
+        "ans": 2
+      }
+    ]
+  }
+]

@@ -1,0 +1,392 @@
+/* ============================================================
+   app/globals.css  —  CodeSphere Design System
+   ============================================================
+
+   This file defines the "design tokens" for the whole app.
+   Think of it like a style guide: colors, fonts, spacing, etc.
+
+   HOW CSS VARIABLES WORK:
+   Define:   --color-primary: #00d4ff;
+   Use:      color: var(--color-primary);
+
+   This makes it easy to change the whole theme in one place!
+   ============================================================ */
+
+/* ── Google Fonts (loaded in layout.js <link>) ─────────────── */
+/* Orbitron = techy headings | Inter = readable body text */
+
+/* ── CSS Reset ──────────────────────────────────────────────── */
+/* Removes the browser's default margins/padding so we start fresh */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Design Tokens (CSS variables) ─────────────────────────── */
+:root {
+  /* === BRAND COLORS === */
+  --color-bg:          #060b18;     /* Very dark navy — main background */
+  --color-bg-card:     #0d1528;     /* Slightly lighter — card background */
+  --color-bg-input:    #111827;     /* Input fields */
+  --color-border:      #1e2d4a;     /* Subtle borders */
+  --color-border-glow: #00d4ff44;  /* Glowing border (cyan, 27% opacity) */
+
+  /* Primary = Cyan (tech/coding feel) */
+  --color-primary:     #00d4ff;
+  --color-primary-dim: #00d4ff22;
+
+  /* Accent = Purple (cybersecurity feel) */
+  --color-accent:      #7c3aed;
+  --color-accent-dim:  #7c3aed22;
+
+  /* Success, Warning, Danger */
+  --color-success:     #10b981;
+  --color-warning:     #f59e0b;
+  --color-danger:      #ef4444;
+
+  /* === TEXT COLORS === */
+  --color-text:        #e2e8f0;    /* Main text — light gray */
+  --color-text-muted:  #64748b;    /* Dimmed text — for labels, subtitles */
+  --color-text-link:   #00d4ff;    /* Links */
+
+  /* === TYPOGRAPHY === */
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-heading: 'Orbitron', 'Inter', sans-serif;
+
+  /* === SPACING === */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+  --space-2xl: 64px;
+
+  /* === BORDER RADIUS === */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  32px;
+  --radius-full: 9999px;
+
+  /* === SHADOWS & GLOWS === */
+  --glow-cyan:   0 0 20px rgba(0, 212, 255, 0.3);
+  --glow-purple: 0 0 20px rgba(124, 58, 237, 0.3);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+
+  /* === TRANSITIONS === */
+  --transition: all 0.25s ease;
+}
+
+/* ── Base Styles ─────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+
+  /* Animated grid background (subtle tech effect) */
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.05) 0%, transparent 60%),
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* ── Typography ───────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-text-link);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+p {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* ── Utility Classes ─────────────────────────────────────────── */
+/* These are small reusable classes, like mini-styles you apply anywhere */
+
+/* Container: centers content with a max width */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Flex helpers */
+.flex         { display: flex; }
+.flex-center  { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-col     { display: flex; flex-direction: column; }
+.gap-sm       { gap: var(--space-sm); }
+.gap-md       { gap: var(--space-md); }
+.gap-lg       { gap: var(--space-lg); }
+
+/* Text alignment */
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+/* ── Card Component ─────────────────────────────────────────── */
+/* A "card" is a box with a background — used everywhere in the app */
+.card {
+  background:    var(--color-bg-card);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding:       var(--space-lg);
+  transition:    var(--transition);
+}
+
+.card:hover {
+  border-color: var(--color-border-glow);
+  box-shadow:   var(--glow-cyan);
+}
+
+/* ── Button Styles ───────────────────────────────────────────── */
+.btn {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             var(--space-sm);
+  padding:         10px 20px;
+  border-radius:   var(--radius-full);
+  border:          none;
+  font-family:     var(--font-body);
+  font-size:       14px;
+  font-weight:     600;
+  cursor:          pointer;
+  transition:      var(--transition);
+  text-decoration: none;
+}
+
+/* Primary button: cyan gradient */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), #0099cc);
+  color: #000;
+}
+
+.btn-primary:hover {
+  box-shadow: var(--glow-cyan);
+  transform:  translateY(-1px);
+}
+
+/* Accent button: purple */
+.btn-accent {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.btn-accent:hover {
+  box-shadow: var(--glow-purple);
+  transform:  translateY(-1px);
+}
+
+/* Ghost button: transparent with border */
+.btn-ghost {
+  background: transparent;
+  border:     1px solid var(--color-border);
+  color:      var(--color-text-muted);
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-primary);
+  color:        var(--color-primary);
+}
+
+/* Danger button: red */
+.btn-danger {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+/* Success button: green */
+.btn-success {
+  background: var(--color-success);
+  color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Form Styles ───────────────────────────────────────────── */
+.form-group {
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--space-sm);
+  margin-bottom:  var(--space-md);
+}
+
+.form-label {
+  font-size:   13px;
+  font-weight: 600;
+  color:       var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-input,
+.form-select {
+  width:         100%;
+  padding:       12px var(--space-md);
+  background:    var(--color-bg-input);
+  border:        1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color:         var(--color-text);
+  font-family:   var(--font-body);
+  font-size:     14px;
+  transition:    var(--transition);
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline:      none;
+  border-color: var(--color-primary);
+  box-shadow:   0 0 0 3px rgba(0, 212, 255, 0.15);
+}
+
+/* ── Badge / Status Tag ─────────────────────────────────────── */
+.badge {
+  display:       inline-block;
+  padding:       3px 10px;
+  border-radius: var(--radius-full);
+  font-size:     11px;
+  font-weight:   700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-pending  { background: rgba(245, 158, 11, 0.15); color: var(--color-warning); }
+.badge-approved { background: rgba(16, 185, 129, 0.15); color: var(--color-success); }
+.badge-rejected { background: rgba(239, 68, 68, 0.15);  color: var(--color-danger);  }
+.badge-beginner { background: rgba(16, 185, 129, 0.15); color: var(--color-success); }
+.badge-intermediate { background: rgba(0, 212, 255, 0.15); color: var(--color-primary); }
+.badge-advanced { background: rgba(124, 58, 237, 0.15); color: var(--color-accent); }
+
+/* ── Alert Boxes ────────────────────────────────────────────── */
+.alert {
+  padding:       var(--space-md);
+  border-radius: var(--radius-sm);
+  border-left:   4px solid;
+  font-size:     14px;
+  margin-bottom: var(--space-md);
+}
+
+.alert-error   { background: rgba(239,68,68,0.1);   border-color: var(--color-danger);  color: #fca5a5; }
+.alert-success { background: rgba(16,185,129,0.1);  border-color: var(--color-success); color: #6ee7b7; }
+.alert-warning { background: rgba(245,158,11,0.1);  border-color: var(--color-warning); color: #fcd34d; }
+.alert-info    { background: rgba(0,212,255,0.1);   border-color: var(--color-primary); color: var(--color-primary); }
+
+/* ── Page Layout ────────────────────────────────────────────── */
+.page-layout {
+  display:      flex;
+  min-height:   100vh;
+}
+
+.page-sidebar {
+  width:      260px;
+  flex-shrink: 0;
+  background: var(--color-bg-card);
+  border-right: 1px solid var(--color-border);
+  padding:    var(--space-lg);
+  position:   sticky;
+  top:        0;
+  height:     100vh;
+  overflow-y: auto;
+}
+
+.page-content {
+  flex: 1;
+  padding: var(--space-xl);
+  overflow-x: hidden;
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(0,212,255,0.3); }
+  50%       { box-shadow: 0 0 30px rgba(0,212,255,0.7); }
+}
+
+.animate-fade-in  { animation: fadeIn  0.5s ease forwards; }
+.animate-slide-in { animation: slideIn 0.4s ease forwards; }
+.animate-pulse    { animation: pulse   2s ease infinite; }
+
+/* ── Table Styles ───────────────────────────────────────────── */
+.table {
+  width:           100%;
+  border-collapse: collapse;
+  font-size:       14px;
+}
+
+.table th {
+  text-align:     left;
+  padding:        12px var(--space-md);
+  font-size:      11px;
+  font-weight:    700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color:          var(--color-text-muted);
+  border-bottom:  1px solid var(--color-border);
+}
+
+.table td {
+  padding:       12px var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: middle;
+}
+
+.table tbody tr:hover {
+  background: rgba(0, 212, 255, 0.03);
+}
+
+/* ── Grid helpers ───────────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .page-sidebar     { display: none; }
+  .page-content     { padding: var(--space-lg); }
+}
+
+/* ── Scrollbar (webkit) ─────────────────────────────────────── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }

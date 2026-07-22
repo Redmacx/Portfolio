@@ -1,0 +1,171 @@
+[
+  {
+    "id": 0,
+    "title": "1.1 Introduction to Cybersecurity",
+    "vid": "inWWhr5tnEA",
+    "reading": "<h3>What is Cybersecurity?</h3>\n<p>Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks. These cyberattacks are usually aimed at accessing, changing, or destroying sensitive information; extorting money from users; or interrupting normal business processes.</p>\n<p>Implementing effective cybersecurity measures is particularly challenging today because there are more devices than people, and attackers are becoming more innovative.</p>\n<div class='note-box'>💡 Note: Cybersecurity involves not only technology but also people and processes working together.</div>\n<h3>Why is Cybersecurity Important?</h3>\n<p>With an increasing number of users, devices, and programs in the modern enterprise, combined with the growing deluge of data — much of which is sensitive or confidential — the importance of cybersecurity continues to grow.</p>\n<ul>\n    <li><b>Protection of Data:</b> Safeguarding intellectual property, financial data, and personal information.</li>\n    <li><b>Business Continuity:</b> Ensuring systems remain operational despite potential attacks.</li>\n    <li><b>Trust:</b> Maintaining the trust of customers and stakeholders.</li>\n</ul>\n<div class='code-block'>\n# Example of a simple script to check system security status\ndef check_security_status():\n    print(\"Checking firewall...\")\n    return True\n</div>",
+    "quiz": [
+      {
+        "q": "What is the primary goal of cybersecurity?",
+        "opts": ["To increase network speed", "To protect systems, networks, and programs from digital attacks", "To fix broken hardware"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "title": "1.2 The CIA Triad",
+    "vid": "V9H7mH3gI1s",
+    "reading": "<h3>The Core Concept of Security</h3>\n<p>The CIA triad is a well-known model for security policy development, used to identify problem areas and necessary solutions for information security. CIA stands for <b>Confidentiality, Integrity, and Availability</b>.</p>\n<ul>\n    <li><b>Confidentiality:</b> Ensuring that information is accessible only to those authorized to have access.</li>\n    <li><b>Integrity:</b> Safeguarding the accuracy and completeness of information and processing methods.</li>\n    <li><b>Availability:</b> Ensuring that authorized users have access to information and associated assets when required.</li>\n</ul>\n<div class='note-box'>💡 Note: Think of the CIA triad as the three pillars that hold up any information security strategy.</div>\n<h3>How the Triad is Applied</h3>\n<p>When designing a system, all three components must be balanced. For example, making a system highly confidential might make it less available. Security professionals must weigh the risks and requirements of the organization to find the right balance.</p>",
+    "quiz": [
+      {
+        "q": "What does the 'I' in the CIA triad stand for?",
+        "opts": ["Information", "Integrity", "Intelligence"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "2.1 Common Cyber Threats",
+    "vid": "7e9w_97t2eA",
+    "reading": "<h3>Understanding the Threat Landscape</h3>\n<p>A cyber threat is any malicious act that attempts to gain access to a computer network without authorization or permission. Threats can come from various sources, including hostile nation-states, terrorist groups, corporate spies, and lone hackers.</p>\n<h3>Types of Cyber Threats</h3>\n<ul>\n    <li><b>Cybercrime:</b> Single actors or groups targeting systems for financial gain or to cause disruption.</li>\n    <li><b>Cyberattack:</b> Often involves politically motivated information gathering.</li>\n    <li><b>Cyberterrorism:</b> Intended to undermine electronic systems to cause panic or fear.</li>\n</ul>\n<div class='note-box'>💡 Note: A threat is not the same as a vulnerability. A vulnerability is a weakness, while a threat is the potential to exploit that weakness.</div>\n<p>To defend against these threats, organizations must implement robust security controls, continuous monitoring, and effective incident response plans.</p>",
+    "quiz": [
+      {
+        "q": "Which of the following is defined as a weakness in a system?",
+        "opts": ["Threat", "Vulnerability", "Exploit"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "2.2 Malware & Viruses",
+    "vid": "vTAHq-nK6J0",
+    "reading": "<h3>What is Malware?</h3>\n<p>Malware, short for malicious software, is an umbrella term for any software intentionally designed to cause disruption to a computer, server, client, or computer network, leak private information, gain unauthorized access to information or systems, deprive users of access to information, or which unknowingly interferes with the user's computer security and privacy.</p>\n<h3>Common Types of Malware</h3>\n<ul>\n    <li><b>Viruses:</b> Programs that can replicate themselves and infect other files.</li>\n    <li><b>Worms:</b> Similar to viruses, but they can spread across networks without human intervention.</li>\n    <li><b>Trojans:</b> Malicious software disguised as legitimate software.</li>\n    <li><b>Ransomware:</b> Malware that encrypts a victim's files and demands payment to restore access.</li>\n</ul>\n<div class='code-block'>\n# Concept of a basic virus signature detection\ndef detect_virus(file_data, signature):\n    if signature in file_data:\n        return \"Malware detected!\"\n    return \"File is clean.\"\n</div>\n<div class='note-box'>💡 Note: Always keep your antivirus software up-to-date to protect against the latest malware variants.</div>",
+    "quiz": [
+      {
+        "q": "Which type of malware disguises itself as legitimate software?",
+        "opts": ["Worm", "Trojan", "Ransomware"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "2.3 Phishing & Social Engineering",
+    "vid": "LCsR2s9I8H8",
+    "reading": "<h3>The Human Element of Security</h3>\n<p>Social engineering is the psychological manipulation of people into performing actions or divulging confidential information. It exploits human psychology rather than technical vulnerabilities.</p>\n<h3>Phishing: The Most Common Form</h3>\n<p>Phishing is a specific type of social engineering attack often used to steal user data, including login credentials and credit card numbers. It occurs when an attacker, masquerading as a trusted entity, dupes a victim into opening an email, instant message, or text message.</p>\n<ul>\n    <li><b>Spear Phishing:</b> Targeted phishing aimed at a specific individual or organization.</li>\n    <li><b>Whaling:</b> Phishing targeting high-profile targets like C-level executives.</li>\n    <li><b>Vishing:</b> Voice phishing, typically done over the phone.</li>\n</ul>\n<div class='note-box'>💡 Note: Always verify the sender's email address and avoid clicking on suspicious links.</div>\n<p>Organizations combat phishing through employee training, email filtering, and implementing multi-factor authentication (MFA).</p>",
+    "quiz": [
+      {
+        "q": "What is phishing targeting a specific individual called?",
+        "opts": ["Spear Phishing", "Whaling", "Vishing"],
+        "ans": 0
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "3.1 Network Security Basics",
+    "vid": "3Kq1MIfTWCE",
+    "reading": "<h3>Securing the Network</h3>\n<p>Network security is any activity designed to protect the usability and integrity of your network and data. It includes both hardware and software technologies. Effective network security manages access to the network.</p>\n<h3>Key Components of Network Security</h3>\n<ul>\n    <li><b>Access Control:</b> Not every user should have access to your network. To keep out potential attackers, you need to recognize each user and each device.</li>\n    <li><b>Application Security:</b> Any software you use to run your business needs to be protected, whether your IT staff builds it or whether you buy it.</li>\n    <li><b>Behavioral Analytics:</b> To detect abnormal network behavior, you must know what normal behavior looks like.</li>\n</ul>\n<div class='note-box'>💡 Note: A defense-in-depth strategy is crucial, meaning multiple layers of security are applied.</div>\n<p>By securing the network, organizations can prevent data breaches, reduce risk, and ensure that their systems are highly available for legitimate users.</p>",
+    "quiz": [
+      {
+        "q": "What is the strategy of using multiple layers of security called?",
+        "opts": ["Defense-in-depth", "Single-point security", "Overhead security"],
+        "ans": 0
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "3.2 Firewalls and VPNs",
+    "vid": "7_LPdttKXPc",
+    "reading": "<h3>Building Barriers</h3>\n<p>A firewall is a network security device that monitors incoming and outgoing network traffic and decides whether to allow or block specific traffic based on a defined set of security rules. Firewalls have been a first line of defense in network security for over 25 years.</p>\n<h3>Virtual Private Networks (VPNs)</h3>\n<p>A virtual private network (VPN) gives you online privacy and anonymity by creating a private network from a public internet connection. VPNs mask your internet protocol (IP) address so your online actions are virtually untraceable.</p>\n<ul>\n    <li><b>Firewalls:</b> Act as a barrier between your internal network and the outside world.</li>\n    <li><b>VPNs:</b> Encrypt your data in transit, ensuring that even if intercepted, it cannot be read.</li>\n</ul>\n<div class='code-block'>\n# Pseudo-rule for a firewall\nALLOW TCP from ANY to 192.168.1.10 on PORT 80\nDENY ALL from ANY to ANY\n</div>\n<div class='note-box'>💡 Note: Using a VPN is especially important when connecting to public Wi-Fi networks.</div>",
+    "quiz": [
+      {
+        "q": "What is the primary function of a VPN?",
+        "opts": ["To block all incoming traffic", "To encrypt data in transit and mask your IP address", "To detect malware on your computer"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "4.1 Introduction to Cryptography",
+    "vid": "jhXCTbFnK8o",
+    "reading": "<h3>Securing Data with Math</h3>\n<p>Cryptography is the practice and study of techniques for secure communication in the presence of adversarial behavior. More generally, cryptography is about constructing and analyzing protocols that prevent third parties or the public from reading private messages.</p>\n<h3>Key Cryptographic Concepts</h3>\n<ul>\n    <li><b>Encryption:</b> The process of encoding a message or information in such a way that only authorized parties can access it.</li>\n    <li><b>Decryption:</b> The process of converting encrypted data back into its original form.</li>\n    <li><b>Cipher:</b> An algorithm for performing encryption or decryption.</li>\n</ul>\n<div class='note-box'>💡 Note: Cryptography provides confidentiality, integrity, non-repudiation, and authentication.</div>\n<p>Modern cryptography intersects the disciplines of mathematics, computer science, and electrical engineering.</p>",
+    "quiz": [
+      {
+        "q": "What is the process of converting encrypted data back into its original form called?",
+        "opts": ["Encryption", "Decryption", "Hashing"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "4.2 Symmetric vs Asymmetric Encryption",
+    "vid": "AQDCe585Lnc",
+    "reading": "<h3>Two Approaches to Encryption</h3>\n<p>There are two primary types of encryption used today: symmetric and asymmetric.</p>\n<h3>Symmetric Encryption</h3>\n<p>Symmetric encryption uses a single key to both encrypt and decrypt data. Both the sender and the receiver must have the same key.</p>\n<ul>\n    <li><b>Pros:</b> Fast, efficient for large amounts of data.</li>\n    <li><b>Cons:</b> Key distribution is a major challenge.</li>\n    <li><b>Examples:</b> AES, DES.</li>\n</ul>\n<h3>Asymmetric Encryption</h3>\n<p>Asymmetric encryption uses a pair of keys: a public key for encryption and a private key for decryption.</p>\n<ul>\n    <li><b>Pros:</b> Solves the key distribution problem.</li>\n    <li><b>Cons:</b> Slower, computationally expensive.</li>\n    <li><b>Examples:</b> RSA, ECC.</li>\n</ul>\n<div class='note-box'>💡 Note: In practice, systems often use a hybrid approach, using asymmetric encryption to securely exchange a symmetric key, which is then used for the bulk of data transfer.</div>",
+    "quiz": [
+      {
+        "q": "Which type of encryption uses a pair of keys (public and private)?",
+        "opts": ["Symmetric Encryption", "Asymmetric Encryption", "Hashing"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "5.1 Identity and Access Management",
+    "vid": "P3nSj-yFDEs",
+    "reading": "<h3>Controlling Who Has Access</h3>\n<p>Identity and Access Management (IAM) ensures that the right people and job roles in your organization can access the tools they need to do their jobs.</p>\n<h3>The Core Principles of IAM</h3>\n<ul>\n    <li><b>Identification:</b> Claiming an identity (e.g., username).</li>\n    <li><b>Authentication:</b> Proving the identity (e.g., password).</li>\n    <li><b>Authorization:</b> Granting access based on the proven identity (e.g., permissions).</li>\n</ul>\n<p>Effective IAM systems allow IT administrators to securely manage identities and control access to corporate resources.</p>\n<div class='note-box'>💡 Note: The Principle of Least Privilege states that a user should only be given the minimum levels of access necessary to complete their job functions.</div>",
+    "quiz": [
+      {
+        "q": "What does the Principle of Least Privilege state?",
+        "opts": ["All users should have admin access", "Users should only have the minimum access necessary", "Users should change passwords daily"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "5.2 Passwords and Multi-Factor Authentication",
+    "vid": "5OwwyP_A2Wk",
+    "reading": "<h3>Strengthening Authentication</h3>\n<p>Passwords have historically been the primary method of authentication, but they are increasingly vulnerable to brute-force attacks, credential stuffing, and phishing.</p>\n<h3>Multi-Factor Authentication (MFA)</h3>\n<p>MFA requires users to provide two or more verification factors to gain access to a resource such as an application, online account, or a VPN. This adds an extra layer of security.</p>\n<ul>\n    <li><b>Something you know:</b> A password or PIN.</li>\n    <li><b>Something you have:</b> A smartphone, hardware token, or smart card.</li>\n    <li><b>Something you are:</b> Biometrics like fingerprints or facial recognition.</li>\n</ul>\n<div class='code-block'>\n# Concept of MFA verification\ndef verify_login(user, password, otp):\n    if check_password(user, password) and check_otp(user, otp):\n        return \"Access Granted\"\n    return \"Access Denied\"\n</div>\n<div class='note-box'>💡 Note: Implementing MFA is one of the most effective ways to prevent unauthorized access, even if a password is compromised.</div>",
+    "quiz": [
+      {
+        "q": "Which of the following represents 'something you have' in MFA?",
+        "opts": ["A password", "A smartphone or hardware token", "A fingerprint"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "6.1 Incident Response and Forensics",
+    "vid": "gR_U8Kx8o4U",
+    "reading": "<h3>Reacting to an Attack</h3>\n<p>An Incident Response (IR) plan is a set of instructions designed to help IT staff detect, respond to, and recover from network security incidents. The goal is to address and manage the aftermath of a security breach or cyberattack.</p>\n<h3>Phases of Incident Response</h3>\n<ol>\n    <li><b>Preparation:</b> Establishing policies, procedures, and tools.</li>\n    <li><b>Identification:</b> Detecting the incident and determining its scope.</li>\n    <li><b>Containment:</b> Stopping the spread of the threat.</li>\n    <li><b>Eradication:</b> Removing the threat from the environment.</li>\n    <li><b>Recovery:</b> Restoring systems to normal operation.</li>\n    <li><b>Lessons Learned:</b> Analyzing the incident to improve future responses.</li>\n</ol>\n<h3>Digital Forensics</h3>\n<p>Digital forensics is the process of uncovering and interpreting electronic data. The goal is to preserve any evidence in its most original form while performing a structured investigation to reconstruct past events.</p>\n<div class='note-box'>💡 Note: Always follow a documented chain of custody when handling digital evidence to ensure it remains admissible in court.</div>",
+    "quiz": [
+      {
+        "q": "What is the first phase of an Incident Response plan?",
+        "opts": ["Identification", "Containment", "Preparation"],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "6.2 The Future of Cybersecurity",
+    "vid": "Q6i3B2x7Bjc",
+    "reading": "<h3>Looking Ahead</h3>\n<p>The cybersecurity landscape is constantly evolving as new technologies emerge and attackers develop new techniques. Staying ahead of threats requires continuous learning and adaptation.</p>\n<h3>Emerging Trends</h3>\n<ul>\n    <li><b>Artificial Intelligence & Machine Learning:</b> Used both by defenders to detect anomalies and by attackers to automate and scale attacks.</li>\n    <li><b>Quantum Computing:</b> Poses a future threat to current cryptographic algorithms, driving the need for post-quantum cryptography.</li>\n    <li><b>Internet of Things (IoT):</b> The proliferation of connected devices vastly expands the attack surface.</li>\n</ul>\n<p>As we move into the future, a proactive, intelligence-driven approach to cybersecurity will become increasingly critical.</p>\n<div class='note-box'>💡 Note: Continuous education and adopting a 'security-first' mindset are essential for individuals and organizations alike.</div>",
+    "quiz": [
+      {
+        "q": "How is AI impacting cybersecurity?",
+        "opts": ["It is only used by defenders", "It is only used by attackers", "It is used by both defenders and attackers"],
+        "ans": 2
+      }
+    ]
+  }
+]

@@ -1,0 +1,158 @@
+[
+  {
+    "id": 0,
+    "title": "1.1 Network Components",
+    "vid": "qiQR5rCEvnI",
+    "reading": "<h3>What is a Computer Network?</h3><p>At its core, a computer network is a group of interconnected nodes or computing devices that exchange data and resources with each other. A network connection can be established using either cable media or wireless media.</p><h3>Primary Components of a Network</h3><p>Every network, from a small home setup to the global Internet, relies on three main categories of components:</p><ul><li><strong>End Devices:</strong> These are the devices that users directly interact with. Examples include desktop computers, laptops, servers, smartphones, and IoT devices.</li><li><strong>Intermediary Devices:</strong> These devices connect the end devices to the network and route data behind the scenes. Examples include switches, routers, and firewalls.</li><li><strong>Network Media:</strong> The physical or wireless channels through which data travels, such as copper cables, fiber optics, and Wi-Fi.</li></ul><div class='note-box'>💡 Note: End devices are where the communication originates from or is directed to, while intermediary devices manage the flow of that communication.</div><h3>Why Learn Networking?</h3><p>Understanding these basic components is your very first step in the Cisco CCNA journey. As a network engineer, you will be responsible for configuring these intermediary devices to ensure data flows efficiently and securely.</p><div class='code-block'># A basic command to check interface status on a Cisco Router<br>Router# show ip interface brief</div>",
+    "quiz": [
+      {
+        "q": "Which of the following is considered an intermediary device?",
+        "opts": ["Laptop", "Switch", "Server"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "title": "1.2 Network Topologies",
+    "vid": "Pkwc-g45gXU",
+    "reading": "<h3>Understanding Network Types</h3><p>Networks are typically classified by their size and the geographic area they cover.</p><ul><li><strong>LAN (Local Area Network):</strong> Covers a small geographical area, such as a single office building or home. LANs are typically owned and managed by a single individual or IT department.</li><li><strong>WAN (Wide Area Network):</strong> Covers a large geographical area, such as across a city, country, or globally (e.g., the Internet). WANs are typically managed by Service Providers.</li><li><strong>WLAN (Wireless LAN):</strong> A LAN that wirelessly interconnects users and endpoints.</li></ul><h3>Network Topologies</h3><p>The term 'topology' refers to the layout or structure of a network.</p><p><strong>Physical Topology:</strong> Refers to the physical layout of the wires and devices. Common examples include Star, Bus, and Ring. Modern LANs almost exclusively use the Star topology.</p><p><strong>Logical Topology:</strong> Refers to the way a network transfers frames from one node to the next.</p><div class='note-box'>💡 Note: When troubleshooting a network, you must understand both its physical wiring and its logical data flow.</div>",
+    "quiz": [
+      {
+        "q": "Which topology is most commonly used in modern LANs?",
+        "opts": ["Bus", "Ring", "Star"],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "2.1 The OSI Model",
+    "vid": "vv4y_uOneC0",
+    "reading": "<h3>The OSI Reference Model</h3><p>The Open Systems Interconnection (OSI) model is a conceptual framework used to understand and standardize how different network protocols and equipment communicate. It divides the network communication process into seven distinct layers:</p><ul><li><strong>Layer 7 - Application:</strong> The interface to the user and network applications.</li><li><strong>Layer 6 - Presentation:</strong> Data formatting, encryption, and compression.</li><li><strong>Layer 5 - Session:</strong> Establishes, maintains, and terminates sessions.</li><li><strong>Layer 4 - Transport:</strong> End-to-end data delivery, error recovery, and flow control (TCP, UDP).</li><li><strong>Layer 3 - Network:</strong> Logical addressing (IP addresses) and routing data.</li><li><strong>Layer 2 - Data Link:</strong> Physical addressing (MAC addresses) and access to the media.</li><li><strong>Layer 1 - Physical:</strong> The physical media and binary transmission (1s and 0s).</li></ul><div class='note-box'>💡 Note: A common mnemonic to remember the layers from bottom to top is 'Please Do Not Throw Sausage Pizza Away'.</div><h3>The TCP/IP Model</h3><p>The TCP/IP model closely aligns with the actual protocols that run the Internet today. It condenses the 7 OSI layers into 4 layers: Application, Transport, Internet, and Network Access.</p>",
+    "quiz": [
+      {
+        "q": "Which OSI layer is responsible for logical addressing (IP)?",
+        "opts": ["Data Link", "Network", "Transport"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "3.1 IPv4 Addressing",
+    "vid": "vcFT6Xq5mCg",
+    "reading": "<h3>IPv4 Addressing Basics</h3><p>An IPv4 address is a 32-bit logical address that uniquely identifies a device on a network. It is typically represented in dotted-decimal format, divided into four 8-bit sections called octets (e.g., 192.168.1.10).</p><h3>The Subnet Mask</h3><p>Every IP address consists of two parts: a Network portion and a Host portion. The subnet mask is used by devices to determine which part is which. For example, a subnet mask of 255.255.255.0 means the first three octets are the network address.</p><h3>Subnetting</h3><p>Subnetting is the process of borrowing bits from the host portion of an address to create smaller sub-networks (subnets). This helps conserve IP addresses and improves network performance.</p><div class='code-block'>IP Address: 192.168.1.50<br>Subnet Mask: 255.255.255.0 (/24)<br>Network Address: 192.168.1.0<br>Broadcast Address: 192.168.1.255</div><div class='note-box'>💡 Note: The /24 notation is called CIDR (Classless Inter-Domain Routing) notation and represents the number of consecutive 1s in the subnet mask.</div>",
+    "quiz": [
+      {
+        "q": "How many bits are in an IPv4 address?",
+        "opts": ["128 bits", "32 bits", "64 bits"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "3.2 IPv6 Addressing",
+    "vid": "8n8hVw5_sLE",
+    "reading": "<h3>The Need for IPv6</h3><p>The primary motivation for transitioning to IPv6 is the exhaustion of the IPv4 address space. While IPv4 offers roughly 4.3 billion addresses, IPv6 provides a staggering 340 undecillion addresses (a 128-bit address space).</p><h3>IPv6 Address Format</h3><p>IPv6 addresses are 128 bits in length and are written in hexadecimal characters. The address is divided into eight 16-bit segments, called hextets, separated by colons.</p><div class='code-block'>Example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334</div><h3>Compressing IPv6 Addresses</h3><p>To make IPv6 addresses easier to read and write, there are two main rules for compression:</p><ol><li><strong>Omit Leading Zeros:</strong> Within any hextet, leading zeros can be removed. For example, '0db8' becomes 'db8'.</li><li><strong>Double Colon (::):</strong> A single contiguous block of multiple hextets consisting only of zeros can be replaced with a double colon (::). This can only be used once per address.</li></ol><div class='note-box'>💡 Note: Applying both rules, our example address can be compressed to: 2001:db8:85a3::8a2e:370:7334</div>",
+    "quiz": [
+      {
+        "q": "What is the length of an IPv6 address?",
+        "opts": ["32 bits", "128 bits", "64 bits"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "4.1 Ethernet Switching",
+    "vid": "oP01F_RIfa4",
+    "reading": "<h3>Fundamentals of Ethernet Switching</h3><p>Switches operate at Layer 2 (the Data Link Layer) of the OSI model. Their primary job is to connect end devices on a local network and forward Ethernet frames based on MAC (Media Access Control) addresses.</p><h3>The MAC Address Table</h3><p>A switch learns the topology of the network by examining the source MAC address of every incoming frame and associating that MAC address with the switch port it arrived on. This information is stored in the MAC Address Table.</p><div class='code-block'>Switch# show mac address-table<br>          Mac Address Table<br>-------------------------------------------<br>Vlan    Mac Address       Type        Ports<br>----    -----------       --------    -----<br>   1    000a.f312.4411    DYNAMIC     Fa0/1</div><h3>Frame Forwarding</h3><p>When a switch receives a frame destined for a specific device, it looks up the destination MAC address in its table and forwards the frame out of the correct port.</p><div class='note-box'>💡 Note: If the switch does not know the destination MAC, it floods the frame out of all ports except the receiving port.</div>",
+    "quiz": [
+      {
+        "q": "What does a Layer 2 switch use to make forwarding decisions?",
+        "opts": ["IP Addresses", "MAC Addresses", "Port Numbers"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "4.2 VLAN Concepts",
+    "vid": "jF537KjV4Ew",
+    "reading": "<h3>What is a VLAN?</h3><p>A Virtual LAN (VLAN) allows you to logically segment a network into different broadcast domains on the same physical switch. Without VLANs, a broadcast sent by one device is received by all other devices on the switch.</p><h3>Benefits of VLANs</h3><ul><li><strong>Security:</strong> Separating sensitive data from the rest of the network.</li><li><strong>Cost Reduction:</strong> Less need for expensive physical routers to create separate networks.</li><li><strong>Better Performance:</strong> Smaller broadcast domains reduce unnecessary traffic.</li></ul><div class='code-block'>Switch(config)# vlan 10<br>Switch(config-vlan)# name Sales<br>Switch(config-vlan)# exit<br>Switch(config)# interface FastEthernet 0/1<br>Switch(config-if)# switchport mode access<br>Switch(config-if)# switchport access vlan 10</div><div class='note-box'>💡 Note: By default, all ports on a Cisco switch belong to VLAN 1 (the default VLAN).</div>",
+    "quiz": [
+      {
+        "q": "What is the primary purpose of a VLAN?",
+        "opts": ["To speed up routing", "To logically segment a network", "To connect to the internet"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "5.1 Routing Concepts",
+    "vid": "u5QYmB_81eE",
+    "reading": "<h3>The Role of a Router</h3><p>Routers operate at Layer 3 (Network Layer) and are designed to connect different networks together. Unlike switches, which connect devices within the same network, routers figure out how to send packets to remote networks.</p><h3>The Routing Table</h3><p>To make forwarding decisions, a router uses a Routing Table. This table contains a list of destination networks and the best path to reach them.</p><div class='code-block'>Router# show ip route<br>C   192.168.1.0/24 is directly connected, GigabitEthernet0/0<br>S   10.0.0.0/8 [1/0] via 192.168.1.2</div><p>When a router receives a packet, it examines the destination IP address, finds the most specific match in its routing table, and forwards the packet out the associated interface.</p><div class='note-box'>💡 Note: The 'Default Gateway' configured on your PC is simply the IP address of your local router. It's the doorway out of your local network.</div>",
+    "quiz": [
+      {
+        "q": "What table does a router use to make forwarding decisions?",
+        "opts": ["MAC Address Table", "ARP Table", "Routing Table"],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "5.2 Static vs Dynamic Routing",
+    "vid": "9x8-11xL1iQ",
+    "reading": "<h3>Static Routing</h3><p>A static route is manually configured by a network administrator. It tells the router exactly where to send traffic for a specific destination. Static routes are secure and use very little CPU memory, but they do not automatically adapt if a link goes down.</p><div class='code-block'>Router(config)# ip route 192.168.2.0 255.255.255.0 10.0.0.2</div><h3>Dynamic Routing</h3><p>Dynamic routing protocols (such as OSPF, EIGRP, and BGP) allow routers to dynamically share information about the networks they know. If a topology changes, the routers automatically update their routing tables to find a new path.</p><h3>Administrative Distance (AD)</h3><p>When a router learns about the same destination network from multiple sources, it uses Administrative Distance to choose the most trusted source. Lower AD is better.</p><div class='note-box'>💡 Note: Static routes have a default Administrative Distance of 1, meaning they are almost always preferred over dynamic routing protocols.</div>",
+    "quiz": [
+      {
+        "q": "What is the default Administrative Distance of a static route?",
+        "opts": ["90", "1", "120"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "5.3 Introduction to OSPF",
+    "vid": "TQ3d0g-D_kU",
+    "reading": "<h3>What is OSPF?</h3><p>OSPF (Open Shortest Path First) is a highly popular, open-standard Link-State routing protocol. It is used extensively in enterprise networks.</p><h3>How OSPF Works</h3><p>OSPF routers establish 'neighbor' relationships with directly connected routers. They then exchange Link-State Advertisements (LSAs) to build a complete topological map of the network. Finally, each router runs the Dijkstra algorithm to determine the absolute shortest path to every destination network.</p><ul><li><strong>Metric:</strong> OSPF uses 'Cost' as its metric, which is inversely proportional to the bandwidth of the link. Higher bandwidth = lower cost = better path.</li><li><strong>Administrative Distance:</strong> OSPF has a default AD of 110.</li><li><strong>Areas:</strong> OSPF uses a hierarchical design with Areas to minimize routing update traffic. Area 0 is the backbone.</li></ul><div class='code-block'>Router(config)# router ospf 1<br>Router(config-router)# network 192.168.1.0 0.0.0.255 area 0</div><div class='note-box'>💡 Note: OSPF configuration uses wildcard masks (like 0.0.0.255) instead of standard subnet masks.</div>",
+    "quiz": [
+      {
+        "q": "What metric does OSPF use to determine the best path?",
+        "opts": ["Hop count", "Delay", "Cost (Based on Bandwidth)"],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "6.1 Network Address Translation (NAT)",
+    "vid": "gX4UeW5IqH0",
+    "reading": "<h3>Why Do We Need NAT?</h3><p>Private IPv4 addresses (like 192.168.x.x or 10.x.x.x) are not allowed to be routed over the public Internet. NAT (Network Address Translation) was created to translate these private addresses into globally unique public IP addresses.</p><h3>Types of NAT</h3><ul><li><strong>Static NAT:</strong> A strict one-to-one mapping between a private IP and a public IP. Useful for web servers that need a consistent public address.</li><li><strong>Dynamic NAT:</strong> Translates private IPs to public IPs from a shared pool.</li><li><strong>PAT (Port Address Translation):</strong> Also known as NAT Overload. This translates many private IPs to a single public IP address by keeping track of unique source port numbers.</li></ul><div class='note-box'>💡 Note: PAT is the most common form of NAT today. It is what your home wireless router uses to allow all your devices to share one public IP from your ISP.</div>",
+    "quiz": [
+      {
+        "q": "Which type of NAT translates multiple private IPs to a single public IP using port numbers?",
+        "opts": ["Static NAT", "Dynamic NAT", "PAT (NAT Overload)"],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "7.1 Access Control Lists (ACLs)",
+    "vid": "r8oN3a-7WcI",
+    "reading": "<h3>What are Access Control Lists?</h3><p>ACLs are a set of rules defined on a router or firewall to filter incoming or outgoing network traffic. They act like a bouncer at a club, checking packets against a list of criteria to decide whether to permit or deny them.</p><h3>Standard vs Extended ACLs</h3><ul><li><strong>Standard ACLs (Numbered 1-99):</strong> These can only filter traffic based on the Source IP Address. They are typically placed as close to the destination as possible.</li><li><strong>Extended ACLs (Numbered 100-199):</strong> Much more granular. They can filter based on Source IP, Destination IP, Protocol (TCP/UDP), and Port Numbers (like port 80 for HTTP). They are typically placed as close to the source as possible.</li></ul><div class='code-block'>Router(config)# access-list 10 permit 192.168.1.0 0.0.0.255<br>Router(config)# interface GigabitEthernet0/0<br>Router(config-if)# ip access-group 10 in</div><div class='note-box'>💡 Note: Every ACL has an implicit 'deny all' statement at the very end. If a packet does not match any of your explicit rules, it will be automatically dropped!</div>",
+    "quiz": [
+      {
+        "q": "What do Standard ACLs filter traffic based on?",
+        "opts": ["Destination IP only", "Source IP only", "Both Source IP and Port numbers"],
+        "ans": 1
+      }
+    ]
+  }
+]

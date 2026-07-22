@@ -1,0 +1,73 @@
+/* ============================================================
+   components/Navbar.module.css  —  Navbar Styles
+   ============================================================
+   CSS Modules: styles only apply to Navbar.js, not other files.
+   This prevents naming conflicts between components.
+   ============================================================ */
+
+/* The full-width bar at the top */
+.navbar {
+  position:   sticky;     /* Sticks to the top as you scroll */
+  top:        0;
+  z-index:    100;        /* Appears above other content */
+  background: rgba(6, 11, 24, 0.85);   /* Semi-transparent dark */
+  backdrop-filter: blur(12px);          /* Frosted glass effect */
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Inner wrapper: centers content and sets max width */
+.navInner {
+  max-width:   1200px;
+  margin:      0 auto;
+  padding:     0 var(--space-lg);
+  height:      64px;
+  display:     flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Logo ─────────────────────────────────────────────────── */
+.logo {
+  display:     flex;
+  align-items: center;
+  gap:         var(--space-sm);
+  text-decoration: none;
+}
+
+.logoIcon {
+  font-size:   20px;
+  font-weight: 900;
+  color:       var(--color-primary);
+  font-family: var(--font-heading);
+  animation:   glow 3s ease infinite;
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-size:   18px;
+  font-weight: 700;
+  color:       var(--color-text);
+}
+
+/* The "Sphere" part of "CodeSphere" is cyan */
+.logoAccent {
+  color: var(--color-primary);
+}
+
+/* ── Right side items ────────────────────────────────────── */
+.navRight {
+  display:     flex;
+  align-items: center;
+  gap:         var(--space-md);
+}
+
+.userName {
+  font-size:   14px;
+  font-weight: 600;
+  color:       var(--color-text);
+}
+
+/* ── Mobile: hide long text on small screens ────────────── */
+@media (max-width: 600px) {
+  .userName { display: none; }
+}

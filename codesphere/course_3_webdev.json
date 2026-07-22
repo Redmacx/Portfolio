@@ -1,0 +1,278 @@
+[
+  {
+    "id": 0,
+    "title": "1. HTML Basics and Document Structure",
+    "vid": "pQN-pnXPaVg",
+    "reading": "<h3>What is HTML?</h3><p>HTML stands for Hyper Text Markup Language. It is the standard markup language for creating Web pages. HTML elements are the building blocks of HTML pages.</p><div class='note-box'>💡 Note: HTML describes the structure of a Web page semantically.</div><h3>A Simple HTML Document</h3><div class='code-block'>&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n  &lt;title&gt;Page Title&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n\n  &lt;h1&gt;My First Heading&lt;/h1&gt;\n  &lt;p&gt;My first paragraph.&lt;/p&gt;\n\n&lt;/body&gt;\n&lt;/html&gt;</div><h3>Explanation of the Example</h3><ul><li><strong>&lt;!DOCTYPE html&gt;</strong>: Defines that this document is an HTML5 document.</li><li><strong>&lt;html&gt;</strong>: The root element of an HTML page.</li><li><strong>&lt;head&gt;</strong>: Contains meta information about the page.</li><li><strong>&lt;title&gt;</strong>: Specifies a title for the page, shown in the browser's title bar or page tab.</li><li><strong>&lt;body&gt;</strong>: Defines the document's body, a container for all visible contents.</li></ul>",
+    "quiz": [
+      {
+        "q": "What does HTML stand for?",
+        "opts": ["Home Tool Markup Language", "Hyper Text Markup Language", "Hyperlinks and Text Markup Language"],
+        "ans": 1
+      },
+      {
+        "q": "Which element represents the root of an HTML document?",
+        "opts": ["<head>", "<body>", "<html>"],
+        "ans": 2
+      },
+      {
+        "q": "Where does the <title> element go?",
+        "opts": ["Inside <head>", "Inside <body>", "At the very top"],
+        "ans": 0
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "title": "2. HTML Elements, Attributes, and Headings",
+    "vid": "kUMe1ly46mA",
+    "reading": "<h3>HTML Elements</h3><p>An HTML element is defined by a start tag, some content, and an end tag: <code>&lt;tagname&gt;Content goes here...&lt;/tagname&gt;</code></p><p>Nested HTML Elements: Elements can contain other elements. All HTML documents consist of nested HTML elements.</p><h3>HTML Attributes</h3><p>Attributes provide additional information about HTML elements. They are always specified in the start tag and usually come in name/value pairs like: <code>name=\"value\"</code>.</p><div class='note-box'>💡 Note: Always quote attribute values. Double quotes are the most common.</div><h3>HTML Headings</h3><p>HTML headings are defined with the <code>&lt;h1&gt;</code> to <code>&lt;h6&gt;</code> tags. <code>&lt;h1&gt;</code> defines the most important heading, while <code>&lt;h6&gt;</code> defines the least important.</p><div class='code-block'>&lt;h1&gt;Heading 1&lt;/h1&gt;\n&lt;h2&gt;Heading 2&lt;/h2&gt;\n&lt;h3&gt;Heading 3&lt;/h3&gt;</div>",
+    "quiz": [
+      {
+        "q": "Which tag defines the most important heading?",
+        "opts": ["<h6>", "<heading>", "<h1>"],
+        "ans": 2
+      },
+      {
+        "q": "Where are attributes placed in an HTML element?",
+        "opts": ["In the start tag", "In the end tag", "Between the tags"],
+        "ans": 0
+      },
+      {
+        "q": "What format do attributes typically follow?",
+        "opts": ["value=\"name\"", "name=\"value\"", "attribute:value"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "3. HTML Links and Images",
+    "vid": "bWPMSSsVdPk",
+    "reading": "<h3>HTML Links</h3><p>HTML links are hyper-links. You can click on a link and jump to another document.</p><p>Links are defined with the <code>&lt;a&gt;</code> tag:</p><div class='code-block'>&lt;a href=\"https://www.w3schools.com/\"&gt;Visit W3Schools.com!&lt;/a&gt;</div><p>The <code>href</code> attribute specifies the destination address of the link.</p><h3>HTML Images</h3><p>Images are not technically inserted into a web page; images are linked to web pages. The <code>&lt;img&gt;</code> tag creates a holding space for the referenced image.</p><div class='code-block'>&lt;img src=\"img_girl.jpg\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"&gt;</div><div class='note-box'>💡 Note: The alt attribute provides an alternate text for an image, if the user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).</div>",
+    "quiz": [
+      {
+        "q": "Which tag is used to create a hyperlink?",
+        "opts": ["<link>", "<a>", "<href>"],
+        "ans": 1
+      },
+      {
+        "q": "Which attribute specifies the URL of the link?",
+        "opts": ["src", "link", "href"],
+        "ans": 2
+      },
+      {
+        "q": "Which attribute is used to provide alternate text for an image?",
+        "opts": ["alt", "title", "text"],
+        "ans": 0
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "4. HTML Lists and Tables",
+    "vid": "aMUDvNGsllE",
+    "reading": "<h3>HTML Lists</h3><p>HTML offers two primary types of lists: Unordered and Ordered.</p><ul><li><strong>Unordered List:</strong> Starts with the <code>&lt;ul&gt;</code> tag. Each list item starts with the <code>&lt;li&gt;</code> tag. By default, items are marked with bullets.</li><li><strong>Ordered List:</strong> Starts with the <code>&lt;ol&gt;</code> tag. Each list item starts with the <code>&lt;li&gt;</code> tag. By default, items are marked with numbers.</li></ul><div class='code-block'>&lt;ul&gt;\n  &lt;li&gt;Coffee&lt;/li&gt;\n  &lt;li&gt;Tea&lt;/li&gt;\n&lt;/ul&gt;</div><h3>HTML Tables</h3><p>An HTML table consists of one <code>&lt;table&gt;</code> element and one or more <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code>, and <code>&lt;td&gt;</code> elements.</p><div class='note-box'>💡 Note: &lt;tr&gt; defines a table row, &lt;th&gt; defines a table header, and &lt;td&gt; defines a table data/cell.</div><div class='code-block'>&lt;table&gt;\n  &lt;tr&gt;\n    &lt;th&gt;Company&lt;/th&gt;\n    &lt;th&gt;Contact&lt;/th&gt;\n  &lt;/tr&gt;\n  &lt;tr&gt;\n    &lt;td&gt;Alfreds Futterkiste&lt;/td&gt;\n    &lt;td&gt;Maria Anders&lt;/td&gt;\n  &lt;/tr&gt;\n&lt;/table&gt;</div>",
+    "quiz": [
+      {
+        "q": "Which tag defines an unordered list?",
+        "opts": ["<list>", "<ol>", "<ul>"],
+        "ans": 2
+      },
+      {
+        "q": "Which tag is used for a table row?",
+        "opts": ["<td>", "<tr>", "<th>"],
+        "ans": 1
+      },
+      {
+        "q": "What does <th> stand for?",
+        "opts": ["Table Height", "Table Header", "Table Heading row"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "5. HTML Forms and Inputs",
+    "vid": "fNcJuPIZ2EQ",
+    "reading": "<h3>HTML Forms</h3><p>The <code>&lt;form&gt;</code> element is used to create an HTML form for user input. It acts as a container for different types of input elements, such as text fields, checkboxes, radio buttons, submit buttons, etc.</p><h3>The &lt;input&gt; Element</h3><p>The most used form element is the <code>&lt;input&gt;</code> element. It can be displayed in many ways, depending on the <code>type</code> attribute.</p><ul><li><code>&lt;input type=\"text\"&gt;</code> - Defines a single-line text input field</li><li><code>&lt;input type=\"radio\"&gt;</code> - Defines a radio button (for selecting one of many choices)</li><li><code>&lt;input type=\"submit\"&gt;</code> - Defines a submit button (for submitting the form)</li></ul><h3>The &lt;label&gt; Element</h3><div class='note-box'>💡 Note: The <code>&lt;label&gt;</code> element is useful for screen-reader users. It also helps users who have difficulty clicking on very small regions (like radio buttons or checkboxes) because clicking on the text within the label toggles the radio button/checkbox.</div><div class='code-block'>&lt;form action=\"/submit\"&gt;\n  &lt;label for=\"fname\"&gt;First name:&lt;/label&gt;&lt;br&gt;\n  &lt;input type=\"text\" id=\"fname\" name=\"fname\"&gt;&lt;br&gt;\n  &lt;input type=\"submit\" value=\"Submit\"&gt;\n&lt;/form&gt;</div>",
+    "quiz": [
+      {
+        "q": "Which element is used to create a form?",
+        "opts": ["<input>", "<form>", "<fieldset>"],
+        "ans": 1
+      },
+      {
+        "q": "Which input type is used for a submit button?",
+        "opts": ["button", "submit", "action"],
+        "ans": 1
+      },
+      {
+        "q": "What is the purpose of the <label> tag?",
+        "opts": ["To group form elements", "To make text bold", "To bind text to an input for accessibility"],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "6. Introduction to CSS and Selectors",
+    "vid": "yfoY53QXEnI",
+    "reading": "<h3>What is CSS?</h3><p>CSS stands for Cascading Style Sheets. It describes how HTML elements are to be displayed on screen, paper, or in other media. CSS saves a lot of work by controlling the layout of multiple web pages all at once.</p><h3>CSS Syntax</h3><p>A CSS rule consists of a selector and a declaration block:</p><div class='code-block'>h1 {<br>  color: blue;<br>  font-size: 12px;<br>}</div><p>The selector (<code>h1</code>) points to the HTML element you want to style. The declaration block contains one or more declarations separated by semicolons. Each declaration includes a CSS property name and a value, separated by a colon.</p><h3>CSS Selectors</h3><p>CSS selectors are used to \"find\" (or select) the HTML elements you want to style.</p><ul><li><strong>Element Selector:</strong> Selects elements based on the element name. (e.g., <code>p { ... }</code>)</li><li><strong>Class Selector:</strong> Selects elements with a specific class attribute. Starts with a period character. (e.g., <code>.center { ... }</code>)</li><li><strong>ID Selector:</strong> Selects an element with a specific id attribute. Starts with a hash character. (e.g., <code>#header { ... }</code>)</li></ul><div class='note-box'>💡 Note: An id must be unique within a page, so the id selector is used to select one unique element!</div>",
+    "quiz": [
+      {
+        "q": "What does CSS stand for?",
+        "opts": ["Colorful Style Sheets", "Computer Style Sheets", "Cascading Style Sheets"],
+        "ans": 2
+      },
+      {
+        "q": "How do you select an element with id 'demo'?",
+        "opts": ["#demo", ".demo", "demo"],
+        "ans": 0
+      },
+      {
+        "q": "How do you select an element with class 'intro'?",
+        "opts": ["#intro", ".intro", "intro"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "7. CSS Colors, Backgrounds, and Borders",
+    "vid": "1Rs2ND1ryYc",
+    "reading": "<h3>CSS Colors</h3><p>Colors in CSS are specified by valid color names (like <code>red</code>), HEX values (like <code>#ff0000</code>), RGB values (like <code>rgb(255, 0, 0)</code>), or HSL values.</p><div class='code-block'>p {\n  color: tomato;\n}</div><h3>CSS Backgrounds</h3><p>The CSS background properties are used to add background effects for elements.</p><ul><li><code>background-color</code>: Specifies the background color of an element.</li><li><code>background-image</code>: Specifies an image to use as the background.</li><li><code>background-repeat</code>: Specifies if/how a background image will be repeated.</li></ul><div class='code-block'>body {\n  background-color: lightblue;\n}</div><h3>CSS Borders</h3><p>The CSS border properties allow you to specify the style, width, and color of an element's border.</p><div class='note-box'>💡 Note: The <code>border-style</code> property is required! If this property is not set, no border will be drawn.</div><div class='code-block'>div {\n  border: 2px solid red;\n}</div>",
+    "quiz": [
+      {
+        "q": "Which property changes the text color?",
+        "opts": ["text-color", "color", "font-color"],
+        "ans": 1
+      },
+      {
+        "q": "Which property changes the background color?",
+        "opts": ["bg-color", "color-background", "background-color"],
+        "ans": 2
+      },
+      {
+        "q": "Which border property is absolutely required to show a border?",
+        "opts": ["border-style", "border-width", "border-color"],
+        "ans": 0
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "8. CSS Box Model",
+    "vid": "rIO53268zaU",
+    "reading": "<h3>The Box Model</h3><p>All HTML elements can be considered as boxes. In CSS, the term \"box model\" is used when talking about design and layout.</p><p>The CSS box model is essentially a box that wraps around every HTML element. It consists of: margins, borders, padding, and the actual content.</p><ul><li><strong>Content:</strong> The content of the box, where text and images appear.</li><li><strong>Padding:</strong> Clears an area around the content. The padding is transparent.</li><li><strong>Border:</strong> A border that goes around the padding and content.</li><li><strong>Margin:</strong> Clears an area outside the border. The margin is transparent.</li></ul><div class='note-box'>💡 Note: When you set the width and height properties of an element with CSS, you just set the width and height of the <b>content area</b>. To calculate the full size of an element, you must also add padding, borders and margins.</div><h3>Box Sizing</h3><p>The <code>box-sizing</code> property solves the problem of calculating total width. By setting <code>box-sizing: border-box;</code>, padding and border are included in the element's total width and height.</p><div class='code-block'>* {\n  box-sizing: border-box;\n}</div>",
+    "quiz": [
+      {
+        "q": "What is the innermost part of the CSS Box Model?",
+        "opts": ["Padding", "Content", "Margin"],
+        "ans": 1
+      },
+      {
+        "q": "Which property creates space inside the border, around the content?",
+        "opts": ["Margin", "Padding", "Border-spacing"],
+        "ans": 1
+      },
+      {
+        "q": "What does `box-sizing: border-box` do?",
+        "opts": ["Removes all borders", "Makes the element perfectly square", "Includes padding and border in the total width and height"],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "9. CSS Text and Font Styling",
+    "vid": "J35jug1uHzE",
+    "reading": "<h3>Text Formatting</h3><p>CSS has many properties to style text, making it readable and visually appealing.</p><ul><li><strong>text-align:</strong> Used to set the horizontal alignment of a text (e.g., <code>center</code>, <code>left</code>, <code>right</code>, <code>justify</code>).</li><li><strong>text-decoration:</strong> Used to set or remove decorations from text. Commonly used to remove underlines from links (<code>text-decoration: none;</code>).</li><li><strong>text-transform:</strong> Used to specify uppercase and lowercase letters in a text (e.g., <code>uppercase</code>, <code>lowercase</code>, <code>capitalize</code>).</li></ul><h3>CSS Fonts</h3><p>The <code>font-family</code> property should hold several font names as a \"fallback\" system. If the browser does not support the first font, it tries the next font.</p><div class='code-block'>p {\n  font-family: \"Times New Roman\", Times, serif;\n  font-size: 16px;\n  font-weight: bold;\n}</div><div class='note-box'>💡 Note: Font family names with more than one word must be in quotation marks, like \"Times New Roman\".</div>",
+    "quiz": [
+      {
+        "q": "Which property is used to remove the underline from links?",
+        "opts": ["text-style", "text-decoration", "font-decoration"],
+        "ans": 1
+      },
+      {
+        "q": "How do you make the text bold in CSS?",
+        "opts": ["font-weight: bold;", "font: bold;", "text-weight: bold;"],
+        "ans": 0
+      },
+      {
+        "q": "Which property aligns text horizontally?",
+        "opts": ["align-text", "text-align", "text-position"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "10. CSS Flexbox Layout",
+    "vid": "K74l26pE4YA",
+    "reading": "<h3>What is Flexbox?</h3><p>The Flexible Box Layout Module, makes it easier to design flexible responsive layout structure without using float or positioning.</p><h3>Flex Container</h3><p>To start using the Flexbox model, you need to first define a flex container. This is done by setting the <code>display</code> property to <code>flex</code>.</p><div class='code-block'>.container {\n  display: flex;\n}</div><h3>Flex Properties</h3><ul><li><strong>flex-direction:</strong> Defines in which direction the container wants to stack the flex items (<code>row</code>, <code>column</code>, <code>row-reverse</code>, <code>column-reverse</code>).</li><li><strong>justify-content:</strong> Used to align the flex items horizontally across the main axis (e.g., <code>center</code>, <code>space-between</code>, <code>space-around</code>).</li><li><strong>align-items:</strong> Used to align the flex items vertically across the cross axis (e.g., <code>center</code>, <code>flex-start</code>, <code>flex-end</code>).</li></ul><div class='note-box'>💡 Note: Flexbox is primarily a 1-dimensional layout system, meaning it deals with either rows or columns, but not both at the same time.</div>",
+    "quiz": [
+      {
+        "q": "How do you initialize a flexbox container?",
+        "opts": ["display: flexbox;", "display: block flex;", "display: flex;"],
+        "ans": 2
+      },
+      {
+        "q": "Which property aligns items along the main axis?",
+        "opts": ["align-items", "justify-content", "flex-align"],
+        "ans": 1
+      },
+      {
+        "q": "What is the default flex-direction?",
+        "opts": ["column", "row", "stack"],
+        "ans": 1
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "11. CSS Grid Layout",
+    "vid": "jV8B24rSN5o",
+    "reading": "<h3>What is CSS Grid?</h3><p>The CSS Grid Layout Module offers a grid-based layout system, with rows and columns, making it easier to design web pages without having to use floats and positioning.</p><div class='note-box'>💡 Note: Unlike Flexbox (1-dimensional), CSS Grid is a 2-dimensional layout system, perfect for overall page layouts.</div><h3>Grid Container</h3><p>An element becomes a grid container when its <code>display</code> property is set to <code>grid</code> or <code>inline-grid</code>.</p><div class='code-block'>.grid-container {\n  display: grid;\n  grid-template-columns: auto auto auto;\n  gap: 10px;\n}</div><h3>Grid Properties</h3><ul><li><strong>grid-template-columns:</strong> Defines the number of columns and their widths in the grid layout.</li><li><strong>grid-template-rows:</strong> Defines the height of each row.</li><li><strong>gap:</strong> A shorthand property for row-gap and column-gap, setting the spacing between grid items.</li></ul>",
+    "quiz": [
+      {
+        "q": "CSS Grid is primarily a ___-dimensional layout system.",
+        "opts": ["1", "2", "3"],
+        "ans": 1
+      },
+      {
+        "q": "Which property defines the number and width of columns?",
+        "opts": ["grid-columns", "grid-template-columns", "template-cols"],
+        "ans": 1
+      },
+      {
+        "q": "Which property sets the space between grid cells?",
+        "opts": ["spacing", "margin", "gap"],
+        "ans": 2
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "12. Responsive Web Design and Media Queries",
+    "vid": "sQOgbxL9u-4",
+    "reading": "<h3>Responsive Web Design</h3><p>Responsive Web Design is about using HTML and CSS to automatically resize, hide, shrink, or enlarge a website, to make it look good on all devices (desktops, tablets, and phones).</p><h3>The Viewport</h3><p>HTML5 introduced a method to let web designers take control over the viewport (the user's visible area of a web page), through the <code>&lt;meta&gt;</code> tag.</p><div class='code-block'>&lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"&gt;</div><h3>Media Queries</h3><p>Media queries are a popular technique for delivering a tailored style sheet to different devices. It uses the <code>@media</code> rule to include a block of CSS properties only if a certain condition is true.</p><div class='code-block'>@media screen and (max-width: 600px) {\n  body {\n    background-color: lightblue;\n  }\n}</div><div class='note-box'>💡 Note: The example above will apply the lightblue background ONLY if the browser window is 600px wide or smaller.</div>",
+    "quiz": [
+      {
+        "q": "What does responsive web design aim to do?",
+        "opts": ["Make websites load faster", "Make websites look good on all devices", "Make websites use less data"],
+        "ans": 1
+      },
+      {
+        "q": "Which HTML tag is used to control the viewport?",
+        "opts": ["<viewport>", "<meta>", "<head>"],
+        "ans": 1
+      },
+      {
+        "q": "Which CSS rule is used for media queries?",
+        "opts": ["@media", "@query", "@responsive"],
+        "ans": 0
+      }
+    ]
+  }
+]
