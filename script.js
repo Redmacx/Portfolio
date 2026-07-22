@@ -185,15 +185,45 @@ const formSuccess = document.getElementById('formSuccess');
 
 form.addEventListener('submit', e => {
   e.preventDefault();
-  submitBtn.querySelector('span').textContent = 'Sending…';
+  
+  // Set sending state
+  const btnText = submitBtn.querySelector('span') || submitBtn;
+  const originalText = btnText.textContent;
+  btnText.textContent = 'Sending…';
   submitBtn.disabled = true;
-  setTimeout(() => {
+
+  const formData = new FormData(form);
+  
+  // Submit via Web3Forms API
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    body: formData
+  })
+  .then(async (response) => {
+    let json = await response.json();
+    if (response.status == 200) {
+      formSuccess.style.display = 'block';
+      formSuccess.style.color = 'var(--green)';
+      formSuccess.textContent = '✅ Message sent successfully! I will get back to you soon.';
+      form.reset();
+      setTimeout(() => { formSuccess.style.display = 'none'; }, 5000);
+    } else {
+      console.log(response);
+      formSuccess.style.display = 'block';
+      formSuccess.style.color = '#ff5555';
+      formSuccess.textContent = json.message || 'Oops! Something went wrong.';
+    }
+  })
+  .catch(error => {
+    console.log(error);
     formSuccess.style.display = 'block';
-    form.reset();
-    submitBtn.querySelector('span').textContent = 'Send Message';
+    formSuccess.style.color = '#ff5555';
+    formSuccess.textContent = 'Oops! Network error. Please try again.';
+  })
+  .then(() => {
+    btnText.textContent = originalText;
     submitBtn.disabled = false;
-    setTimeout(() => { formSuccess.style.display = 'none'; }, 4000);
-  }, 1200);
+  });
 });
 
 /* ── 10. ACTIVE NAV LINK HIGHLIGHT ───────────────── */
