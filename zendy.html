@@ -106,7 +106,7 @@
     .poster-section {
       position: relative;
       z-index: 1;
-      max-width: 860px;
+      max-width: 480px;
       margin: 0 auto 3rem;
       padding: 0 24px;
     }
@@ -130,12 +130,36 @@
     }
     .poster-img {
       width: 100%;
+      height: auto;
+      display: block;
       border-radius: 16px;
       border: 1px solid var(--border);
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      transition: box-shadow 0.3s;
+      transition: box-shadow 0.3s, transform 0.3s;
+      object-fit: contain;
+      cursor: zoom-in;
     }
-    .poster-img:hover { box-shadow: 0 24px 80px rgba(34,211,238,0.12); }
+    .poster-img:hover { box-shadow: 0 24px 80px rgba(34,211,238,0.25); transform: scale(1.01); }
+    /* Lightbox */
+    .poster-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      backdrop-filter: blur(6px);
+    }
+    .poster-lightbox.active { display: flex; }
+    .poster-lightbox img {
+      max-width: 95vw;
+      max-height: 95vh;
+      border-radius: 12px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+      object-fit: contain;
+    }
 
     /* ── TECH + FEATURES ── */
     .zendy-grid {
@@ -354,8 +378,20 @@
   <!-- RESEARCH POSTER -->
   <div class="poster-section">
     <h2>Research Poster</h2>
-    <img src="zendy-poster.jpg" alt="ZenDy Research Poster — Cavite State University 2026" class="poster-img" />
+    <img src="zendy-poster.png" alt="ZenDy Research Poster — Cavite State University 2026" class="poster-img" id="posterImg" title="Click to enlarge" />
   </div>
+
+  <!-- LIGHTBOX -->
+  <div class="poster-lightbox" id="posterLightbox">
+    <img src="zendy-poster.png" alt="ZenDy Research Poster Full View" />
+  </div>
+  <script>
+    const posterImg = document.getElementById('posterImg');
+    const lightbox  = document.getElementById('posterLightbox');
+    posterImg.addEventListener('click', () => lightbox.classList.add('active'));
+    lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('active'); });
+  </script>
 
   <!-- FOOTER -->
   <footer class="footer">

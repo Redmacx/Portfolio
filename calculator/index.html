@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MACX Calculator — Premium Edition</title>
+  <meta name="description" content="A premium glassmorphism calculator with scientific mode, history panel, and keyboard support." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <div class="app-wrapper">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="brand-icon">⚡</div>
+        <span class="brand-name">MACX <span class="brand-accent">Calc</span></span>
+      </div>
+      <div class="header-actions">
+        <button id="toggleHistory" class="btn-icon" title="Toggle History">🕘</button>
+        <button id="toggleScientific" class="btn-icon" title="Scientific Mode">∑</button>
+        <a href="../index.html" class="btn-back" title="Back to Portfolio">← Portfolio</a>
+      </div>
+    </header>
+
+    <main class="main-layout">
+
+      <!-- History Panel -->
+      <aside id="historyPanel" class="history-panel hidden">
+        <div class="history-header">
+          <h2>📋 History</h2>
+          <button id="clearHistory" class="btn-clear-hist">Clear</button>
+        </div>
+        <ul id="historyList" class="history-list">
+          <li class="history-empty">No calculations yet…</li>
+        </ul>
+      </aside>
+
+      <!-- Calculator Card -->
+      <div class="calculator-card">
+
+        <!-- Display -->
+        <div class="display-area">
+          <div id="expression" class="display-expression">0</div>
+          <div id="result-preview" class="display-preview"></div>
+        </div>
+
+        <!-- Mode badge -->
+        <div id="modeBadge" class="mode-badge">Standard</div>
+
+        <!-- Scientific Row (hidden by default) -->
+        <div id="scientificRow" class="btn-grid sci-grid hidden">
+          <button class="btn btn-sci" data-action="sin">sin</button>
+          <button class="btn btn-sci" data-action="cos">cos</button>
+          <button class="btn btn-sci" data-action="tan">tan</button>
+          <button class="btn btn-sci" data-action="log">log</button>
+          <button class="btn btn-sci" data-action="ln">ln</button>
+          <button class="btn btn-sci" data-action="sqrt">√</button>
+          <button class="btn btn-sci" data-action="pi">π</button>
+          <button class="btn btn-sci" data-action="e">e</button>
+          <button class="btn btn-sci" data-action="pow2">x²</button>
+          <button class="btn btn-sci" data-action="pow3">x³</button>
+        </div>
+
+        <!-- Standard Buttons -->
+        <div class="btn-grid std-grid">
+
+          <!-- Row 1 -->
+          <button class="btn btn-utility" data-action="ac" id="btnAC">AC</button>
+          <button class="btn btn-utility" data-action="sign">+/-</button>
+          <button class="btn btn-utility" data-action="percent">%</button>
+          <button class="btn btn-operator" data-action="/">÷</button>
+
+          <!-- Row 2 -->
+          <button class="btn btn-num" data-action="7">7</button>
+          <button class="btn btn-num" data-action="8">8</button>
+          <button class="btn btn-num" data-action="9">9</button>
+          <button class="btn btn-operator" data-action="*">×</button>
+
+          <!-- Row 3 -->
+          <button class="btn btn-num" data-action="4">4</button>
+          <button class="btn btn-num" data-action="5">5</button>
+          <button class="btn btn-num" data-action="6">6</button>
+          <button class="btn btn-operator" data-action="-">−</button>
+
+          <!-- Row 4 -->
+          <button class="btn btn-num" data-action="1">1</button>
+          <button class="btn btn-num" data-action="2">2</button>
+          <button class="btn btn-num" data-action="3">3</button>
+          <button class="btn btn-operator" data-action="+">+</button>
+
+          <!-- Row 5 -->
+          <button class="btn btn-num btn-zero" data-action="0">0</button>
+          <button class="btn btn-num" data-action=".">.</button>
+          <button class="btn btn-equal" data-action="=">=</button>
+
+        </div>
+
+        <!-- Keyboard hint -->
+        <div class="keyboard-hint">⌨️ Keyboard supported &nbsp;|&nbsp; Backspace to delete</div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
