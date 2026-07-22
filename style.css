@@ -344,9 +344,7 @@ ul { list-style: none; }
 .about-text p { color: var(--text-muted); margin-bottom: 16px; }
 .about-lead { font-size: 1.15rem; color: var(--text) !important; line-height: 1.7; }
 .about-lead strong { color: var(--accent-3); }
-.about-text strong { color: var(--text); }
 .about-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; justify-content: center; }
-}
 .info-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
