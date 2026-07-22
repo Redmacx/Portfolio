@@ -338,8 +338,9 @@ ul { list-style: none; }
   justify-content: center;
 }
 .about-text {
-  max-width: 780px;
-  text-align: center;
+  max-width: 760px;
+  text-align: left;
+  margin: 0 auto;
 }
 .about-text p { color: var(--text-muted); margin-bottom: 16px; }
 .about-lead { font-size: 1.15rem; color: var(--text) !important; line-height: 1.7; }
