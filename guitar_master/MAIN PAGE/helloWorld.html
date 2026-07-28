@@ -3,119 +3,441 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Master of Puppets – Guitar Tutorial Hub</title>
-  <meta name="description" content="Learn Master of Puppets by Metallica on guitar. Watch electric, acoustic, and ukulele video tutorials for all skill levels.">
+  <title>Metallica Guitar Tutorials – Master of Puppets & All Songs</title>
+  <meta name="description" content="Learn every Metallica song on guitar. Electric, Acoustic, and Ukulele tutorials with tabs, chords, and proper tuning for all skill levels.">
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@300;400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <!-- FIXED BACKGROUND -->
   <div class="hero-overlay"></div>
+  <div class="bg-grid"></div>
 
   <!-- NAVBAR -->
-  <nav>
+  <nav id="navbar">
     <div class="nav-inner">
-      <a href="helloWorld.html" class="nav-logo">🎸 <span>Guitar</span> Master</a>
+      <a href="helloWorld.html" class="nav-logo">🎸 <span>Metallica</span> Tutorials</a>
       <ul class="nav-links">
-        <li><a href="helloWorld.html" class="active" id="nav-home">Home</a></li>
+        <li><a href="#hero" class="active" id="nav-home">Home</a></li>
+        <li><a href="#master-of-puppets" id="nav-mop">Master of Puppets</a></li>
+        <li><a href="#metallica-hub" id="nav-hub">All Songs</a></li>
         <li><a href="../acoustic master of puppets/hello world 3.html" id="nav-acoustic">Acoustic</a></li>
         <li><a href="../guitar ukelele/hello world 2.html" id="nav-ukelele">Ukulele</a></li>
-        <li><a href="#" id="nav-other">Other</a></li>
       </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#hero">🏠 Home</a>
+    <a href="#master-of-puppets">🎸 Master of Puppets</a>
+    <a href="#metallica-hub">🤘 All Songs</a>
+    <a href="../acoustic master of puppets/hello world 3.html">🪕 Acoustic</a>
+    <a href="../guitar ukelele/hello world 2.html">🎵 Ukulele</a>
+  </div>
+
+  <!-- ██████████ HERO ██████████ -->
+  <section class="hero" id="hero">
     <div class="hero-content fade-in">
-      <div class="page-header">
-        <span class="badge">Metallica · 1986</span>
-        <h1>Master of <span class="highlight">Puppets</span></h1>
-        <div class="divider"></div>
-        <p>Choose your instrument and start learning one of the greatest metal songs ever written.</p>
+      <div class="lightning-badge">⚡ OFFICIAL TRIBUTE TUTORIALS ⚡</div>
+      <h1 class="hero-title">
+        <span class="metallica-text">METALLICA</span>
+        <span class="guitar-text">GUITAR TUTORIALS</span>
+      </h1>
+      <p class="hero-sub">Master every riff, tab & chord — Electric · Acoustic · Ukulele</p>
+      <div class="hero-cta-group">
+        <a href="#master-of-puppets" class="btn-primary">🎸 Start with Master of Puppets</a>
+        <a href="#metallica-hub" class="btn-secondary">🤘 Browse All Songs</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span>50+</span>Songs</div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span>3</span>Instruments</div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span>100%</span>Free</div>
       </div>
     </div>
+  </section>
 
-    <!-- PAGE CONTENT -->
-    <div class="page-content">
+  <!-- ██████████ MASTER OF PUPPETS SECTION ██████████ -->
+  <section class="section-block" id="master-of-puppets">
+    <div class="section-container">
 
-      <!-- BAND INFO -->
+      <!-- SECTION TITLE -->
+      <div class="section-title-block fade-in">
+        <span class="section-tag">⭐ Featured Song</span>
+        <h2>Master of <span class="red">Puppets</span></h2>
+        <div class="divider-line"></div>
+        <p>One of the greatest metal songs ever written — learn every part, every riff.</p>
+      </div>
+
+      <!-- BAND INFO CARD -->
       <div class="band-section fade-in-2">
-        <img src="m.png" alt="Metallica Members" class="band-photo">
+        <img src="m.png" alt="Metallica Band" class="band-photo">
         <div class="band-info">
-          <h2>Metallica</h2>
-          <p>Master of Puppets is the third studio album by Metallica, released in March 1986. The title track is widely considered one of the greatest heavy metal songs ever recorded — a masterclass in riff-writing, dynamics, and sheer intensity.</p>
-          <a href="https://en.wikipedia.org/wiki/Metallica" target="_blank" rel="noopener">Learn more about Metallica →</a>
+          <div class="band-label">Metallica · 1986</div>
+          <h2>Master of Puppets</h2>
+          <p>Released March 3, 1986, this thrash metal masterpiece from Metallica's third studio album features one of the most iconic opening riffs in rock history. Tuned to standard E, the song runs at a ferocious 212 BPM and showcases James Hetfield's legendary rhythm guitar work alongside Kirk Hammett's scorching leads.</p>
+          <div class="band-tags">
+            <span class="tag">E Minor</span>
+            <span class="tag">212 BPM</span>
+            <span class="tag">Standard Tuning</span>
+            <span class="tag">Thrash Metal</span>
+          </div>
+          <a href="https://en.wikipedia.org/wiki/Master_of_Puppets_(song)" target="_blank" rel="noopener">Learn more on Wikipedia →</a>
         </div>
       </div>
 
-      <!-- CATEGORY CARDS -->
+      <!-- INSTRUMENT CARDS -->
       <div class="category-grid fade-in-3">
-        <a href="helloWorld.html" class="category-card" id="card-electric">
+        <a href="#electric-section" class="category-card electric-card" id="card-electric">
+          <div class="card-glow"></div>
           <span class="card-icon">⚡</span>
           <h3>Electric Guitar</h3>
-          <p>The full original electric guitar version — tabs, full song tutorial.</p>
-          <span class="difficulty hard">Hard</span>
+          <p>Full original electric version with complete tab breakdown & tutorial.</p>
+          <span class="difficulty hard">Advanced</span>
           <span class="arrow">→</span>
         </a>
-        <a href="../acoustic master of puppets/hello world 3.html" class="category-card" id="card-acoustic">
+        <a href="../acoustic master of puppets/hello world 3.html" class="category-card acoustic-card" id="card-acoustic">
+          <div class="card-glow"></div>
           <span class="card-icon">🎸</span>
           <h3>Acoustic</h3>
-          <p>A beautiful stripped-down acoustic cover with full lesson breakdown.</p>
-          <span class="difficulty hard">Hard</span>
+          <p>Beautiful stripped-down acoustic arrangement with full lesson breakdown.</p>
+          <span class="difficulty hard">Advanced</span>
           <span class="arrow">→</span>
         </a>
-        <a href="../guitar ukelele/hello world 2.html" class="category-card" id="card-ukelele">
+        <a href="../guitar ukelele/hello world 2.html" class="category-card uke-card" id="card-ukelele">
+          <div class="card-glow"></div>
           <span class="card-icon">🪕</span>
           <h3>Ukulele</h3>
-          <p>Master of Puppets on ukulele — a surprisingly playable arrangement.</p>
-          <span class="difficulty medium">Medium</span>
-          <span class="arrow">→</span>
-        </a>
-        <a href="#" class="category-card" id="card-other">
-          <span class="card-icon">🎵</span>
-          <h3>Other Tutorials</h3>
-          <p>More Metallica and metal guitar tutorials coming soon.</p>
-          <span class="difficulty medium">Various</span>
+          <p>Master of Puppets on ukulele — surprisingly playable & fun!</p>
+          <span class="difficulty medium">Intermediate</span>
           <span class="arrow">→</span>
         </a>
       </div>
 
-      <!-- ELECTRIC VIDEO -->
-      <div class="video-section fade-in-4">
+      <!-- ELECTRIC VIDEO SECTION -->
+      <div class="video-section fade-in-4" id="electric-section">
         <div class="video-section-header">
           <div class="dot"></div>
-          <h2>⚡ Electric Guitar — Full Tab &amp; Tutorial (Stranger Things Cover)</h2>
+          <h2>⚡ Electric Guitar — Full Tab & Tutorial</h2>
+          <span class="video-badge">Stranger Things Cover</span>
         </div>
         <div class="video-wrapper">
           <video controls id="electric-video">
             <source src="Y2Mate.is - Master of Puppets Metallica Cover  Guitar Tab  Lesson  Tutorial  Stranger Things-S6jkEOIHJFg-1080p-1654328943389.mp4" type="video/mp4">
-            Your browser does not support the HTML5 video tag.
+            <div class="video-placeholder">
+              <span>🎬</span>
+              <p>Video file not found. Place your MP4 tutorial video in this folder.</p>
+            </div>
           </video>
         </div>
       </div>
 
-      <!-- INFO CARDS -->
+      <!-- TABS & CHORDS SECTION -->
+      <div class="tabs-chords-block fade-in-4" id="tabs-section">
+        <div class="tc-header">
+          <h2>📋 Tabs & Chords — Master of Puppets</h2>
+          <div class="tc-tabs">
+            <button class="tc-tab active" data-tab="tabs">Guitar Tabs</button>
+            <button class="tc-tab" data-tab="chords">Chords</button>
+            <button class="tc-tab" data-tab="tuning">Tuning</button>
+          </div>
+        </div>
+
+        <!-- TABS PANEL -->
+        <div class="tc-panel active" id="panel-tabs">
+          <div class="tab-info-row">
+            <span class="ti-item">🎵 Key: <strong>E Minor</strong></span>
+            <span class="ti-item">⚡ BPM: <strong>212</strong></span>
+            <span class="ti-item">🎸 Tuning: <strong>EADGBe</strong></span>
+          </div>
+          <div class="tab-scroll">
+            <pre class="guitar-tab">
+<span class="tab-label">INTRO / MAIN RIFF (E String Gallop)</span>
+<span class="tab-note">e|----------------------------------------------|
+B|----------------------------------------------|
+G|----------------------------------------------|
+D|----------------------------------------------|
+A|----------------------------------------------|
+E|-0-0-0--0-0-0--0-0-3b-3b-1-0--3--2--1--0------|</span>
+
+<span class="tab-label">MAIN RIFF (Full Power Chord Version)</span>
+<span class="tab-note">e|----------------------------------------------|
+B|----------------------------------------------|
+G|---------5---5-5-3--2--0----------------------|
+D|---------5---5-5-3--2--0---------2--2----------|
+A|-0-0-0-0-3---3-3-1--0--x--5-5-5-2--2----------|
+E|-0-0-0-0-----------x--0--5-5-5-0--0------------|</span>
+
+<span class="tab-label">CHORUS — "Master! Master!"</span>
+<span class="tab-note">e|----------------------------------------------|
+B|----------------------------------------------|
+G|---2--2--2--2--2--2--2------------------------|
+D|---2--2--2--2--2--2--2--5-5-5-5-3-3-----------|
+A|---0--0--0--0--0--0--0--5-5-5-5-3-3-----------|
+E|------------------------3-3-3-3-1-1------------|</span>
+
+<span class="tab-label">INTERLUDE — Clean Section ("Lullaby")</span>
+<span class="tab-note">e|--0--0--0--0--0--0--0--0----------------------|
+B|--1--1--1--1--1--1--1--1----------------------|
+G|--0--0--0--0--0--0--0--0--2--2--2--2---------|
+D|--2--2--2--2--2--2--2--2--2--2--2--2---------|
+A|--3--3--3--3--3--3--3--3--0--0--0--0---------|
+E|----------------------------------------------|</span>
+
+<span class="tab-label">SOLO LEAD INTRO (Kirk Hammett)</span>
+<span class="tab-note">e|--12b14--12--10--12--10-9--10-9-7--9-7-5-7-5--|
+B|----------------------------------------------|
+G|----------------------------------------------|
+D|----------------------------------------------|
+A|----------------------------------------------|
+E|----------------------------------------------|</span>
+            </pre>
+          </div>
+          <div class="tab-legend">
+            <span>h = hammer-on</span>
+            <span>p = pull-off</span>
+            <span>b = bend</span>
+            <span>/ = slide up</span>
+            <span>~ = vibrato</span>
+          </div>
+        </div>
+
+        <!-- CHORDS PANEL -->
+        <div class="tc-panel" id="panel-chords">
+          <div class="chords-grid">
+            <div class="chord-card">
+              <div class="chord-name">Em</div>
+              <div class="chord-diagram">
+                <div class="chord-frets">
+                  <div class="string-row"><span class="fret-num">0</span><div class="fret-dots"><div class="dot-open"></div></div></div>
+                  <div class="string-row"><span class="fret-num">0</span><div class="fret-dots"><div class="dot-open"></div></div></div>
+                  <div class="string-row"><span class="fret-num">0</span><div class="fret-dots"><div class="dot-open"></div></div></div>
+                  <div class="string-row"><span class="fret-num">2</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                  <div class="string-row"><span class="fret-num">2</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                  <div class="string-row"><span class="fret-num">0</span><div class="fret-dots"><div class="dot-open"></div></div></div>
+                </div>
+              </div>
+              <div class="chord-notes">E–G–B</div>
+              <div class="chord-use">Main Riff Root</div>
+            </div>
+            <div class="chord-card">
+              <div class="chord-name">E5</div>
+              <div class="chord-diagram">
+                <div class="chord-frets">
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">2</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                  <div class="string-row"><span class="fret-num">2</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                  <div class="string-row"><span class="fret-num">0</span><div class="fret-dots"><div class="dot-open"></div></div></div>
+                </div>
+              </div>
+              <div class="chord-notes">E–B</div>
+              <div class="chord-use">Power Chord — Main</div>
+            </div>
+            <div class="chord-card">
+              <div class="chord-name">G5</div>
+              <div class="chord-diagram">
+                <div class="chord-frets">
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">5</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                  <div class="string-row"><span class="fret-num">5</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                  <div class="string-row"><span class="fret-num">3</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                </div>
+              </div>
+              <div class="chord-notes">G–D</div>
+              <div class="chord-use">Chorus Chord</div>
+            </div>
+            <div class="chord-card">
+              <div class="chord-name">F5</div>
+              <div class="chord-diagram">
+                <div class="chord-frets">
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">3</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                  <div class="string-row"><span class="fret-num">3</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                  <div class="string-row"><span class="fret-num">1</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                </div>
+              </div>
+              <div class="chord-notes">F–C</div>
+              <div class="chord-use">Transition</div>
+            </div>
+            <div class="chord-card">
+              <div class="chord-name">Am</div>
+              <div class="chord-diagram">
+                <div class="chord-frets">
+                  <div class="string-row"><span class="fret-num">0</span><div class="fret-dots"><div class="dot-open"></div></div></div>
+                  <div class="string-row"><span class="fret-num">1</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                  <div class="string-row"><span class="fret-num">2</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                  <div class="string-row"><span class="fret-num">2</span><div class="fret-dots"><div class="dot-fill"></div></div></div>
+                  <div class="string-row"><span class="fret-num">0</span><div class="fret-dots"><div class="dot-open"></div></div></div>
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                </div>
+              </div>
+              <div class="chord-notes">A–C–E</div>
+              <div class="chord-use">Clean Section</div>
+            </div>
+            <div class="chord-card">
+              <div class="chord-name">D5</div>
+              <div class="chord-diagram">
+                <div class="chord-frets">
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                  <div class="string-row"><span class="fret-num">0</span><div class="fret-dots"><div class="dot-open"></div></div></div>
+                  <div class="string-row"><span class="fret-num">0</span><div class="fret-dots"><div class="dot-open"></div></div></div>
+                  <div class="string-row"><span class="fret-num">x</span><div class="fret-dots"><div class="dot-mute"></div></div></div>
+                </div>
+              </div>
+              <div class="chord-notes">D–A</div>
+              <div class="chord-use">Bridge Chord</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TUNING PANEL -->
+        <div class="tc-panel" id="panel-tuning">
+          <div class="tuning-block">
+            <h3>🎸 Standard Tuning — EADGBe</h3>
+            <p>Master of Puppets uses <strong>Standard Tuning</strong>. No alternate tuning required.</p>
+            <div class="tuning-strings">
+              <div class="string-item">
+                <div class="string-num">6 (Low)</div>
+                <div class="string-note">E</div>
+                <div class="string-freq">82.41 Hz</div>
+              </div>
+              <div class="string-item">
+                <div class="string-num">5</div>
+                <div class="string-note">A</div>
+                <div class="string-freq">110.00 Hz</div>
+              </div>
+              <div class="string-item">
+                <div class="string-num">4</div>
+                <div class="string-note">D</div>
+                <div class="string-freq">146.83 Hz</div>
+              </div>
+              <div class="string-item">
+                <div class="string-num">3</div>
+                <div class="string-note">G</div>
+                <div class="string-freq">196.00 Hz</div>
+              </div>
+              <div class="string-item">
+                <div class="string-num">2</div>
+                <div class="string-note">B</div>
+                <div class="string-freq">246.94 Hz</div>
+              </div>
+              <div class="string-item">
+                <div class="string-num">1 (High)</div>
+                <div class="string-note">e</div>
+                <div class="string-freq">329.63 Hz</div>
+              </div>
+            </div>
+            <div class="tuning-tips">
+              <div class="tip-card">🎯 <strong>Pro Tip:</strong> Metallica often used .010–.052 gauge strings for that heavy, tight tone.</div>
+              <div class="tip-card">🔊 <strong>Amp Settings:</strong> High gain, scooped mids. Bass: 7, Mid: 3, Treble: 7, Gain: 9.</div>
+              <div class="tip-card">🎸 <strong>James Hetfield Pick:</strong> He uses a Dunlop Tortex .88mm for the signature gallop rhythm.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SONG INFO CARDS -->
       <div class="info-grid fade-in-4">
         <div class="info-card">
           <div class="icon">🎼</div>
-          <h3>Key &amp; Tuning</h3>
-          <p>E minor · Standard tuning (EADGBe) · 212 BPM</p>
+          <h3>Key & Tuning</h3>
+          <p>E minor · Standard EADGBe · 212 BPM</p>
         </div>
         <div class="info-card">
           <div class="icon">⭐</div>
           <h3>Difficulty</h3>
-          <p>Advanced — requires solid alternate picking, palm muting, and power chord fluency.</p>
+          <p>Advanced — alternate picking, palm muting, power chord fluency required.</p>
         </div>
         <div class="info-card">
           <div class="icon">📅</div>
           <h3>Released</h3>
-          <p>March 3, 1986 · Master of Puppets album · Elektra Records</p>
+          <p>March 3, 1986 · Master of Puppets · Elektra Records</p>
         </div>
         <div class="info-card">
           <div class="icon">🎙️</div>
           <h3>Written by</h3>
-          <p>James Hetfield, Lars Ulrich, Kirk Hammett, and Cliff Burton</p>
+          <p>James Hetfield, Lars Ulrich, Kirk Hammett, Cliff Burton</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ██████████ METALLICA HUB SECTION ██████████ -->
+  <section class="section-block dark-section" id="metallica-hub">
+    <div class="section-container">
+
+      <div class="section-title-block fade-in">
+        <span class="section-tag">🤘 Full Discography</span>
+        <h2>Metallica <span class="red">Guitar Hub</span></h2>
+        <div class="divider-line"></div>
+        <p>Search and explore guitar tutorials for every Metallica song — Electric, Acoustic & Ukulele.</p>
+      </div>
+
+      <!-- SEARCH BAR -->
+      <div class="search-container fade-in-2">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search Metallica songs... (e.g. Enter Sandman, Fade to Black)" autocomplete="off">
+          <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+        </div>
+        <div class="search-filters">
+          <button class="filter-btn active" data-filter="all" onclick="filterSongs('all', this)">All Songs</button>
+          <button class="filter-btn" data-filter="electric" onclick="filterSongs('electric', this)">⚡ Electric</button>
+          <button class="filter-btn" data-filter="acoustic" onclick="filterSongs('acoustic', this)">🎸 Acoustic</button>
+          <button class="filter-btn" data-filter="ukulele" onclick="filterSongs('ukulele', this)">🪕 Ukulele</button>
+          <button class="filter-btn" data-filter="easy" onclick="filterSongs('easy', this)">🟢 Easy</button>
+          <button class="filter-btn" data-filter="medium" onclick="filterSongs('medium', this)">🟡 Medium</button>
+          <button class="filter-btn" data-filter="hard" onclick="filterSongs('hard', this)">🔴 Hard</button>
+        </div>
+        <div class="search-results-count" id="resultsCount">Showing 50 songs</div>
+      </div>
+
+      <!-- SONGS GRID -->
+      <div class="songs-grid" id="songsGrid">
+
+        <!-- SONG CARDS — Generated dynamically from JS below -->
+
+      </div>
+
+      <!-- SONG MODAL -->
+      <div class="song-modal-overlay" id="songModal">
+        <div class="song-modal">
+          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div class="modal-header">
+            <div class="modal-badge" id="modalAlbum"></div>
+            <h2 id="modalTitle"></h2>
+            <div class="modal-meta" id="modalMeta"></div>
+          </div>
+          <div class="modal-instrument-tabs">
+            <button class="inst-tab active" data-inst="electric" onclick="switchInst('electric', this)">⚡ Electric</button>
+            <button class="inst-tab" data-inst="acoustic" onclick="switchInst('acoustic', this)">🎸 Acoustic</button>
+            <button class="inst-tab" data-inst="ukulele" onclick="switchInst('ukulele', this)">🪕 Ukulele</button>
+          </div>
+          <div class="modal-body">
+            <div class="modal-section-tabs">
+              <button class="msec-tab active" data-sec="overview" onclick="switchSec('overview', this)">Overview</button>
+              <button class="msec-tab" data-sec="tabs" onclick="switchSec('tabs', this)">Tabs</button>
+              <button class="msec-tab" data-sec="chords" onclick="switchSec('chords', this)">Chords</button>
+              <button class="msec-tab" data-sec="tuning" onclick="switchSec('tuning', this)">Tuning</button>
+            </div>
+            <div class="modal-content-area" id="modalContent"></div>
+          </div>
         </div>
       </div>
 
@@ -124,8 +446,408 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>Guitar Master of Puppets &copy; 2024 &nbsp;·&nbsp; Made with <span>♥</span> and 🤘</p>
+    <div class="footer-inner">
+      <div class="footer-logo">🎸 <span>Metallica</span> Guitar Tutorials</div>
+      <p>Fan-made tutorial hub — Not affiliated with Metallica or their management.</p>
+      <p>Made with <span>♥</span> and 🤘 for the metal community · © 2024</p>
+    </div>
   </footer>
+
+  <script>
+    // =========================================================
+    // METALLICA SONGS DATABASE
+    // =========================================================
+    const metallicaSongs = [
+      // Kill 'Em All (1983)
+      { title: "Hit the Lights", album: "Kill 'Em All", year: 1983, key: "E", tuning: "EADGBe", bpm: 183, difficulty: "hard", tags: ["electric","acoustic","ukulele"], chords: ["E5","A5","D5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|------------------------|\nD|---2-2-2-2-5-5-4-4------|\nA|---2-2-2-2-5-5-4-4------|\nE|---0-0-0-0-3-3-2-2------|" },
+      { title: "The Four Horsemen", album: "Kill 'Em All", year: 1983, key: "D", tuning: "EADGBe", bpm: 148, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["D5","A5","C5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---7-7-7-7-5-5-5-5------|\nD|---7-7-7-7-5-5-5-5------|\nA|---5-5-5-5-3-3-3-3------|\nE|------------------------|" },
+      { title: "Motorbreath", album: "Kill 'Em All", year: 1983, key: "E", tuning: "EADGBe", bpm: 175, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","A5","B5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|------------------------|\nD|---2-2-4-4-5-5-4-4------|\nA|---2-2-4-4-5-5-4-4------|\nE|---0-0-2-2-3-3-2-2------|" },
+      { title: "Jump in the Fire", album: "Kill 'Em All", year: 1983, key: "E", tuning: "EADGBe", bpm: 156, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["E5","D5","A5","B5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---2-2-2-0-2-2-2-0------|\nD|---2-2-2-0-2-2-2-0------|\nA|---0-0-0-0-0-0-0-0------|\nE|------------------------|" },
+      { title: "Anesthesia (Pulling Teeth)", album: "Kill 'Em All", year: 1983, key: "E", tuning: "EADGBe", bpm: 120, difficulty: "easy", tags: ["electric","acoustic"], chords: ["Em","Am","D","G"], mainRiff: "e|--0--0--0--0--0--0------|\nB|--1--1--0--1--1--0------|\nG|--0--0--0--0--0--0------|\nD|--2--2--2--0--2--2------|\nA|--3--3--0--0--3--3------|\nE|------------------------|" },
+      { title: "Whiplash", album: "Kill 'Em All", year: 1983, key: "E", tuning: "EADGBe", bpm: 180, difficulty: "hard", tags: ["electric","acoustic","ukulele"], chords: ["E5","A5","G5","F#5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---4-4-4-4-2-2-2-2------|\nD|---4-4-4-4-2-2-2-2------|\nA|---2-2-2-2-0-0-0-0------|\nE|------------------------|" },
+
+      // Ride the Lightning (1984)
+      { title: "Fight Fire with Fire", album: "Ride the Lightning", year: 1984, key: "E", tuning: "EADGBe", bpm: 186, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","D5","A5","C5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-9-9-9-7-7-7-7------|\nD|---9-9-9-9-7-7-7-7------|\nA|---7-7-7-7-5-5-5-5------|\nE|------------------------|" },
+      { title: "Ride the Lightning", album: "Ride the Lightning", year: 1984, key: "E", tuning: "EADGBe", bpm: 164, difficulty: "hard", tags: ["electric","acoustic","ukulele"], chords: ["Em","Am","C","G","D"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-9-7-5-7-5----------|\nD|---9-9-7-5-7-5----------|\nA|---7-7-5-3-5-3----------|\nE|------------------------|" },
+      { title: "For Whom the Bell Tolls", album: "Ride the Lightning", year: 1984, key: "F#", tuning: "EADGBe", bpm: 105, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["F#5","E5","D5","A5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|------------------------|\nD|---4-4-4-4-2-2-2-2------|\nA|---4-4-4-4-2-2-2-2------|\nE|---2-2-2-2-0-0-0-0------|" },
+      { title: "Fade to Black", album: "Ride the Lightning", year: 1984, key: "B", tuning: "EADGBe", bpm: 112, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Bm","G","A","E","D"], mainRiff: "e|--5--3--2--0--2--3------|\nB|--3--3--3--2--3--3------|\nG|--4--4--2--1--2--4------|\nD|--4--5--4--2--4--5------|\nA|--2--5--4--2--4--5------|\nE|-----3--2--0--2--3------|" },
+      { title: "Trapped Under Ice", album: "Ride the Lightning", year: 1984, key: "E", tuning: "EADGBe", bpm: 180, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","A5","D5","C#5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---6-6-6-4-6-6-4-2------|\nD|---6-6-6-4-6-6-4-2------|\nA|---4-4-4-2-4-4-2-0------|\nE|------------------------|" },
+      { title: "Escape", album: "Ride the Lightning", year: 1984, key: "A", tuning: "EADGBe", bpm: 145, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Am","G","C","F","E"], mainRiff: "e|--5-5-5-5-3-3-3-3-------|\nB|--5-5-5-5-3-3-3-3-------|\nG|--6-6-6-6-4-4-4-4-------|\nD|--7-7-7-7-5-5-5-5-------|\nA|--7-7-7-7-5-5-5-5-------|\nE|--5-5-5-5-3-3-3-3-------|" },
+      { title: "Creeping Death", album: "Ride the Lightning", year: 1984, key: "E", tuning: "EADGBe", bpm: 180, difficulty: "hard", tags: ["electric","acoustic","ukulele"], chords: ["Em","Am","D","G","C"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-9-7-9-9-7-9-9------|\nD|---9-9-7-9-9-7-9-9------|\nA|---7-7-5-7-7-5-7-7------|\nE|------------------------|" },
+      { title: "The Call of Ktulu", album: "Ride the Lightning", year: 1984, key: "E", tuning: "EADGBe", bpm: 98, difficulty: "hard", tags: ["electric","acoustic"], chords: ["Em","C","Am","D","G"], mainRiff: "e|--0--0--0--0--0--0------|\nB|--0--0--0--0--0--0------|\nG|--0--0--0--0--0--0------|\nD|--2--0--2--0--2--0------|\nA|--2--0--2--0--2--0------|\nE|--0--0--0--0--0--0------|" },
+
+      // Master of Puppets (1986)
+      { title: "Battery", album: "Master of Puppets", year: 1986, key: "E", tuning: "EADGBe", bpm: 196, difficulty: "hard", tags: ["electric","acoustic","ukulele"], chords: ["Em","Am","G","D","C"], mainRiff: "e|--0-0-0-0-0-0-0-0-------|\nB|--0-0-0-0-0-0-0-0-------|\nG|--9-9-9-9-7-7-7-7-------|\nD|--9-9-9-9-7-7-7-7-------|\nA|--7-7-7-7-5-5-5-5-------|\nE|------------------------|" },
+      { title: "Master of Puppets", album: "Master of Puppets", year: 1986, key: "E", tuning: "EADGBe", bpm: 212, difficulty: "hard", tags: ["electric","acoustic","ukulele"], chords: ["Em","Am","G","D","F","C"], mainRiff: "e|------------------------|\nB|------------------------|\nG|------------------------|\nD|------------------------|\nA|---0-0-0-0-3b-3b-1-0----|\nE|---0-0-0-0-----------3--|" },
+      { title: "The Thing That Should Not Be", album: "Master of Puppets", year: 1986, key: "E", tuning: "EADGBe", bpm: 100, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","G5","F5","D5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|------------------------|\nD|---2-2-2-2-0-0-3-3------|\nA|---2-2-2-2-0-0-3-3------|\nE|---0-0-0-0-0-0-1-1------|" },
+      { title: "Welcome Home (Sanitarium)", album: "Master of Puppets", year: 1986, key: "E", tuning: "EADGBe", bpm: 120, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Em","Am","D","G","C","B7"], mainRiff: "e|--7-7-5-4-5-7-----------|\nB|--8-8-5-5-5-8-----------|\nG|--9-9-6-5-6-9-----------|\nD|--9-9-7-6-7-9-----------|\nA|--7-7-7-6-7-7-----------|\nE|--7-7-5-4-5-7-----------|" },
+      { title: "Disposable Heroes", album: "Master of Puppets", year: 1986, key: "E", tuning: "EADGBe", bpm: 210, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","A5","G5","F5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---2-2-2-2-0-0-0-0------|\nD|---2-2-2-2-0-0-0-0------|\nA|---0-0-0-0-0-0-0-0------|\nE|------------------------|" },
+      { title: "Leper Messiah", album: "Master of Puppets", year: 1986, key: "E", tuning: "EADGBe", bpm: 175, difficulty: "hard", tags: ["electric","acoustic"], chords: ["Em","D","A","G","C"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---4-4-4-4-2-2-2-2------|\nD|---4-4-4-4-2-2-2-2------|\nA|---2-2-2-2-0-0-0-0------|\nE|------------------------|" },
+      { title: "Orion", album: "Master of Puppets", year: 1986, key: "E", tuning: "EADGBe", bpm: 120, difficulty: "hard", tags: ["electric","acoustic"], chords: ["Em","D","C","G","Am"], mainRiff: "e|--12-12-10-9-10-12------|\nB|------------------------|\nG|------------------------|\nD|------------------------|\nA|------------------------|\nE|------------------------|" },
+      { title: "Damage, Inc.", album: "Master of Puppets", year: 1986, key: "E", tuning: "EADGBe", bpm: 216, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","A5","G5","D5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-9-9-9-7-7-7-7------|\nD|---9-9-9-9-7-7-7-7------|\nA|---7-7-7-7-5-5-5-5------|\nE|------------------------|" },
+
+      // ...And Justice for All (1988)
+      { title: "Blackened", album: "...And Justice for All", year: 1988, key: "E", tuning: "EADGBe", bpm: 190, difficulty: "hard", tags: ["electric","acoustic"], chords: ["Em","D","A","G","C"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---6-6-6-9-9-9-7-7------|\nD|---6-6-6-9-9-9-7-7------|\nA|---4-4-4-7-7-7-5-5------|\nE|------------------------|" },
+      { title: "...And Justice for All", album: "...And Justice for All", year: 1988, key: "E", tuning: "EADGBe", bpm: 168, difficulty: "hard", tags: ["electric","acoustic"], chords: ["Em","D","A","G","C"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---4-4-4-4-2-2-2-2------|\nD|---4-4-4-4-2-2-2-2------|\nA|---2-2-2-2-0-0-0-0------|\nE|------------------------|" },
+      { title: "Eye of the Beholder", album: "...And Justice for All", year: 1988, key: "E", tuning: "EADGBe", bpm: 160, difficulty: "hard", tags: ["electric","acoustic"], chords: ["Em","D","A","G"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---2-2-4-4-5-5-4-4------|\nD|---2-2-4-4-5-5-4-4------|\nA|---0-0-2-2-3-3-2-2------|\nE|------------------------|" },
+      { title: "One", album: "...And Justice for All", year: 1988, key: "B", tuning: "EADGBe", bpm: 140, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Bm","G","D","A","Em","F#"], mainRiff: "e|--5--5--3--2--3--2------|\nB|--7--5--3--3--3--3------|\nG|--7--4--4--2--4--2------|\nD|--7--5--5--4--5--4------|\nA|--5--5--5--4--5--4------|\nE|-----3--3--2--3--2------|" },
+      { title: "The Shortest Straw", album: "...And Justice for All", year: 1988, key: "E", tuning: "EADGBe", bpm: 190, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","D5","A5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---2-2-2-2-0-0-5-5------|\nD|---2-2-2-2-0-0-5-5------|\nA|---0-0-0-0-0-0-3-3------|\nE|------------------------|" },
+      { title: "Harvester of Sorrow", album: "...And Justice for All", year: 1988, key: "E", tuning: "EADGBe", bpm: 108, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Em","Am","D","G","C"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---4-4-4-0-4-4-0-2------|\nD|---4-4-4-0-4-4-0-2------|\nA|---2-2-2-0-2-2-0-0------|\nE|------------------------|" },
+      { title: "The Frayed Ends of Sanity", album: "...And Justice for All", year: 1988, key: "E", tuning: "EADGBe", bpm: 195, difficulty: "hard", tags: ["electric","acoustic"], chords: ["Em","D","A","C","G"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-9-7-5-7-5-4-2------|\nD|---9-9-7-5-7-5-4-2------|\nA|---7-7-5-3-5-3-2-0------|\nE|------------------------|" },
+      { title: "To Live Is to Die", album: "...And Justice for All", year: 1988, key: "E", tuning: "EADGBe", bpm: 100, difficulty: "hard", tags: ["electric","acoustic"], chords: ["Em","Am","D","G","C"], mainRiff: "e|--0--2--3--5--7--8------|\nB|--0--2--3--5--7--8------|\nG|--0--2--4--5--7--9------|\nD|--2--4--5--7--9--10-----|\nA|--2--4--5--7--9--10-----|\nE|--0--2--3--5--7--8------|" },
+      { title: "Dyers Eve", album: "...And Justice for All", year: 1988, key: "E", tuning: "EADGBe", bpm: 240, difficulty: "hard", tags: ["electric","acoustic"], chords: ["Em","D","A","G"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-9-7-5-9-9-7-5------|\nD|---9-9-7-5-9-9-7-5------|\nA|---7-7-5-3-7-7-5-3------|\nE|------------------------|" },
+
+      // Metallica/Black Album (1991)
+      { title: "Enter Sandman", album: "Metallica (Black Album)", year: 1991, key: "E", tuning: "EADGBe", bpm: 123, difficulty: "easy", tags: ["electric","acoustic","ukulele"], chords: ["Em","Am","D","G","C","F"], mainRiff: "e|------------------------|\nB|------------------------|\nG|------------------------|\nD|---2-2-0-2-3-2-0--2-0---|\nA|---2-2-0-2-3-2-0--2-0---|\nE|---0-0-0-0-1-0-0--0-0---|" },
+      { title: "Sad but True", album: "Metallica (Black Album)", year: 1991, key: "D", tuning: "Drop D", bpm: 98, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["D5","G5","F5","C5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---0-0-0-0-0-0-0-0------|\nD|---0-0-0-0-0-0-0-0------|\nA|---0-0-0-0-0-0-0-0------|\nE|---0-0-0-0-0-0-0-0------|" },
+      { title: "Holier Than Thou", album: "Metallica (Black Album)", year: 1991, key: "E", tuning: "EADGBe", bpm: 188, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","A5","D5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-9-9-7-5-7-9-9------|\nD|---9-9-9-7-5-7-9-9------|\nA|---7-7-7-5-3-5-7-7------|\nE|------------------------|" },
+      { title: "The Unforgiven", album: "Metallica (Black Album)", year: 1991, key: "Am", tuning: "EADGBe", bpm: 116, difficulty: "easy", tags: ["electric","acoustic","ukulele"], chords: ["Am","G","C","F","Dm","E"], mainRiff: "e|--0--0--0--0--0--0------|\nB|--1--1--1--1--0--1------|\nG|--2--2--2--2--0--0------|\nD|--2--2--2--2--0--2------|\nA|--0--0--0--0--2--3------|\nE|--0--0--0--0--0--0------|" },
+      { title: "Wherever I May Roam", album: "Metallica (Black Album)", year: 1991, key: "E", tuning: "EADGBe", bpm: 120, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Em","D","A","G","C"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---2-0--2-2-2-0-2-------|\nD|---2-0--2-2-2-0-2-------|\nA|---0-0--0-0-0-0-0-------|\nE|------------------------|" },
+      { title: "Don't Tread on Me", album: "Metallica (Black Album)", year: 1991, key: "E", tuning: "EADGBe", bpm: 152, difficulty: "medium", tags: ["electric","acoustic"], chords: ["E5","A5","D5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---2-2-2-2-0-0-0-0------|\nD|---2-2-2-2-0-0-0-0------|\nA|---0-0-0-0-0-0-0-0------|\nE|------------------------|" },
+      { title: "Through the Never", album: "Metallica (Black Album)", year: 1991, key: "E", tuning: "EADGBe", bpm: 178, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","D5","A5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---2-2-0-2-4-4-2-0------|\nD|---2-2-0-2-4-4-2-0------|\nA|---0-0-0-0-2-2-0-0------|\nE|------------------------|" },
+      { title: "Nothing Else Matters", album: "Metallica (Black Album)", year: 1991, key: "Em", tuning: "EADGBe", bpm: 70, difficulty: "easy", tags: ["electric","acoustic","ukulele"], chords: ["Em","D","C","G","Am","B7"], mainRiff: "e|--0--3--2--0--2--3------|\nB|--0--2--3--0--3--3------|\nG|--0--0--2--0--2--2------|\nD|--2--0--0--2--0--0------|\nA|--2--2--0--2--0--2------|\nE|--0--3--2--0--2--3------|" },
+      { title: "Of Wolf and Man", album: "Metallica (Black Album)", year: 1991, key: "E", tuning: "EADGBe", bpm: 152, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["E5","A5","D5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---4-4-4-2-4-4-4-2------|\nD|---4-4-4-2-4-4-4-2------|\nA|---2-2-2-0-2-2-2-0------|\nE|------------------------|" },
+      { title: "The God That Failed", album: "Metallica (Black Album)", year: 1991, key: "E", tuning: "EADGBe", bpm: 103, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Em","Am","D","G","C"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---4-4-2-0-4-4-2-0------|\nD|---4-4-2-0-4-4-2-0------|\nA|---2-2-0-0-2-2-0-0------|\nE|------------------------|" },
+      { title: "My Friend of Misery", album: "Metallica (Black Album)", year: 1991, key: "Em", tuning: "EADGBe", bpm: 120, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Em","Am","D","G","C"], mainRiff: "e|--7--5--4--5--7--9------|\nB|--8--5--5--5--8--10-----|\nG|--9--6--5--6--9--11-----|\nD|--9--7--6--7--9--11-----|\nA|--7--7--6--7--7--9------|\nE|------------------------|" },
+      { title: "The Struggle Within", album: "Metallica (Black Album)", year: 1991, key: "E", tuning: "EADGBe", bpm: 168, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","A5","D5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-9-7-5-7-9-9-7------|\nD|---9-9-7-5-7-9-9-7------|\nA|---7-7-5-3-5-7-7-5------|\nE|------------------------|" },
+
+      // Load (1996)
+      { title: "Ain't My Bitch", album: "Load", year: 1996, key: "E", tuning: "EADGBe", bpm: 132, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["E5","A5","D5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---2-2-2-2-2-2-2-2------|\nD|---2-2-2-2-2-2-2-2------|\nA|---0-0-0-0-0-0-0-0------|\nE|------------------------|" },
+      { title: "2 x 4", album: "Load", year: 1996, key: "A", tuning: "EADGBe", bpm: 128, difficulty: "medium", tags: ["electric","acoustic"], chords: ["A5","D5","G5","E5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---7-7-7-7-5-5-5-5------|\nD|---7-7-7-7-5-5-5-5------|\nA|---5-5-5-5-3-3-3-3------|\nE|------------------------|" },
+      { title: "Until It Sleeps", album: "Load", year: 1996, key: "E", tuning: "EADGBe", bpm: 118, difficulty: "easy", tags: ["electric","acoustic","ukulele"], chords: ["Am","G","F","E","C","Dm"], mainRiff: "e|--5--5--5--3--2--0------|\nB|--5--5--3--3--2--1------|\nG|--5--5--4--4--2--0------|\nD|--7--5--5--5--4--2------|\nA|--7--3--5--5--4--3------|\nE|--5-----3--3--2--0------|" },
+      { title: "King Nothing", album: "Load", year: 1996, key: "E", tuning: "EADGBe", bpm: 112, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["E5","A5","D5","G5","C5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---2-4-5-4-2-0----------|\nD|---2-4-5-4-2-0----------|\nA|---0-2-3-2-0-0----------|\nE|------------------------|" },
+      { title: "Hero of the Day", album: "Load", year: 1996, key: "E", tuning: "EADGBe", bpm: 112, difficulty: "easy", tags: ["electric","acoustic","ukulele"], chords: ["Em","Am","G","D","C"], mainRiff: "e|--0--2--3--2--0--2------|\nB|--0--3--3--3--0--3------|\nG|--0--2--4--2--0--2------|\nD|--2--4--5--4--2--4------|\nA|--2--4--5--4--2--4------|\nE|--0--2--3--2--0--2------|" },
+      { title: "Mama Said", album: "Load", year: 1996, key: "G", tuning: "EADGBe", bpm: 96, difficulty: "easy", tags: ["electric","acoustic","ukulele"], chords: ["G","C","D","Em","Am"], mainRiff: "e|--3--3--3--3--0--0------|\nB|--3--3--1--1--1--1------|\nG|--0--0--0--0--0--0------|\nD|--0--2--2--2--2--2------|\nA|--2--3--3--3--0--0------|\nE|--3--3--3--3--0--0------|" },
+
+      // ReLoad (1997)
+      { title: "Fuel", album: "ReLoad", year: 1997, key: "E", tuning: "EADGBe", bpm: 212, difficulty: "hard", tags: ["electric","acoustic","ukulele"], chords: ["E5","D5","A5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---4-4-4-4-2-2-2-2------|\nD|---4-4-4-4-2-2-2-2------|\nA|---2-2-2-2-0-0-0-0------|\nE|------------------------|" },
+      { title: "The Memory Remains", album: "ReLoad", year: 1997, key: "A", tuning: "EADGBe", bpm: 118, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Am","G","F","E","C","Dm"], mainRiff: "e|--5--5--5--5--3--3------|\nB|--5--5--5--5--3--3------|\nG|--5--5--5--5--4--4------|\nD|--7--7--5--5--5--5------|\nA|--7--7--3--3--5--5------|\nE|--5--5--------3--3------|" },
+      { title: "The Unforgiven II", album: "ReLoad", year: 1997, key: "Am", tuning: "EADGBe", bpm: 110, difficulty: "easy", tags: ["electric","acoustic","ukulele"], chords: ["Am","G","C","F","Dm","E"], mainRiff: "e|--0--2--3--5--0--0------|\nB|--1--3--3--5--1--0------|\nG|--0--2--4--5--2--1------|\nD|--2--4--5--7--2--2------|\nA|--3--4--5--7--0--2------|\nE|--0--2--3--5--0--0------|" },
+      { title: "Fixxxer", album: "ReLoad", year: 1997, key: "E", tuning: "EADGBe", bpm: 95, difficulty: "medium", tags: ["electric","acoustic"], chords: ["Em","Am","D","G","C"], mainRiff: "e|--0--3--2--0--3--2------|\nB|--0--3--3--0--3--3------|\nG|--0--4--2--0--4--2------|\nD|--2--5--4--2--5--4------|\nA|--2--5--4--2--5--4------|\nE|--0--3--2--0--3--2------|" },
+
+      // Death Magnetic (2008)
+      { title: "That Was Just Your Life", album: "Death Magnetic", year: 2008, key: "E", tuning: "EADGBe", bpm: 190, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","A5","D5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-9-9-7-5-7-9-9------|\nD|---9-9-9-7-5-7-9-9------|\nA|---7-7-7-5-3-5-7-7------|\nE|------------------------|" },
+      { title: "The End of the Line", album: "Death Magnetic", year: 2008, key: "E", tuning: "EADGBe", bpm: 168, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","D5","A5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---2-2-4-4-5-5-4-4------|\nD|---2-2-4-4-5-5-4-4------|\nA|---0-0-2-2-3-3-2-2------|\nE|------------------------|" },
+      { title: "All Nightmare Long", album: "Death Magnetic", year: 2008, key: "E", tuning: "EADGBe", bpm: 192, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","D5","A5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---4-4-4-2-0-2-4-4------|\nD|---4-4-4-2-0-2-4-4------|\nA|---2-2-2-0-0-0-2-2------|\nE|------------------------|" },
+      { title: "Cyanide", album: "Death Magnetic", year: 2008, key: "E", tuning: "EADGBe", bpm: 150, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Em","Am","D","G"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---2-2-2-0-2-2-0-2------|\nD|---2-2-2-0-2-2-0-2------|\nA|---0-0-0-0-0-0-0-0------|\nE|------------------------|" },
+      { title: "The Unforgiven III", album: "Death Magnetic", year: 2008, key: "Am", tuning: "EADGBe", bpm: 100, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Am","G","C","F","Dm","E"], mainRiff: "e|--5--5--5--3--2--0------|\nB|--5--5--3--3--1--1------|\nG|--5--5--4--4--2--0------|\nD|--7--5--5--5--2--2------|\nA|--7--3--5--5--0--3------|\nE|--5-----3--3--0--0------|" },
+      { title: "My Apocalypse", album: "Death Magnetic", year: 2008, key: "E", tuning: "EADGBe", bpm: 220, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","A5","D5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-7-9-7-5-7-9-9------|\nD|---9-7-9-7-5-7-9-9------|\nA|---7-5-7-5-3-5-7-7------|\nE|------------------------|" },
+
+      // Hardwired...to Self-Destruct (2016)
+      { title: "Hardwired", album: "Hardwired...to Self-Destruct", year: 2016, key: "E", tuning: "EADGBe", bpm: 196, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","A5","D5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-9-9-7-5-7-9-9------|\nD|---9-9-9-7-5-7-9-9------|\nA|---7-7-7-5-3-5-7-7------|\nE|------------------------|" },
+      { title: "Atlas, Rise!", album: "Hardwired...to Self-Destruct", year: 2016, key: "E", tuning: "EADGBe", bpm: 145, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Em","D","A","G","C"], mainRiff: "e|--7-7-7-7-5-5-5-5-------|\nB|--8-8-8-8-5-5-5-5-------|\nG|--9-9-9-9-6-6-6-6-------|\nD|--9-9-9-9-7-7-7-7-------|\nA|--7-7-7-7-7-7-7-7-------|\nE|--7-7-7-7-5-5-5-5-------|" },
+      { title: "Now That We're Dead", album: "Hardwired...to Self-Destruct", year: 2016, key: "D", tuning: "EADGBe", bpm: 100, difficulty: "medium", tags: ["electric","acoustic","ukulele"], chords: ["Dm","C","Bb","F","Am"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---7-7-7-7-5-5-5-5------|\nD|---7-7-7-7-5-5-5-5------|\nA|---5-5-5-5-3-3-3-3------|\nE|------------------------|" },
+      { title: "Moth into Flame", album: "Hardwired...to Self-Destruct", year: 2016, key: "E", tuning: "EADGBe", bpm: 170, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","D5","A5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---4-4-4-2-0-2-4-4------|\nD|---4-4-4-2-0-2-4-4------|\nA|---2-2-2-0-0-0-2-2------|\nE|------------------------|" },
+      { title: "Spit Out the Bone", album: "Hardwired...to Self-Destruct", year: 2016, key: "E", tuning: "EADGBe", bpm: 200, difficulty: "hard", tags: ["electric","acoustic"], chords: ["E5","D5","A5","G5"], mainRiff: "e|------------------------|\nB|------------------------|\nG|---9-9-9-7-5-4-2-0------|\nD|---9-9-9-7-5-4-2-0------|\nA|---7-7-7-5-3-2-0-0------|\nE|------------------------|" },
+    ];
+
+    // =========================================================
+    // RENDER SONGS
+    // =========================================================
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    function getDiffClass(d) {
+      if (d === 'easy') return 'diff-easy';
+      if (d === 'medium') return 'diff-med';
+      return 'diff-hard';
+    }
+    function getDiffLabel(d) {
+      if (d === 'easy') return '🟢 Easy';
+      if (d === 'medium') return '🟡 Medium';
+      return '🔴 Hard';
+    }
+
+    function renderSongs() {
+      const grid = document.getElementById('songsGrid');
+      const countEl = document.getElementById('resultsCount');
+      const filtered = metallicaSongs.filter(s => {
+        const matchSearch = s.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                            s.album.toLowerCase().includes(currentSearch.toLowerCase());
+        const matchFilter = currentFilter === 'all' ||
+                            s.tags.includes(currentFilter) ||
+                            s.difficulty === currentFilter;
+        return matchSearch && matchFilter;
+      });
+
+      countEl.textContent = `Showing ${filtered.length} of ${metallicaSongs.length} songs`;
+      grid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="no-results"><span>🔍</span><p>No songs found. Try a different search!</p></div>';
+        return;
+      }
+
+      filtered.forEach((song, i) => {
+        const card = document.createElement('div');
+        card.className = 'song-card';
+        card.setAttribute('data-index', metallicaSongs.indexOf(song));
+        card.innerHTML = `
+          <div class="song-card-inner">
+            <div class="song-album-tag">${song.album}</div>
+            <div class="song-title-row">
+              <h3>${song.title}</h3>
+              <span class="song-year">${song.year}</span>
+            </div>
+            <div class="song-meta-row">
+              <span class="song-key">🎵 ${song.key}</span>
+              <span class="song-bpm">⚡ ${song.bpm} BPM</span>
+              <span class="song-tuning">🎸 ${song.tuning}</span>
+            </div>
+            <div class="song-instruments">
+              ${song.tags.includes('electric') ? '<span class="inst-badge">⚡ Electric</span>' : ''}
+              ${song.tags.includes('acoustic') ? '<span class="inst-badge">🎸 Acoustic</span>' : ''}
+              ${song.tags.includes('ukulele') ? '<span class="inst-badge">🪕 Ukulele</span>' : ''}
+            </div>
+            <div class="song-card-footer">
+              <span class="diff-badge ${getDiffClass(song.difficulty)}">${getDiffLabel(song.difficulty)}</span>
+              <button class="view-btn" onclick="openModal(${metallicaSongs.indexOf(song)})">View Tutorial →</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+        setTimeout(() => card.classList.add('visible'), i * 30);
+      });
+    }
+
+    function filterSongs(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderSongs();
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      currentSearch = '';
+      document.getElementById('searchClear').style.opacity = '0';
+      renderSongs();
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+      currentSearch = this.value;
+      document.getElementById('searchClear').style.opacity = this.value ? '1' : '0';
+      renderSongs();
+    });
+
+    // =========================================================
+    // MODAL
+    // =========================================================
+    let currentSongIdx = 0;
+    let currentInst = 'electric';
+    let currentSec = 'overview';
+
+    function openModal(idx) {
+      currentSongIdx = idx;
+      currentInst = 'electric';
+      currentSec = 'overview';
+      const song = metallicaSongs[idx];
+      document.getElementById('modalTitle').textContent = song.title;
+      document.getElementById('modalAlbum').textContent = `${song.album} · ${song.year}`;
+      document.getElementById('modalMeta').innerHTML = `
+        <span>🎵 Key: <strong>${song.key}</strong></span>
+        <span>⚡ ${song.bpm} BPM</span>
+        <span>🎸 Tuning: <strong>${song.tuning}</strong></span>
+        <span class="diff-badge ${getDiffClass(song.difficulty)}">${getDiffLabel(song.difficulty)}</span>
+      `;
+      document.querySelectorAll('.inst-tab').forEach(t => t.classList.remove('active'));
+      document.querySelector('[data-inst="electric"]').classList.add('active');
+      document.querySelectorAll('.msec-tab').forEach(t => t.classList.remove('active'));
+      document.querySelector('[data-sec="overview"]').classList.add('active');
+      updateModalContent();
+      document.getElementById('songModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('songModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('songModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    function switchInst(inst, btn) {
+      currentInst = inst;
+      document.querySelectorAll('.inst-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      updateModalContent();
+    }
+
+    function switchSec(sec, btn) {
+      currentSec = sec;
+      document.querySelectorAll('.msec-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      updateModalContent();
+    }
+
+    function updateModalContent() {
+      const song = metallicaSongs[currentSongIdx];
+      const inst = currentInst;
+      const sec = currentSec;
+      const el = document.getElementById('modalContent');
+
+      const instAvailable = song.tags.includes(inst);
+      if (!instAvailable) {
+        el.innerHTML = `<div class="modal-unavail"><span>⚠️</span><p>No ${inst} tutorial available for this song yet. Check back soon!</p></div>`;
+        return;
+      }
+
+      if (sec === 'overview') {
+        const instIcons = { electric: '⚡', acoustic: '🎸', ukulele: '🪕' };
+        const instDescs = {
+          electric: `Play the full electric version of <strong>${song.title}</strong> on electric guitar. This track is in the key of <strong>${song.key}</strong> using <strong>${song.tuning}</strong> tuning at <strong>${song.bpm} BPM</strong>. Use a high-gain amp with palm muting for authentic Metallica tone.`,
+          acoustic: `Acoustic version of <strong>${song.title}</strong>. Strip back the electric aggression and focus on the melodic structure in <strong>${song.key}</strong>. Great for developing fingerpicking and chord transitions.`,
+          ukulele: `Play <strong>${song.title}</strong> on ukulele! Transposed for standard GCEA ukulele tuning. A fun way to learn this classic Metallica track on a smaller instrument.`
+        };
+        el.innerHTML = `
+          <div class="modal-overview">
+            <div class="overview-icon">${instIcons[inst]}</div>
+            <p>${instDescs[inst]}</p>
+            <div class="overview-info">
+              <div class="ov-item"><strong>Key:</strong> ${song.key}</div>
+              <div class="ov-item"><strong>Tuning:</strong> ${song.tuning}</div>
+              <div class="ov-item"><strong>BPM:</strong> ${song.bpm}</div>
+              <div class="ov-item"><strong>Album:</strong> ${song.album}</div>
+              <div class="ov-item"><strong>Year:</strong> ${song.year}</div>
+              <div class="ov-item"><strong>Difficulty:</strong> ${getDiffLabel(song.difficulty)}</div>
+            </div>
+          </div>`;
+      } else if (sec === 'tabs') {
+        el.innerHTML = `
+          <div class="modal-tabs-section">
+            <div class="tab-info-row">
+              <span class="ti-item">🎵 Key: <strong>${song.key}</strong></span>
+              <span class="ti-item">⚡ ${song.bpm} BPM</span>
+              <span class="ti-item">🎸 ${song.tuning}</span>
+            </div>
+            <h4>Main Riff</h4>
+            <div class="tab-scroll"><pre class="guitar-tab">${song.mainRiff}</pre></div>
+            <div class="tab-legend">
+              <span>h = hammer-on</span><span>p = pull-off</span>
+              <span>b = bend</span><span>/ = slide up</span><span>~ = vibrato</span>
+            </div>
+          </div>`;
+      } else if (sec === 'chords') {
+        const chordDefs = {
+          'Em': { frets: ['0','2','2','0','0','0'], notes: 'E–G–B' },
+          'Am': { frets: ['x','0','2','2','1','0'], notes: 'A–C–E' },
+          'D': { frets: ['x','x','0','2','3','2'], notes: 'D–F#–A' },
+          'G': { frets: ['3','2','0','0','0','3'], notes: 'G–B–D' },
+          'C': { frets: ['x','3','2','0','1','0'], notes: 'C–E–G' },
+          'F': { frets: ['1','1','2','3','3','1'], notes: 'F–A–C' },
+          'Bm': { frets: ['x','2','4','4','3','2'], notes: 'B–D–F#' },
+          'A': { frets: ['x','0','2','2','2','0'], notes: 'A–C#–E' },
+          'E': { frets: ['0','2','2','1','0','0'], notes: 'E–G#–B' },
+          'B7': { frets: ['x','2','1','2','0','2'], notes: 'B–D#–F#–A' },
+          'Dm': { frets: ['x','x','0','2','3','1'], notes: 'D–F–A' },
+          'F#': { frets: ['2','2','3','4','4','2'], notes: 'F#–A#–C#' },
+          'E5': { frets: ['0','2','2','x','x','x'], notes: 'E–B' },
+          'A5': { frets: ['x','0','2','2','x','x'], notes: 'A–E' },
+          'D5': { frets: ['x','x','0','2','3','x'], notes: 'D–A' },
+          'G5': { frets: ['3','5','5','x','x','x'], notes: 'G–D' },
+          'F5': { frets: ['1','3','3','x','x','x'], notes: 'F–C' },
+          'C5': { frets: ['x','3','5','5','x','x'], notes: 'C–G' },
+          'B5': { frets: ['x','2','4','4','x','x'], notes: 'B–F#' },
+          'F#5': { frets: ['2','4','4','x','x','x'], notes: 'F#–C#' },
+          'C#5': { frets: ['x','4','6','6','x','x'], notes: 'C#–G#' },
+          'Bb': { frets: ['x','1','3','3','3','1'], notes: 'Bb–D–F' },
+        };
+        const chordsHtml = song.chords.map(ch => {
+          const def = chordDefs[ch] || { frets: ['?','?','?','?','?','?'], notes: ch };
+          const labels = ['e','B','G','D','A','E'];
+          const dotsHtml = def.frets.map((f, i) => {
+            let cls = f === 'x' ? 'dot-mute' : (f === '0' ? 'dot-open' : 'dot-fill');
+            return `<div class="string-row"><span class="fret-num">${f}</span><div class="fret-dots"><div class="${cls}"></div></div></div>`;
+          }).join('');
+          return `<div class="chord-card"><div class="chord-name">${ch}</div><div class="chord-diagram"><div class="chord-frets">${dotsHtml}</div></div><div class="chord-notes">${def.notes}</div></div>`;
+        }).join('');
+        el.innerHTML = `<div class="modal-chords-section"><div class="chords-grid">${chordsHtml}</div></div>`;
+      } else if (sec === 'tuning') {
+        const tuningMap = {
+          'EADGBe': ['E','A','D','G','B','e'],
+          'Drop D': ['D','A','D','G','B','e'],
+          'Eb': ['Eb','Ab','Db','Gb','Bb','eb'],
+          'Drop C': ['C','G','C','F','A','d'],
+        };
+        const notes = tuningMap[song.tuning] || tuningMap['EADGBe'];
+        const freqs = {
+          'E':329.63,'e':329.63,'B':246.94,'G':196.00,'D':146.83,'A':110.00,'E ':82.41,
+          'Eb':311.13,'Ab':103.83,'Db':138.59,'Gb':185.00,'Bb':233.08,'eb':311.13,
+          'D ':146.83,'C':130.81,'F':174.61
+        };
+        const stringNums = ['1 (High)','2','3','4','5','6 (Low)'];
+        const stringsHtml = notes.map((n, i) => `
+          <div class="string-item">
+            <div class="string-num">${stringNums[i]}</div>
+            <div class="string-note">${n}</div>
+            <div class="string-freq">${(freqs[n] || freqs[n.replace(' ','')] || '—') + ' Hz'}</div>
+          </div>`).join('');
+        el.innerHTML = `
+          <div class="tuning-block">
+            <h3>🎸 ${song.tuning} Tuning</h3>
+            <p>This song uses <strong>${song.tuning}</strong> tuning.</p>
+            <div class="tuning-strings">${stringsHtml}</div>
+            <div class="tuning-tips">
+              <div class="tip-card">🎯 Use a clip-on or pedal tuner before playing to ensure accurate pitch.</div>
+              <div class="tip-card">🔊 For electric: High gain, palm muting. Amp gain around 8–9.</div>
+              <div class="tip-card">🎸 Recommended string gauge: .010–.052 for electric, .012–.053 for acoustic.</div>
+            </div>
+          </div>`;
+      }
+    }
+
+    // =========================================================
+    // TABS & CHORDS SWITCHER (Master of Puppets section)
+    // =========================================================
+    document.querySelectorAll('.tc-tab').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.tc-tab').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const tab = this.dataset.tab;
+        document.querySelectorAll('.tc-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('panel-' + tab).classList.add('active');
+      });
+    });
+
+    // =========================================================
+    // NAVBAR SCROLL EFFECT
+    // =========================================================
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // =========================================================
+    // HAMBURGER MENU
+    // =========================================================
+    document.getElementById('hamburger').addEventListener('click', function() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('open');
+      this.classList.toggle('open');
+    });
+
+    // =========================================================
+    // SMOOTH SCROLL FOR NAV LINKS
+    // =========================================================
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+          document.getElementById('mobile-menu').classList.remove('open');
+          document.getElementById('hamburger').classList.remove('open');
+        }
+      });
+    });
+
+    // =========================================================
+    // INIT
+    // =========================================================
+    renderSongs();
+  </script>
 
 </body>
 </html>
