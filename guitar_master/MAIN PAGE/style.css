@@ -1273,6 +1273,34 @@ footer p span { color: var(--red); }
 ::-webkit-scrollbar-thumb { background: var(--red-dark); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--red); }
 
+/* ===== LYRICS SECTION ===== */
+.modal-lyrics-section {
+  padding: 1rem 0;
+  color: var(--text);
+}
+.lyrics-header {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border2);
+  padding-bottom: 1rem;
+}
+.lyrics-header h3 {
+  font-family: 'Oswald', sans-serif;
+  color: var(--white);
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+.lyrics-content pre {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  color: var(--text2);
+  background: var(--card);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border2);
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .category-grid { grid-template-columns: 1fr 1fr; }
