@@ -732,8 +732,11 @@ a.contact-item-value:hover { color: var(--accent-3); }
 /* ── ADMIN CONTROLS ───────────────────────────────── */
 .admin-controls {
   position: relative;
-  display: inline-block;
+  display: none; /* Hidden by default */
   margin-left: 20px;
+}
+.admin-controls.unlocked {
+  display: inline-block;
 }
 .admin-toggle {
   background: transparent;

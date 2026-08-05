@@ -360,6 +360,30 @@ if (toggleRatingsSectionBtn && testimonialsSection) {
   });
 }
 
+// Secret Admin Unlock Logic
+const footerCopy = document.querySelector('.footer-copy');
+const adminControls = document.querySelector('.admin-controls');
+
+if (footerCopy && adminControls) {
+  footerCopy.addEventListener('dblclick', () => {
+    let pw = prompt("Enter Admin Password:");
+    if (pw === "maccin") {
+      localStorage.setItem('isAdminUnlocked', 'true');
+      adminControls.classList.add('unlocked');
+      alert("Admin Mode Unlocked! The gear icon is now visible.");
+    } else if (pw !== null) {
+      alert("Incorrect password.");
+    }
+  });
+  
+  // Or via URL parameter ?admin=true
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('admin') === 'true') {
+    localStorage.setItem('isAdminUnlocked', 'true');
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+}
+
 // Run on load
 document.addEventListener('DOMContentLoaded', () => {
   updateHappyClientsCounter();
@@ -369,4 +393,10 @@ document.addEventListener('DOMContentLoaded', () => {
     testimonialsSection.style.display = 'none';
     if(testimonialsNav) testimonialsNav.parentElement.style.display = 'none';
   }
+  
+  // Show admin controls if unlocked
+  if (localStorage.getItem('isAdminUnlocked') === 'true' && adminControls) {
+    adminControls.classList.add('unlocked');
+  }
 });
+
