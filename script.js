@@ -288,6 +288,14 @@ if (ratingForm) {
     const mailtoUrl = `mailto:maccinbeldad07@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
     window.location.href = mailtoUrl;
     
+    // Update happy clients if 4 or 5 stars
+    if (rating >= 4) {
+      let happyClientsCount = parseInt(localStorage.getItem('happyClientsAdded')) || 0;
+      happyClientsCount += 1;
+      localStorage.setItem('happyClientsAdded', happyClientsCount);
+      updateHappyClientsCounter();
+    }
+
     ratingSuccess.style.display = 'block';
     ratingSuccess.style.color = 'var(--green)';
     ratingForm.reset();
@@ -297,3 +305,18 @@ if (ratingForm) {
     setTimeout(() => { ratingSuccess.style.display = 'none'; }, 5000);
   });
 }
+
+// Function to update the Happy Clients counter immediately
+function updateHappyClientsCounter() {
+  const happyClientsEl = document.getElementById('happyClientsNum');
+  if (happyClientsEl) {
+    const baseTarget = parseInt(happyClientsEl.getAttribute('data-target')) || 0;
+    const added = parseInt(localStorage.getItem('happyClientsAdded')) || 0;
+    happyClientsEl.textContent = baseTarget + added;
+    happyClientsEl.setAttribute('data-target', baseTarget + added);
+  }
+}
+// Run on load
+document.addEventListener('DOMContentLoaded', () => {
+  updateHappyClientsCounter();
+});
