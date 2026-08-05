@@ -14,10 +14,14 @@ const firebaseConfig = {
   databaseURL: "https://macxportfolio-default-rtdb.firebaseio.com"
 };
 
-let database;
+let database = null;
 if (typeof firebase !== 'undefined') {
-  firebase.initializeApp(firebaseConfig);
-  database = firebase.database();
+  try {
+    firebase.initializeApp(firebaseConfig);
+    database = firebase.database();
+  } catch (err) {
+    console.error("Firebase initialization failed:", err);
+  }
 }
 
 /* ── 1. CURSOR GLOW ──────────────────────────────── */
