@@ -171,6 +171,7 @@ const revealObserver = new IntersectionObserver(entries => {
   ...document.querySelectorAll('.info-card'),
   ...document.querySelectorAll('.skill-category'),
   ...document.querySelectorAll('.project-card'),
+  ...document.querySelectorAll('.testimonial-card'),
   ...document.querySelectorAll('.contact-item'),
   ...document.querySelectorAll('.section-header'),
 ].forEach((el, i) => {
@@ -193,7 +194,7 @@ form.addEventListener('submit', e => {
   
   const emailBody = `Hi Maccin,\n\n${message}\n\nBest regards,\n${name}\nEmail: ${email}`;
   
-  const mailtoUrl = `mailto:maccinbeldad28@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+  const mailtoUrl = `mailto:maccinbeldad07@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
   
   // Open default email client
   window.location.href = mailtoUrl;
