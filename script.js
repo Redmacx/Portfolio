@@ -144,13 +144,15 @@ typeLoop();
 
 /* ── 6. COUNTER ANIMATION ────────────────────────── */
 function animCounter(el) {
-  const target = parseInt(el.dataset.target);
+  if (el.animInterval) clearInterval(el.animInterval);
+  const target = parseInt(el.dataset.target) || 0;
+  if (target === 0) { el.textContent = 0; return; }
   let count = 0;
   const step = Math.max(1, Math.floor(target / 40));
-  const interval = setInterval(() => {
+  el.animInterval = setInterval(() => {
     count = Math.min(count + step, target);
     el.textContent = count;
-    if (count >= target) clearInterval(interval);
+    if (count >= target) clearInterval(el.animInterval);
   }, 40);
 }
 
@@ -343,9 +345,12 @@ function listenToHappyClientsCounter() {
       const count = snapshot.val() || 0;
       const happyClientsEl = document.getElementById('happyClientsNum');
       if (happyClientsEl) {
-        const baseTarget = parseInt(happyClientsEl.getAttribute('data-target')) || 0;
-        happyClientsEl.textContent = baseTarget + count;
-        happyClientsEl.setAttribute('data-target', baseTarget + count);
+        happyClientsEl.setAttribute('data-target', count);
+        if (typeof animCounter === 'function') {
+          animCounter(happyClientsEl);
+        } else {
+          happyClientsEl.textContent = count;
+        }
       }
     });
   }
