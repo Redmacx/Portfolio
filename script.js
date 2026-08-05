@@ -233,3 +233,67 @@ window.addEventListener('scroll', () => {
     heroVisual.style.transform = `translateY(${window.scrollY * 0.08}px)`;
   }
 }, { passive: true });
+
+/* ── 12. INTERACTIVE RATING FORM ─────────────────── */
+const stars = document.querySelectorAll('.star-rating .star');
+const ratingValueInput = document.getElementById('ratingValue');
+
+stars.forEach(star => {
+  star.addEventListener('mouseover', function() {
+    const value = parseInt(this.getAttribute('data-value'));
+    stars.forEach(s => {
+      if (parseInt(s.getAttribute('data-value')) <= value) {
+        s.classList.add('hovered');
+      } else {
+        s.classList.remove('hovered');
+      }
+    });
+  });
+  
+  star.addEventListener('mouseout', function() {
+    stars.forEach(s => s.classList.remove('hovered'));
+  });
+  
+  star.addEventListener('click', function() {
+    const value = parseInt(this.getAttribute('data-value'));
+    ratingValueInput.value = value;
+    stars.forEach(s => {
+      if (parseInt(s.getAttribute('data-value')) <= value) {
+        s.classList.add('selected');
+      } else {
+        s.classList.remove('selected');
+      }
+    });
+  });
+});
+
+const ratingForm = document.getElementById('ratingForm');
+const ratingSuccess = document.getElementById('ratingSuccess');
+
+if (ratingForm) {
+  ratingForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const rating = ratingValueInput.value;
+    if (rating == 0) {
+      alert("Please select a star rating!");
+      return;
+    }
+    const name = document.getElementById('ratingName').value;
+    const project = document.getElementById('ratingProject').value;
+    const message = document.getElementById('ratingMessage').value;
+    
+    const subject = `New Portfolio Rating from ${name}`;
+    const emailBody = `Hi Maccin,\n\nI just rated your work on ${project}!\nRating: ${rating} out of 5 Stars\n\nFeedback:\n${message}\n\nBest regards,\n${name}`;
+    
+    const mailtoUrl = `mailto:maccinbeldad07@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = mailtoUrl;
+    
+    ratingSuccess.style.display = 'block';
+    ratingSuccess.style.color = 'var(--green)';
+    ratingForm.reset();
+    ratingValueInput.value = 0;
+    stars.forEach(s => s.classList.remove('selected'));
+    
+    setTimeout(() => { ratingSuccess.style.display = 'none'; }, 5000);
+  });
+}
