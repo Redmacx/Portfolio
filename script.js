@@ -357,18 +357,11 @@ function listenToHappyClientsCounter() {
 }
 
 // Admin Controls Logic
-const adminToggleBtn = document.getElementById('adminToggleBtn');
 const adminMenu = document.getElementById('adminMenu');
 const resetHappyClientsBtn = document.getElementById('resetHappyClientsBtn');
 const toggleRatingsSectionBtn = document.getElementById('toggleRatingsSectionBtn');
 const testimonialsSection = document.getElementById('testimonials');
 const testimonialsNav = document.querySelector('a[href="#testimonials"]');
-
-if (adminToggleBtn && adminMenu) {
-  adminToggleBtn.addEventListener('click', () => {
-    adminMenu.classList.toggle('hidden');
-  });
-}
 
 if (resetHappyClientsBtn) {
   resetHappyClientsBtn.addEventListener('click', () => {
@@ -407,13 +400,18 @@ const adminControls = document.querySelector('.admin-controls');
 
 if (footerCopy && adminControls) {
   footerCopy.addEventListener('dblclick', () => {
-    let pw = prompt("Enter Admin Password:");
-    if (pw === "maccin") {
-      localStorage.setItem('isAdminUnlocked', 'true');
-      adminControls.classList.add('unlocked');
-      alert("Admin Mode Unlocked! The gear icon is now visible.");
-    } else if (pw !== null) {
-      alert("Incorrect password.");
+    if (localStorage.getItem('isAdminUnlocked') === 'true') {
+      adminMenu.classList.toggle('hidden');
+    } else {
+      let pw = prompt("Enter Admin Password:");
+      if (pw === "maccin") {
+        localStorage.setItem('isAdminUnlocked', 'true');
+        adminControls.classList.add('unlocked');
+        adminMenu.classList.remove('hidden');
+        alert("Admin Mode Unlocked! You can now manage settings and delete reviews.");
+      } else if (pw !== null) {
+        alert("Incorrect password.");
+      }
     }
   });
   
