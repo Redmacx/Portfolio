@@ -316,7 +316,57 @@ function updateHappyClientsCounter() {
     happyClientsEl.setAttribute('data-target', baseTarget + added);
   }
 }
+
+// Admin Controls Logic
+const adminToggleBtn = document.getElementById('adminToggleBtn');
+const adminMenu = document.getElementById('adminMenu');
+const resetHappyClientsBtn = document.getElementById('resetHappyClientsBtn');
+const toggleRatingsSectionBtn = document.getElementById('toggleRatingsSectionBtn');
+const testimonialsSection = document.getElementById('testimonials');
+const testimonialsNav = document.querySelector('a[href="#testimonials"]');
+
+if (adminToggleBtn && adminMenu) {
+  adminToggleBtn.addEventListener('click', () => {
+    adminMenu.classList.toggle('hidden');
+  });
+}
+
+if (resetHappyClientsBtn) {
+  resetHappyClientsBtn.addEventListener('click', () => {
+    if (confirm("Are you sure you want to reset your Happy Clients counter?")) {
+      localStorage.setItem('happyClientsAdded', 0);
+      updateHappyClientsCounter();
+      adminMenu.classList.add('hidden');
+    }
+  });
+}
+
+if (toggleRatingsSectionBtn && testimonialsSection) {
+  toggleRatingsSectionBtn.addEventListener('click', () => {
+    if (confirm("Are you sure you want to toggle the visibility of the Client Ratings section?")) {
+      const isHidden = testimonialsSection.style.display === 'none';
+      
+      if (isHidden) {
+        testimonialsSection.style.display = '';
+        if(testimonialsNav) testimonialsNav.parentElement.style.display = '';
+        localStorage.setItem('hideRatingsSection', 'false');
+      } else {
+        testimonialsSection.style.display = 'none';
+        if(testimonialsNav) testimonialsNav.parentElement.style.display = 'none';
+        localStorage.setItem('hideRatingsSection', 'true');
+      }
+      adminMenu.classList.add('hidden');
+    }
+  });
+}
+
 // Run on load
 document.addEventListener('DOMContentLoaded', () => {
   updateHappyClientsCounter();
+  
+  // Hide ratings section if saved
+  if (localStorage.getItem('hideRatingsSection') === 'true' && testimonialsSection) {
+    testimonialsSection.style.display = 'none';
+    if(testimonialsNav) testimonialsNav.parentElement.style.display = 'none';
+  }
 });

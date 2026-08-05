@@ -728,3 +728,49 @@ a.contact-item-value:hover { color: var(--accent-3); }
   .form-row { grid-template-columns: 1fr; }
   .contact-form { padding: 24px; }
 }
+
+/* ── ADMIN CONTROLS ───────────────────────────────── */
+.admin-controls {
+  position: relative;
+  display: inline-block;
+  margin-left: 20px;
+}
+.admin-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.admin-toggle:hover {
+  opacity: 1;
+  transform: rotate(45deg);
+}
+.admin-menu {
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  width: max-content;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  text-align: left;
+}
+.admin-menu.hidden {
+  display: none;
+}
+.admin-menu h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
