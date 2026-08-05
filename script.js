@@ -307,15 +307,23 @@ if (ratingForm) {
     const subject = `New Portfolio Rating from ${name}`;
     const emailBody = `Hi Maccin,\n\nI just rated your work on ${project}!\nRating: ${rating} out of 5 Stars\n\nFeedback:\n${message}\n\nBest regards,\n${name}`;
     
-    const mailtoUrl = `mailto:maccinbeldad07@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
-    window.location.href = mailtoUrl;
-    
-    // Update happy clients if 4 or 5 stars via Firebase
-    if (rating >= 4 && database) {
-      const counterRef = database.ref('stats/happyClients');
-      counterRef.set(firebase.database.ServerValue.increment(1));
-    }
+    if (database) {
+      // 1. Push the full feedback to a 'ratings' list in Firebase
+      const ratingsRef = database.ref('ratings');
+      ratingsRef.push({
+        name: name,
+        project: project,
+        rating: rating,
+        message: message,
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+      });
 
+      // 2. Update happy clients counter if 4 or 5 stars
+      if (rating >= 4) {
+        const counterRef = database.ref('stats/happyClients');
+        counterRef.set(firebase.database.ServerValue.increment(1));
+      }
+    }
 
     ratingSuccess.style.display = 'block';
     ratingSuccess.style.color = 'var(--green)';
