@@ -2,6 +2,24 @@
    MACCIN BELDAD — PORTFOLIO SCRIPT
 ══════════════════════════════════════════════════ */
 
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyA8Do7NAxvRscmkSnkbZyuQnHD8NfcoBY0",
+  authDomain: "macxportfolio.firebaseapp.com",
+  projectId: "macxportfolio",
+  storageBucket: "macxportfolio.firebasestorage.app",
+  messagingSenderId: "435791768169",
+  appId: "1:435791768169:web:dc825c68c4990b0b4dd0f8",
+  measurementId: "G-9LQEZEXFXQ",
+  databaseURL: "https://macxportfolio-default-rtdb.firebaseio.com"
+};
+
+let database;
+if (typeof firebase !== 'undefined') {
+  firebase.initializeApp(firebaseConfig);
+  database = firebase.database();
+}
+
 /* ── 1. CURSOR GLOW ──────────────────────────────── */
 const cursorGlow = document.getElementById('cursorGlow');
 document.addEventListener('mousemove', e => {
@@ -288,13 +306,12 @@ if (ratingForm) {
     const mailtoUrl = `mailto:maccinbeldad07@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
     window.location.href = mailtoUrl;
     
-    // Update happy clients if 4 or 5 stars
-    if (rating >= 4) {
-      let happyClientsCount = parseInt(localStorage.getItem('happyClientsAdded')) || 0;
-      happyClientsCount += 1;
-      localStorage.setItem('happyClientsAdded', happyClientsCount);
-      updateHappyClientsCounter();
+    // Update happy clients if 4 or 5 stars via Firebase
+    if (rating >= 4 && database) {
+      const counterRef = database.ref('stats/happyClients');
+      counterRef.set(firebase.database.ServerValue.increment(1));
     }
+
 
     ratingSuccess.style.display = 'block';
     ratingSuccess.style.color = 'var(--green)';
@@ -306,14 +323,19 @@ if (ratingForm) {
   });
 }
 
-// Function to update the Happy Clients counter immediately
-function updateHappyClientsCounter() {
-  const happyClientsEl = document.getElementById('happyClientsNum');
-  if (happyClientsEl) {
-    const baseTarget = parseInt(happyClientsEl.getAttribute('data-target')) || 0;
-    const added = parseInt(localStorage.getItem('happyClientsAdded')) || 0;
-    happyClientsEl.textContent = baseTarget + added;
-    happyClientsEl.setAttribute('data-target', baseTarget + added);
+// Function to listen to the Happy Clients counter from Firebase
+function listenToHappyClientsCounter() {
+  if (database) {
+    const counterRef = database.ref('stats/happyClients');
+    counterRef.on('value', (snapshot) => {
+      const count = snapshot.val() || 0;
+      const happyClientsEl = document.getElementById('happyClientsNum');
+      if (happyClientsEl) {
+        const baseTarget = parseInt(happyClientsEl.getAttribute('data-target')) || 0;
+        happyClientsEl.textContent = baseTarget + count;
+        happyClientsEl.setAttribute('data-target', baseTarget + count);
+      }
+    });
   }
 }
 
@@ -334,8 +356,9 @@ if (adminToggleBtn && adminMenu) {
 if (resetHappyClientsBtn) {
   resetHappyClientsBtn.addEventListener('click', () => {
     if (confirm("Are you sure you want to reset your Happy Clients counter?")) {
-      localStorage.setItem('happyClientsAdded', 0);
-      updateHappyClientsCounter();
+      if (database) {
+        database.ref('stats/happyClients').set(0);
+      }
       adminMenu.classList.add('hidden');
     }
   });
@@ -386,7 +409,7 @@ if (footerCopy && adminControls) {
 
 // Run on load
 document.addEventListener('DOMContentLoaded', () => {
-  updateHappyClientsCounter();
+  listenToHappyClientsCounter();
   
   // Hide ratings section if saved
   if (localStorage.getItem('hideRatingsSection') === 'true' && testimonialsSection) {
