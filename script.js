@@ -434,9 +434,93 @@ document.addEventListener('DOMContentLoaded', () => {
     if(testimonialsNav) testimonialsNav.parentElement.style.display = 'none';
   }
   
-  // Show admin controls if unlocked
+// Show admin controls if unlocked
   if (localStorage.getItem('isAdminUnlocked') === 'true' && adminControls) {
     adminControls.classList.add('unlocked');
   }
 });
+
+/* ── REVIEWS MODAL LOGIC ─────────────────────────── */
+const happyClientsStatBtn = document.getElementById('happyClientsStatBtn');
+const reviewsModal = document.getElementById('reviewsModal');
+const reviewsModalClose = document.getElementById('reviewsModalClose');
+const reviewsContainer = document.getElementById('reviewsContainer');
+
+if (happyClientsStatBtn && reviewsModal && reviewsModalClose) {
+  // Open modal
+  happyClientsStatBtn.addEventListener('click', () => {
+    reviewsModal.classList.remove('hidden');
+    loadReviews();
+  });
+
+  // Close modal via button
+  reviewsModalClose.addEventListener('click', () => {
+    reviewsModal.classList.add('hidden');
+  });
+
+  // Close modal via clicking outside
+  reviewsModal.addEventListener('click', (e) => {
+    if (e.target === reviewsModal) {
+      reviewsModal.classList.add('hidden');
+    }
+  });
+}
+
+function loadReviews() {
+  if (!database) {
+    reviewsContainer.innerHTML = '<div class="reviews-empty">Database not connected.</div>';
+    return;
+  }
+  
+  reviewsContainer.innerHTML = '<div class="reviews-loading">Loading reviews...</div>';
+  
+  const ratingsRef = database.ref('ratings');
+  // Fetch once
+  ratingsRef.once('value').then((snapshot) => {
+    if (!snapshot.exists()) {
+      reviewsContainer.innerHTML = '<div class="reviews-empty">No reviews yet. Be the first!</div>';
+      return;
+    }
+    
+    let reviewsHtml = '';
+    const ratings = [];
+    snapshot.forEach(child => {
+      ratings.push(child.val());
+    });
+    
+    // Sort newest first
+    ratings.reverse();
+    
+    // Filter to only 4 and 5 star reviews
+    const highRatings = ratings.filter(r => r.rating >= 4);
+    
+    if (highRatings.length === 0) {
+      reviewsContainer.innerHTML = '<div class="reviews-empty">No high ratings yet!</div>';
+      return;
+    }
+    
+    highRatings.forEach(review => {
+      let stars = '';
+      for (let i = 0; i < 5; i++) {
+        stars += i < review.rating ? '★' : '☆';
+      }
+      
+      reviewsHtml += `
+        <div class="review-item">
+          <div class="review-item-header">
+            <span class="review-item-name">${review.name || 'Anonymous'}</span>
+            <span class="review-item-project">${review.project || 'Project'}</span>
+          </div>
+          <div class="review-item-stars">${stars}</div>
+          <p class="review-item-message">"${review.message || 'Great experience!'}"</p>
+        </div>
+      `;
+    });
+    
+    reviewsContainer.innerHTML = reviewsHtml;
+  }).catch((error) => {
+    reviewsContainer.innerHTML = `<div class="reviews-empty">Failed to load reviews.</div>`;
+    console.error(error);
+  });
+}
 

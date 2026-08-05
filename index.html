@@ -73,7 +73,7 @@
           <span class="stat-label">Years Exp.</span>
         </div>
         <div class="stat-divider"></div>
-        <div class="stat">
+        <div class="stat clickable-stat" id="happyClientsStatBtn" title="Click to view client reviews">
           <span class="stat-num" id="happyClientsNum" data-target="0">0</span>
           <span class="stat-label">Happy Clients</span>
         </div>
@@ -516,6 +516,22 @@
       <a href="#hero" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
     </div>
   </footer>
+
+  <!-- ── REVIEWS MODAL ── -->
+  <div class="modal-overlay hidden" id="reviewsModal">
+    <div class="modal-content">
+      <button class="modal-close" id="reviewsModalClose">&times;</button>
+      <div class="modal-header">
+        <h3>Client <span class="gradient-text">Reviews</span></h3>
+        <p>Real feedback from my happy clients.</p>
+      </div>
+      <div class="modal-body" id="reviewsContainer">
+        <!-- Reviews will be dynamically injected here -->
+        <div class="reviews-loading">Loading reviews...</div>
+      </div>
+    </div>
+  </div>
+
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
