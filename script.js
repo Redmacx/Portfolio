@@ -375,6 +375,7 @@ if (resetHappyClientsBtn) {
     if (confirm("Are you sure you want to reset your Happy Clients counter?")) {
       if (database) {
         database.ref('stats/happyClients').set(0);
+        database.ref('ratings').remove();
       }
       adminMenu.classList.add('hidden');
     }
