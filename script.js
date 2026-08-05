@@ -486,7 +486,7 @@ function loadReviews() {
     let reviewsHtml = '';
     const ratings = [];
     snapshot.forEach(child => {
-      ratings.push(child.val());
+      ratings.push({ ...child.val(), key: child.key });
     });
     
     // Sort newest first
@@ -500,17 +500,24 @@ function loadReviews() {
       return;
     }
     
+    const isAdmin = localStorage.getItem('isAdminUnlocked') === 'true';
+
     highRatings.forEach(review => {
       let stars = '';
       for (let i = 0; i < 5; i++) {
         stars += i < review.rating ? '★' : '☆';
       }
       
+      const deleteBtn = isAdmin ? `<button class="review-delete-btn" data-key="${review.key}" title="Delete this review">🗑️</button>` : '';
+
       reviewsHtml += `
         <div class="review-item">
           <div class="review-item-header">
-            <span class="review-item-name">${review.name || 'Anonymous'}</span>
-            <span class="review-item-project">${review.project || 'Project'}</span>
+            <div>
+              <span class="review-item-name">${review.name || 'Anonymous'}</span>
+              <span class="review-item-project">${review.project || 'Project'}</span>
+            </div>
+            ${deleteBtn}
           </div>
           <div class="review-item-stars">${stars}</div>
           <p class="review-item-message">"${review.message || 'Great experience!'}"</p>
@@ -522,6 +529,33 @@ function loadReviews() {
   }).catch((error) => {
     reviewsContainer.innerHTML = `<div class="reviews-empty">Failed to load reviews.</div>`;
     console.error(error);
+  });
+}
+
+// Handle delete review clicks
+if (reviewsContainer) {
+  reviewsContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('review-delete-btn')) {
+      const key = e.target.getAttribute('data-key');
+      if (confirm("Are you sure you want to delete this review?")) {
+        e.target.textContent = "⏳";
+        if (database) {
+          // Delete from Firebase
+          database.ref('ratings/' + key).remove().then(() => {
+            // Decrement happy clients counter
+            const counterRef = database.ref('stats/happyClients');
+            counterRef.once('value').then(snap => {
+              const currentCount = snap.val() || 0;
+              if (currentCount > 0) {
+                counterRef.set(currentCount - 1);
+              }
+            });
+            // Reload reviews modal
+            loadReviews();
+          });
+        }
+      }
+    }
   });
 }
 
