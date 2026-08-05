@@ -171,7 +171,7 @@ const revealObserver = new IntersectionObserver(entries => {
   ...document.querySelectorAll('.info-card'),
   ...document.querySelectorAll('.skill-category'),
   ...document.querySelectorAll('.project-card'),
-  ...document.querySelectorAll('.testimonial-card'),
+  ...document.querySelectorAll('.rating-form-container'),
   ...document.querySelectorAll('.contact-item'),
   ...document.querySelectorAll('.section-header'),
 ].forEach((el, i) => {
